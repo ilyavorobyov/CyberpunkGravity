@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
@@ -57,15 +55,6 @@ public class PlayerMover : MonoBehaviour
         {
             _rigidbody.velocity = Vector2.zero;
             _rigidbody.AddForce(Vector2.down * _jumpForce, ForceMode2D.Impulse);
-        }
-    }
-
-    private void OnShoot()
-    {
-        if(_energy >= _playerBullet.GetEnergyConsuming())
-        {
-            var bullet = Instantiate(_playerBullet, transform.position, Quaternion.identity);
-            Shot?.Invoke(bullet.GetEnergyConsuming());
         }
     }
 
