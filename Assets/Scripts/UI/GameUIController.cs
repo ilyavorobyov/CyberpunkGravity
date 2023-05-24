@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using DG.Tweening;
+using System.Drawing;
 
 public class GameUIController : MonoBehaviour
 {
@@ -14,12 +16,14 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private TMP_Text _coinsPerGameSession;
     [SerializeField] private TMP_Text _scoreText;
     [SerializeField] private TMP_Text _scoreValue;
+    [SerializeField] private TMP_Text _batteryValueText;
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _menuButton;
     [SerializeField] private Button _pauseButton;
     [SerializeField] private Button _resumeButton;
     [SerializeField] private Button _menuButtonPausePanel;
+    [SerializeField] private float _animationDuration;
 
     public event UnityAction StartGame;
     public event UnityAction GameOver;
@@ -32,16 +36,43 @@ public class GameUIController : MonoBehaviour
         OnMenuUiState();
     }
 
+    private void ShrinkAnimation(GameObject uiElement)
+    {
+        uiElement.transform.localScale = Vector3.one;
+        uiElement.SetActive(true);
+        uiElement.transform.DOScale(Vector3.zero, _animationDuration).SetLoops(1, LoopType.Yoyo).OnComplete(() => uiElement.SetActive(false)).SetUpdate(UpdateType.Normal, true);
+    }
+
+    private void ZoomAnimation(GameObject uiElement)
+    {
+        uiElement.transform.localScale = Vector3.zero;
+        uiElement.SetActive(true);
+        uiElement.transform.DOScale(Vector3.one, _animationDuration).SetLoops(1, LoopType.Yoyo).SetUpdate(UpdateType.Normal, true);
+    }
+
     private void OnMenuUiState()
     {
-        _pausePanel.gameObject.SetActive(false);
-        _pauseButton.gameObject.SetActive(false);
-        _startButton.gameObject.SetActive(true);
-        _gameOverPanel.gameObject.SetActive(false);
-        _coinText.gameObject.SetActive(false);
-        _coinsPerGameSession.gameObject.SetActive(false);
-        _scoreText.gameObject.SetActive(false);
-        _scoreValue.gameObject.SetActive(false);
+        if(_pauseButton.gameObject.activeSelf == true)
+        {
+            ShrinkAnimation(_pauseButton.gameObject);
+        }
+
+        if (_pausePanel.gameObject.activeSelf == true)
+        {
+            ShrinkAnimation(_pausePanel.gameObject);
+        }
+
+        if(_gameOverPanel.gameObject.activeSelf == true)
+        {
+            ShrinkAnimation(_gameOverPanel.gameObject);
+        }
+
+        ZoomAnimation(_startButton.gameObject);
+        ShrinkAnimation(_coinText.gameObject);
+        ShrinkAnimation(_coinsPerGameSession.gameObject);
+        ShrinkAnimation(_scoreText.gameObject);
+        ShrinkAnimation(_scoreValue.gameObject);
+        ShrinkAnimation(_batteryValueText.gameObject);
         ChangeState?.Invoke(true);
     }
 
@@ -49,22 +80,29 @@ public class GameUIController : MonoBehaviour
     {
         Time.timeScale = 1;
         _pausePanel.gameObject.SetActive(false);
-        _pauseButton.gameObject.SetActive(true);
-        _gameOverPanel.gameObject.SetActive(false);
-        _startButton.gameObject.SetActive(false);
-        _coinText.gameObject.SetActive(true);
-        _coinsPerGameSession.gameObject.SetActive(true);
-        _scoreText.gameObject.SetActive(true);
-        _scoreValue.gameObject.SetActive(true);
+        ZoomAnimation(_pauseButton.gameObject);
+        ShrinkAnimation(_startButton.gameObject);
+        ZoomAnimation(_coinText.gameObject);
+        ZoomAnimation(_coinsPerGameSession.gameObject);
+        ZoomAnimation(_scoreText.gameObject);
+        ZoomAnimation(_scoreValue.gameObject);
+        ZoomAnimation(_batteryValueText.gameObject);
+        ChangeState?.Invoke(false);
+        StartGame.Invoke();
+    }
+
+    private void OnRestartButtonClick()
+    {
+        ShrinkAnimation(_gameOverPanel.gameObject);
+        ZoomAnimation(_pauseButton.gameObject);
         ChangeState?.Invoke(false);
         StartGame.Invoke();
     }
 
     private void GameOverUiState()
     {
-        _pausePanel.gameObject.SetActive(false);
-        _pauseButton.gameObject.SetActive(false);
-        _gameOverPanel.gameObject.SetActive(true);
+        ShrinkAnimation(_pauseButton.gameObject);
+        ZoomAnimation(_gameOverPanel.gameObject);
         ChangeState?.Invoke(true);
         GameOver.Invoke();
     }
@@ -73,44 +111,47 @@ public class GameUIController : MonoBehaviour
     {
         Time.timeScale = 0;
         ChangeState?.Invoke(true);
-        _pausePanel.gameObject.SetActive(true);
-        _pauseButton.gameObject.SetActive(false);
+        ZoomAnimation(_pausePanel.gameObject);
+        ShrinkAnimation(_pauseButton.gameObject);
     }
 
     private void OnResumeButtonClick()
     {
         Time.timeScale = 1;
         ChangeState?.Invoke(false);
-        _pausePanel.gameObject.SetActive(false);
-        _pauseButton.gameObject.SetActive(true);
+        ShrinkAnimation(_pausePanel.gameObject);
+        ZoomAnimation(_pauseButton.gameObject);
     }
 
     private void OnMenuButtonClick()
     {
         ChangeState?.Invoke(true);
+        MenuButtonClick.Invoke();
     }
 
     private void OnEnable()
     {
-        _restartButton.onClick.AddListener(OnStartButtonClick);
+        _restartButton.onClick.AddListener(OnRestartButtonClick);
         _startButton.onClick.AddListener(OnStartButtonClick);
         _menuButton.onClick.AddListener(OnMenuUiState);
         _menuButton.onClick.AddListener(OnMenuButtonClick);
         _pauseButton.onClick.AddListener(OnPauseButtonClick);
         _resumeButton.onClick.AddListener(OnResumeButtonClick);
         _menuButtonPausePanel.onClick.AddListener(OnMenuUiState);
+        _menuButtonPausePanel.onClick.AddListener(OnMenuButtonClick);
         _player.PlayerDied += GameOverUiState;
     }
 
     private void OnDisable()
     {
-        _restartButton.onClick.RemoveListener(OnStartButtonClick);
+        _restartButton.onClick.RemoveListener(OnRestartButtonClick);
         _startButton.onClick.RemoveListener(OnStartButtonClick);
         _menuButton.onClick.RemoveListener(OnMenuUiState);
         _menuButton.onClick.RemoveListener(OnMenuButtonClick);
         _pauseButton.onClick.RemoveListener(OnPauseButtonClick);
         _resumeButton.onClick.RemoveListener(OnResumeButtonClick);
         _menuButtonPausePanel.onClick.RemoveListener(OnMenuUiState);
+        _menuButtonPausePanel.onClick.RemoveListener(OnMenuButtonClick);
         _player.PlayerDied -= GameOverUiState;
     }
 }

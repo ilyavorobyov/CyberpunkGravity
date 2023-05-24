@@ -87,8 +87,8 @@
                 },
                 {
                     "name": "",
-                    "id": "4a5dc7db-c600-4791-82a2-c97f9a15e4ef",
-                    "path": "<Mouse>/leftButton",
+                    "id": "8274086e-15ae-40bf-841f-4c2c8a5720d9",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyBoard + mouse",
