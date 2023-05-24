@@ -5,7 +5,7 @@ using TMPro;
 
 public class Score : MonoBehaviour
 {
-    private const string SCOREVALUE = "Score";
+    private const string ScoreValue = "Score";
 
     [SerializeField] private Player _player;
     [SerializeField] private TMP_Text _scoreText;
@@ -16,7 +16,7 @@ public class Score : MonoBehaviour
 
     private void Awake()
     {
-        _maxScoreText.text = PlayerPrefs.GetInt(SCOREVALUE).ToString();
+        _maxScoreText.text = PlayerPrefs.GetInt(ScoreValue).ToString();
     }
 
     private void Update()
@@ -27,14 +27,15 @@ public class Score : MonoBehaviour
 
     private void SaveResult()
     {
-        _maxResult = PlayerPrefs.GetInt(SCOREVALUE);
+        _maxResult = PlayerPrefs.GetInt(ScoreValue);
 
         if(_maxResult < _currentResult)
         {
-            PlayerPrefs.SetInt(SCOREVALUE, _currentResult);
+            PlayerPrefs.SetInt(ScoreValue, _currentResult);
         }
 
         Debug.Log("save result");
+        _maxScoreText.text = PlayerPrefs.GetInt(ScoreValue).ToString();
     }
 
     private void OnEnable()

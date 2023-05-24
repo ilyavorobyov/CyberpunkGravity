@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
+    private const string DieMethodName = "Die";
+
     [SerializeField] private float _speed;
     [SerializeField] private int _damage;
-    [SerializeField] private int _energyConsuming;
+    [SerializeField] private float _lifeTime;
+
+    private void Start()
+    {
+        Invoke(DieMethodName, _lifeTime);
+    }
 
     private void Update()
     {
         transform.Translate(Vector3.right * _speed * Time.deltaTime);
-    }
-
-    public int GetEnergyConsuming()
-    {
-        return _energyConsuming;
     }
 
     public void Die()

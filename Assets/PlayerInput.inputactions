@@ -2,7 +2,7 @@
     "name": "PlayerInput",
     "maps": [
         {
-            "name": "Move",
+            "name": "Player",
             "id": "da9cc8d0-ff5e-4750-b597-999f370186af",
             "actions": [
                 {
@@ -26,7 +26,25 @@
                 {
                     "name": "Shoot",
                     "type": "Button",
-                    "id": "686bafb6-1d17-42fd-96e7-80f170018d75",
+                    "id": "448683bc-8a54-4f71-b24b-42e090f1043a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NextWeapon",
+                    "type": "Button",
+                    "id": "abf1138f-3978-4afc-be0a-1522ae8ddd82",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PreviousWeapon",
+                    "type": "Button",
+                    "id": "49c5841a-6f08-420c-9a6b-ced19456f39c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -40,7 +58,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "New control scheme",
+                    "groups": "KeyBoard + mouse",
                     "action": "ChangeGravity",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -51,7 +69,7 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "New control scheme",
+                    "groups": "KeyBoard + mouse",
                     "action": "ChangeGravity",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -62,19 +80,41 @@
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "New control scheme",
+                    "groups": "KeyBoard + mouse",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "78bdaa44-c10f-4d3d-b862-caa8caac35a8",
+                    "id": "4a5dc7db-c600-4791-82a2-c97f9a15e4ef",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyBoard + mouse",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c1b8b25a-95e8-44fc-bb2f-7a24c48b5cf8",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shoot",
+                    "action": "NextWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4af01aec-b92f-45c0-9e09-040983432aaa",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PreviousWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -83,9 +123,14 @@
     ],
     "controlSchemes": [
         {
-            "name": "New control scheme",
-            "bindingGroup": "New control scheme",
+            "name": "KeyBoard + mouse",
+            "bindingGroup": "KeyBoard + mouse",
             "devices": [
+                {
+                    "devicePath": "<VirtualMouse>",
+                    "isOptional": false,
+                    "isOR": false
+                },
                 {
                     "devicePath": "<Keyboard>",
                     "isOptional": false,
