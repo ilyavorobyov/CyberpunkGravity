@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Camera : MonoBehaviour
+public class CameraMover : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private float _xOffset;

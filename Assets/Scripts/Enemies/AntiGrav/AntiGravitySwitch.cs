@@ -1,34 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
 
 public class AntiGravitySwitch : Enemy
 {
-    private PlayerCollisionHandler _playerCollisionHandler;
+    private PlayerMover _playerMover;
 
     private void Start()
     {
-        _playerCollisionHandler = _player.GetComponent<PlayerCollisionHandler>();
+        _playerMover = Player.GetComponent<PlayerMover>();
     }
 
-    public void SetCollisionHandler(PlayerCollisionHandler playerCollisionHandler)
+    public override void Die()
     {
-        _playerCollisionHandler = playerCollisionHandler;
-    }
-
-    private void OnDestroy()
-    {
-        UseSpecialAbility();
-    }
-
-    protected override void UseSpecialAbility()
-    {
-        _playerCollisionHandler.InvokeAntiGravitySwitchOff();
-    }
-
-    protected override void Die()
-    {
-        Destroy(gameObject);
+        base.Die();
+        _playerMover.TurnOnGravityChanger();
     }
 }

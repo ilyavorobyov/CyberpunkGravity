@@ -10,9 +10,4 @@ public class Player : MonoBehaviour
         Debug.Log("Die");
         PlayerDied.Invoke();
     }
-
-    public void TakeDamage(int damage)
-    {
-        Debug.Log("Damage = " + damage);
-    }
 }

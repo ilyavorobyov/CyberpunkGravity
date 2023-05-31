@@ -99,7 +99,7 @@ Transform:
   m_GameObject: {fileID: 4790160507524791775}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 18.2, y: -3.31, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4790160506902554268}
@@ -171,10 +171,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 5
+  _healthBarSample: {fileID: 111980126143739121, guid: c4bd9a126310e624e9c7240ac383fc58, type: 3}
+  _coin: {fileID: 9151226536257720570, guid: 6bc57435804896f4183c917cf8aa1e3e, type: 3}
+  _battery: {fileID: 8310121584227869769, guid: c1a9da91b94eb9b4991dd4c19e18d7fe, type: 3}
   _damage: 0
   _speed: 0
-  _player: {fileID: 0}
-  _candestroyedCollisionWithPlayer: 0
+  _canBeDestroyedByPlayer: 1
 --- !u!58 &4790160507524791765
 CircleCollider2D:
   m_ObjectHideFlags: 0

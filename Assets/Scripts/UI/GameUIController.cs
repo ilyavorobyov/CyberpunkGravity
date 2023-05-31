@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Drawing;
+using UnityEngine.EventSystems;
 
 public class GameUIController : MonoBehaviour
 {
@@ -74,6 +75,7 @@ public class GameUIController : MonoBehaviour
         ShrinkAnimation(_scoreValue.gameObject);
         ShrinkAnimation(_batteryValueText.gameObject);
         ChangeState?.Invoke(true);
+        MenuButtonClick.Invoke();
     }
 
     private void OnStartButtonClick()
@@ -123,35 +125,36 @@ public class GameUIController : MonoBehaviour
         ZoomAnimation(_pauseButton.gameObject);
     }
 
-    private void OnMenuButtonClick()
-    {
-        ChangeState?.Invoke(true);
-        MenuButtonClick.Invoke();
-    }
-
     private void OnEnable()
     {
         _restartButton.onClick.AddListener(OnRestartButtonClick);
         _startButton.onClick.AddListener(OnStartButtonClick);
         _menuButton.onClick.AddListener(OnMenuUiState);
-        _menuButton.onClick.AddListener(OnMenuButtonClick);
         _pauseButton.onClick.AddListener(OnPauseButtonClick);
         _resumeButton.onClick.AddListener(OnResumeButtonClick);
         _menuButtonPausePanel.onClick.AddListener(OnMenuUiState);
-        _menuButtonPausePanel.onClick.AddListener(OnMenuButtonClick);
         _player.PlayerDied += GameOverUiState;
     }
+
+    public void TestOnPointerEnter()
+    {
+        Debug.Log("pointEnt");
+    }
+
+    public void TestOnPointerExit()
+    {
+        Debug.Log("pointEx");
+    }
+
 
     private void OnDisable()
     {
         _restartButton.onClick.RemoveListener(OnRestartButtonClick);
         _startButton.onClick.RemoveListener(OnStartButtonClick);
         _menuButton.onClick.RemoveListener(OnMenuUiState);
-        _menuButton.onClick.RemoveListener(OnMenuButtonClick);
         _pauseButton.onClick.RemoveListener(OnPauseButtonClick);
         _resumeButton.onClick.RemoveListener(OnResumeButtonClick);
         _menuButtonPausePanel.onClick.RemoveListener(OnMenuUiState);
-        _menuButtonPausePanel.onClick.RemoveListener(OnMenuButtonClick);
         _player.PlayerDied -= GameOverUiState;
     }
 }

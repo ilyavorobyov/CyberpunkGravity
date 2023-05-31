@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Missle : Enemy
+public class Rocket : Enemy
 {
     private void Update()
     {
         transform.Translate(Vector3.left * _speed * Time.deltaTime);
     }
-    protected override void UseSpecialAbility()
-    {
-    }
 
-    protected override void Die()
+    public override void Die()
     {
         Destroy(gameObject);
     }

@@ -29,8 +29,15 @@ public class PlayerBullet : MonoBehaviour
     {
         if (collision.TryGetComponent(out Enemy enemy))
         {
-            enemy.TakeDamage(_damage);
-            Die();
+            if(enemy.CanBeDestroyedByPlayer == true)
+            {
+                enemy.TakeDamage(_damage);
+                Die();
+            }
+            else
+            {
+                Die();
+            }
         }
     }
 }

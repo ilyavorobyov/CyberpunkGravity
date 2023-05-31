@@ -115,3 +115,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _volume: 1
+  _minVolume: 1
+  _maxVolume: 3

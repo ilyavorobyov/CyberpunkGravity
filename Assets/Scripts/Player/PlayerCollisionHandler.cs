@@ -4,37 +4,24 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Player))]
+[RequireComponent(typeof(PlayerMover))]
 public class PlayerCollisionHandler : MonoBehaviour
 {
-    public event UnityAction AntiGravitySwitchEnabled;
-    public event UnityAction AntiGravitySwitchOffed;
     public event UnityAction<int> CoinCollected;
     public event UnityAction<int> BatteryTaken;
 
-    private Player _player;
+    private PlayerMover _playerMover;
 
     private void Awake()
     {
-        _player = GetComponent<Player>();
-    }
-
-    public void InvokeAntiGravitySwitchOff()
-    {
-        AntiGravitySwitchOffed.Invoke();
+        _playerMover = GetComponent<PlayerMover>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out AntiGravField antiGravityField))
         {
-            AntiGravitySwitch antiGravitySwitch = antiGravityField.GetComponentInParent<AntiGravitySwitch>();
-            antiGravitySwitch.SetCollisionHandler(this);
-            AntiGravitySwitchEnabled.Invoke();
-        }
-
-        if (collision.TryGetComponent(out Enemy enemy))
-        {
-            _player.Die();
+            _playerMover.TurnOffGravityChanger();
         }
 
         if (collision.TryGetComponent(out Coin coin))
@@ -54,7 +41,7 @@ public class PlayerCollisionHandler : MonoBehaviour
     {
         if (collision.TryGetComponent(out AntiGravField antiGravityField))
         {
-            AntiGravitySwitchOffed.Invoke();
+            _playerMover.TurnOnGravityChanger();
         }
     }
 }
