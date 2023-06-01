@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using Color = UnityEngine.Color;
 
@@ -12,6 +13,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private List<Weapon> _weapons;
     [SerializeField] private TMP_Text _batteryValueText;
     [SerializeField] private float _changeEnergyTextEffectTime;
+
     private bool _onMenu;
     private float _batteryTextMaxFontSize = 60;
     private float _regularTextSize = 40;
@@ -24,6 +26,8 @@ public class WeaponController : MonoBehaviour
     private Weapon _currentWeapon;
     private int _batteryValue;
     private WeaponViewObject _weaponViewObject;
+
+    public event UnityAction<string, Sprite> WeaponChange;
 
     private void Awake()
     {
@@ -42,6 +46,7 @@ public class WeaponController : MonoBehaviour
         _regularEnergyText—olor = _batteryValueText.color;
         _changeEnergyColorLacks = Color.red;
         _changeEnergyColorAdd = Color.green;
+        WeaponChange?.Invoke(_currentWeapon.Label, _currentWeapon.Icon);
     }
 
     public void ChangeOnMenuValue(bool value)
@@ -122,6 +127,7 @@ public class WeaponController : MonoBehaviour
 
     private void ChangeWeapon(Weapon weapon)
     {
+        WeaponChange?.Invoke(weapon.Label, weapon.Icon);
         _currentWeapon = weapon;
         _currentWeapon.Init(_weaponViewObject);
         _weaponViewObject.SetSprite(_currentWeapon.Icon);

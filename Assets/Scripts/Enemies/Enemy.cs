@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int _damage;
     [SerializeField] protected float _speed;
     [SerializeField] private bool _canBeDestroyedByPlayer;
+    [SerializeField] private bool _giveRewardAfterDie;
 
     private UnityEngine.Color _hitColor = UnityEngine.Color.red;
     private Vector3 _healthBarPosition;
@@ -72,6 +73,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.TryGetComponent(out Player player))
         {
+            _speed = 0;
             player.Die();
         }
     }
@@ -79,18 +81,21 @@ public class Enemy : MonoBehaviour
     public virtual void Die() 
     {
         Destroy(gameObject);
-        Debug.Log("die enemy");
-        int randomResourceNumber = Random.Range(0, 2);
 
-        if(randomResourceNumber == 0)
+        if(_giveRewardAfterDie)
         {
-            var dropdownResource = Instantiate(_coin, transform.position, Quaternion.identity);
-            dropdownResource.SetVolume();
-        }
-        else
-        {
-            var dropdownResource = Instantiate(_battery, transform.position, Quaternion.identity);
-            dropdownResource.SetVolume();
+            int randomResourceNumber = Random.Range(0, 2);
+
+            if (randomResourceNumber == 0)
+            {
+                var dropdownResource = Instantiate(_coin, transform.position, Quaternion.identity);
+                dropdownResource.SetVolume();
+            }
+            else
+            {
+                var dropdownResource = Instantiate(_battery, transform.position, Quaternion.identity);
+                dropdownResource.SetVolume();
+            }
         }
     }
 }
