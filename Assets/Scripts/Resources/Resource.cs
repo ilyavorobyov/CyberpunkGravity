@@ -6,9 +6,12 @@ public class Resource : MonoBehaviour
     [SerializeField] private int _minVolume;
     [SerializeField] private int _maxVolume;
 
-    public void Die()
+    private void OnValidate()
     {
-        Destroy(gameObject);
+        if (_minVolume >= _maxVolume)
+        {
+            _minVolume = _maxVolume - 1;
+        }
     }
 
     public void SetVolume()
@@ -22,11 +25,8 @@ public class Resource : MonoBehaviour
         return _volume;
     }
 
-    private void OnValidate()
+    public void Die()
     {
-        if (_minVolume >= _maxVolume)
-        {
-            _minVolume = _maxVolume - 1;
-        }
+        Destroy(gameObject);
     }
 }

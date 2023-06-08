@@ -1,13 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using DG.Tweening;
-using System.Drawing;
-using UnityEngine.EventSystems;
-using Color = UnityEngine.Color;
 
 public class GameUIController : MonoBehaviour
 {
@@ -30,6 +25,7 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private TMP_Text _selectedWeaponText;
 
     private WeaponController _weaponController;
+
     public event UnityAction StartGame;
     public event UnityAction GameOver;
     public event UnityAction MenuButtonClick;
@@ -38,8 +34,32 @@ public class GameUIController : MonoBehaviour
     private void Awake()
     {
         _weaponController = _player.GetComponent<WeaponController>();
-        Time.timeScale = 1;
+        Time.timeScale = 0;
         OnMenuUiState();
+    }
+
+    private void OnEnable()
+    {
+        _restartButton.onClick.AddListener(OnRestartButtonClick);
+        _startButton.onClick.AddListener(OnStartButtonClick);
+        _menuButton.onClick.AddListener(OnMenuUiState);
+        _pauseButton.onClick.AddListener(OnPauseButtonClick);
+        _resumeButton.onClick.AddListener(OnResumeButtonClick);
+        _menuButtonPausePanel.onClick.AddListener(OnMenuUiState);
+        _player.PlayerDied += GameOverUiState;
+        _weaponController.WeaponChange += OnWeaponChanged;
+    }
+
+    private void OnDisable()
+    {
+        _restartButton.onClick.RemoveListener(OnRestartButtonClick);
+        _startButton.onClick.RemoveListener(OnStartButtonClick);
+        _menuButton.onClick.RemoveListener(OnMenuUiState);
+        _pauseButton.onClick.RemoveListener(OnPauseButtonClick);
+        _resumeButton.onClick.RemoveListener(OnResumeButtonClick);
+        _menuButtonPausePanel.onClick.RemoveListener(OnMenuUiState);
+        _player.PlayerDied -= GameOverUiState;
+        _weaponController.WeaponChange -= OnWeaponChanged;
     }
 
     private void ShrinkAnimation(GameObject uiElement)
@@ -85,7 +105,7 @@ public class GameUIController : MonoBehaviour
 
     private void OnStartButtonClick()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 0.21f;
         _pausePanel.gameObject.SetActive(false);
         ZoomAnimation(_pauseButton.gameObject);
         ShrinkAnimation(_startButton.gameObject);
@@ -100,6 +120,7 @@ public class GameUIController : MonoBehaviour
 
     private void OnRestartButtonClick()
     {
+        Time.timeScale = 1;
         ShrinkAnimation(_gameOverPanel.gameObject);
         ZoomAnimation(_pauseButton.gameObject);
         ChangeState?.Invoke(false);
@@ -108,6 +129,7 @@ public class GameUIController : MonoBehaviour
 
     private void GameOverUiState()
     {
+        Time.timeScale = 0;
         ShrinkAnimation(_pauseButton.gameObject);
         ZoomAnimation(_gameOverPanel.gameObject);
         ChangeState?.Invoke(true);
@@ -134,29 +156,5 @@ public class GameUIController : MonoBehaviour
     {
         _selectedWeaponIcon.sprite = icon;
         _selectedWeaponText.text = label;
-    }
-
-    private void OnEnable()
-    {
-        _restartButton.onClick.AddListener(OnRestartButtonClick);
-        _startButton.onClick.AddListener(OnStartButtonClick);
-        _menuButton.onClick.AddListener(OnMenuUiState);
-        _pauseButton.onClick.AddListener(OnPauseButtonClick);
-        _resumeButton.onClick.AddListener(OnResumeButtonClick);
-        _menuButtonPausePanel.onClick.AddListener(OnMenuUiState);
-        _player.PlayerDied += GameOverUiState;
-        _weaponController.WeaponChange += OnWeaponChanged;
-    }
-
-    private void OnDisable()
-    {
-        _restartButton.onClick.RemoveListener(OnRestartButtonClick);
-        _startButton.onClick.RemoveListener(OnStartButtonClick);
-        _menuButton.onClick.RemoveListener(OnMenuUiState);
-        _pauseButton.onClick.RemoveListener(OnPauseButtonClick);
-        _resumeButton.onClick.RemoveListener(OnResumeButtonClick);
-        _menuButtonPausePanel.onClick.RemoveListener(OnMenuUiState);
-        _player.PlayerDied -= GameOverUiState;
-        _weaponController.WeaponChange -= OnWeaponChanged;
     }
 }

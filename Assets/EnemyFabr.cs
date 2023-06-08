@@ -16,7 +16,7 @@ public class EnemyFabr : MonoBehaviour
     {
 /*                var rocketTuner = Instantiate(_antiGravitySwitch, new Vector3(16,-3,0), Quaternion.identity);
                 rocketTuner.Init(_player);
-*/    /*            var rocketTuner2 = Instantiate(_rocketTuner, new Vector3(0, 0, 0), Quaternion.identity);
+*/                /*var rocketTuner2 = Instantiate(_rocketTuner, new Vector3(0, 0, 0), Quaternion.identity);
                 rocketTuner2.Init(_player);*/
         
         /*        var electricBall = Instantiate(_electricBall, transform.position, Quaternion.identity);

@@ -1,24 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
-    protected WeaponViewObject WeaponView;
-
+    [SerializeField] protected PlayerBullet Bullet;
     [SerializeField] private string _label;
     [SerializeField] private int _energyConsuming;
     [SerializeField] private Sprite _icon;
-    [SerializeField] protected PlayerBullet Bullet;
+    [SerializeField] private Sprite _sprite;
+    [SerializeField] private bool _isBuyed;
+
+    protected WeaponViewObject WeaponView;
 
     public string Label => _label;
     public int EnergyConsuming => _energyConsuming;
     public Sprite Icon => _icon;
+    public Sprite Sprite => _sprite;
+    public bool IsBuyed => _isBuyed;
 
     public void Init(WeaponViewObject weaponView)
     {
         WeaponView = weaponView;
     }
 
-    public abstract void Shoot();
+    public abstract void Shoot(float speed);
 }

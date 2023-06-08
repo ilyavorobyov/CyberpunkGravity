@@ -1,11 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyShooter : Enemy
 {
     [SerializeField] private Rocket _enemyLaserMissile;
     [SerializeField] private float _timeBetweenShots;
+
     private Coroutine _laserShooting;
     private float _distanceToPlayer = 16;
     private Vector3 _shootingPosition;

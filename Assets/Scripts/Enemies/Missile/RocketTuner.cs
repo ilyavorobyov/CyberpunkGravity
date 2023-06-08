@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class RocketTuner : Enemy
 {
@@ -30,11 +28,21 @@ public class RocketTuner : Enemy
         transform.position = new Vector3(_xPosition, Player.transform.position.y, Player.transform.position.z);
     }
 
+    private void BeginRocketLaunch()
+    {
+        if( _launchRocket != null )
+        {
+            StopCoroutine(_launchRocket);
+        }
+
+        _launchRocket = StartCoroutine(LaunchRocket());
+    }
+
     private IEnumerator LaunchRocket()
     {
         var waitForSeconds = new WaitForSeconds(_iterationTime);
 
-        for(int i =0; i <= _iterationsNumber; i++)
+        for (int i = 0; i <= _iterationsNumber; i++)
         {
             SpriteRenderer.sprite = _startSprite;
             yield return waitForSeconds;
@@ -44,15 +52,5 @@ public class RocketTuner : Enemy
 
         Instantiate(_rocket, transform.position, Quaternion.identity);
         Destroy(gameObject);
-    }
-
-    private void BeginRocketLaunch()
-    {
-        if( _launchRocket != null )
-        {
-            StopCoroutine(_launchRocket);
-        }
-
-        _launchRocket = StartCoroutine(LaunchRocket());
     }
 }

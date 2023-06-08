@@ -5,13 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerCollisionHandler))]
 public class Wallet : MonoBehaviour
 {
-    private const string ALLCOINSVALUE = "Coins";
-
     [SerializeField] private TMP_Text _allCoinsText;
     [SerializeField] private TMP_Text _coinsPerGameSessionText;
+
+    private const string ALLCOINSVALUE = "Coins";
+
     private PlayerCollisionHandler _playerCollisionHandler;
     private Player _player;
-
     private int _coinsPerGameSessionValue = 0;
 
     public int Coins { get; private set; }
@@ -22,6 +22,18 @@ public class Wallet : MonoBehaviour
         _allCoinsText.text = Coins.ToString();
         _playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
         _player = GetComponent<Player>();
+    }
+
+    private void OnEnable()
+    {
+        _player.PlayerDied += SaveCoins;
+        _playerCollisionHandler.CoinCollected += AddCoins;
+    }
+
+    private void OnDisable()
+    {
+        _player.PlayerDied -= SaveCoins;
+        _playerCollisionHandler.CoinCollected -= AddCoins;
     }
 
     private void AddCoins(int denomination)
@@ -38,17 +50,4 @@ public class Wallet : MonoBehaviour
         _coinsPerGameSessionValue = 0;
         _coinsPerGameSessionText.text = _coinsPerGameSessionValue.ToString();
     }
-
-    private void OnEnable()
-    {
-        _player.PlayerDied += SaveCoins;
-        _playerCollisionHandler.CoinCollected += AddCoins;
-    }
-
-    private void OnDisable()
-    {
-        _player.PlayerDied -= SaveCoins;
-        _playerCollisionHandler.CoinCollected -= AddCoins;
-    }
-
 }

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -9,7 +6,6 @@ public class RollingSaw : Enemy
     private Rigidbody2D _rigidbody;
     private float _normalGravity = 2;
     private float _reversedGravity = -2;
-
 
     private void Start()
     {

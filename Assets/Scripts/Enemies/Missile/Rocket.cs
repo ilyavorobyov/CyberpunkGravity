@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Rocket : Enemy
@@ -18,6 +16,6 @@ public class Rocket : Enemy
 
     public override void Die()
     {
-        Destroy(gameObject);
+        base.Die();
     }
 }

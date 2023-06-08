@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMissileSystem : Enemy
@@ -15,7 +14,7 @@ public class EnemyMissileSystem : Enemy
     private bool _isDistanceCalculating;
     private float _distanceToPlayer;
 
-    void Start()
+    private void Start()
     {
         _isDistanceCalculating = true;
 
@@ -28,7 +27,7 @@ public class EnemyMissileSystem : Enemy
 
     }
 
-    void Update()
+    private void Update()
     {
         _distanceToPlayer = Vector3.Distance(Player.transform.position, transform.position);
 

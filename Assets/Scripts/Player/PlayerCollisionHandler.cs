@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,10 +5,10 @@ using UnityEngine.Events;
 [RequireComponent(typeof(PlayerMover))]
 public class PlayerCollisionHandler : MonoBehaviour
 {
+    private PlayerMover _playerMover;
+
     public event UnityAction<int> CoinCollected;
     public event UnityAction<int> BatteryTaken;
-
-    private PlayerMover _playerMover;
 
     private void Awake()
     {

@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
-    private const string DieMethodName = "Die";
-
     [SerializeField] private float _speed;
     [SerializeField] private int _damage;
     [SerializeField] private float _lifeTime;
+
+    private const string DieMethodName = "Die";
 
     private void Start()
     {
@@ -20,16 +18,11 @@ public class PlayerBullet : MonoBehaviour
         transform.Translate(Vector3.right * _speed * Time.deltaTime);
     }
 
-    public void Die()
-    {
-        Destroy(gameObject);
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out Enemy enemy))
         {
-            if(enemy.CanBeDestroyedByPlayer == true)
+            if (enemy.CanBeDestroyedByPlayer == true)
             {
                 enemy.TakeDamage(_damage);
                 Die();
@@ -39,5 +32,15 @@ public class PlayerBullet : MonoBehaviour
                 Die();
             }
         }
+    }
+
+    public void Init(float speed)
+    {
+        _speed += speed;
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
     }
 }

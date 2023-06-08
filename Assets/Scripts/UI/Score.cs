@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Collections;
+using UnityEngine.Events;
 
 public class Score : MonoBehaviour
 {
-    private const string ScoreValue = "Score";
-
     [SerializeField] private Player _player;
     [SerializeField] private TMP_Text _scoreText;
     [SerializeField] private TMP_Text _maxScoreText;
 
+    private const string ScoreValue = "Score";
+
     private int _maxResult;
     private int _currentResult;
+    private float _timeFromStart;
 
     private void Awake()
     {
@@ -21,21 +22,9 @@ public class Score : MonoBehaviour
 
     private void Update()
     {
+        _timeFromStart += Time.deltaTime;
         _currentResult = (int)_player.transform.position.x;
-        _scoreText.text = _currentResult.ToString();
-    }
-
-    private void SaveResult()
-    {
-        _maxResult = PlayerPrefs.GetInt(ScoreValue);
-
-        if(_maxResult < _currentResult)
-        {
-            PlayerPrefs.SetInt(ScoreValue, _currentResult);
-        }
-
-        Debug.Log("save result");
-        _maxScoreText.text = PlayerPrefs.GetInt(ScoreValue).ToString();
+        _scoreText.text = ((int)_timeFromStart).ToString();
     }
 
     private void OnEnable()
@@ -46,5 +35,18 @@ public class Score : MonoBehaviour
     private void OnDisable()
     {
         _player.PlayerDied -= SaveResult;
+    }
+
+    private void SaveResult()
+    {
+        _maxResult = PlayerPrefs.GetInt(ScoreValue);
+
+        if (_maxResult < _currentResult)
+        {
+            PlayerPrefs.SetInt(ScoreValue, _currentResult);
+        }
+
+        Debug.Log("save result");
+        _maxScoreText.text = PlayerPrefs.GetInt(ScoreValue).ToString();
     }
 }

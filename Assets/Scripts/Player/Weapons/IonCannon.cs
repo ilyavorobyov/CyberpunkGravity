@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class IonCannon : Weapon
 {
-    public override void Shoot()
+    public override void Shoot(float speed)
     {
-        Instantiate(Bullet, WeaponView.transform.position, Quaternion.identity);
+        var bullet = Instantiate(Bullet, WeaponView.transform.position, Quaternion.identity);
+        bullet.Init(speed);
     }
 }

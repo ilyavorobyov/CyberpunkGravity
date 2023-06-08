@@ -1,8 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Events;
-using UnityEditor;
-using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerCollisionHandler))]
@@ -10,6 +7,7 @@ using UnityEngine.UIElements;
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _jumpForce;
+    [SerializeField] private float _speed;
     [SerializeField] private PlayerBullet _playerBullet;
     [SerializeField] private GameUIController _gameStateController;
     [SerializeField] private PowerBoots _powerBoots;
@@ -20,8 +18,6 @@ public class PlayerMover : MonoBehaviour
     private bool _isAlteredGravity;
     private bool _canGravityChange;
     private bool _onMenu;
-    private float _startSpeed = 2;
-    private float _zeroSpeed = 0;
     private float _normalGravity = 2;
     private float _reversedGravity = -2;
     private Vector3 _reversedRotation = new Vector3(0, 180, 180);
@@ -53,9 +49,25 @@ public class PlayerMover : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        _gameStateController.ChangeState += ChangeState;
+        _gameStateController.StartGame += StartGame;
+        _gameStateController.GameOver += GameOverState;
+        _gameStateController.MenuButtonClick += SetStartPosition;
+    }
+
+    private void OnDisable()
+    {
+        _gameStateController.ChangeState -= ChangeState;
+        _gameStateController.StartGame -= StartGame;
+        _gameStateController.GameOver -= GameOverState;
+        _gameStateController.MenuButtonClick -= SetStartPosition;
+    }
+
     private void StartGame()
     {
-        Speed = _startSpeed;
+        Speed = _speed;
         ChangeState(false);
         SetStartPosition();
     }
@@ -67,7 +79,7 @@ public class PlayerMover : MonoBehaviour
 
     private void GameOverState()
     {
-        Speed = _zeroSpeed;
+        Speed = 0;
         ChangeState(true);
     }
 
@@ -102,12 +114,14 @@ public class PlayerMover : MonoBehaviour
             {
                 if (!_isAlteredGravity)
                 {
+                    _rigidbody.velocity = Vector2.zero;
                     _isAlteredGravity = true;
                     _rigidbody.gravityScale = _reversedGravity;
                     transform.rotation = Quaternion.Euler(_reversedRotation);
                 }
                 else
                 {
+                    _rigidbody.velocity = Vector2.zero;
                     SwitchToStandardGravity();
                     transform.rotation = Quaternion.Euler(Vector3.zero);
                 }
@@ -130,21 +144,5 @@ public class PlayerMover : MonoBehaviour
     {
         SwitchToStandardGravity();
         _canGravityChange = false;
-    }
-
-    private void OnEnable()
-    {
-        _gameStateController.ChangeState += ChangeState;
-        _gameStateController.StartGame += StartGame;
-        _gameStateController.GameOver += GameOverState;
-        _gameStateController.MenuButtonClick += SetStartPosition;
-    }
-
-    private void OnDisable()
-    {
-        _gameStateController.ChangeState -= ChangeState;
-        _gameStateController.StartGame -= StartGame;
-        _gameStateController.GameOver -= GameOverState;
-        _gameStateController.MenuButtonClick -= SetStartPosition;
     }
 }
