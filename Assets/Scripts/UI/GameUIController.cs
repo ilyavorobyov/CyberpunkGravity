@@ -105,7 +105,7 @@ public class GameUIController : MonoBehaviour
 
     private void OnStartButtonClick()
     {
-        Time.timeScale = 0.21f;
+        Time.timeScale = 1f;
         _pausePanel.gameObject.SetActive(false);
         ZoomAnimation(_pauseButton.gameObject);
         ShrinkAnimation(_startButton.gameObject);

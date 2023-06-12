@@ -1,30 +1,31 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class RollingSaw : Enemy
 {
-    private Rigidbody2D _rigidbody;
-    private float _normalGravity = 2;
-    private float _reversedGravity = -2;
+    [SerializeField] private float _speed;
 
-    private void Start()
-    {
-        _rigidbody = GetComponent<Rigidbody2D>();
-
-        int gravityNumber = Random.Range(0, 2);
-
-        if(gravityNumber == 0 )
-        {
-            _rigidbody.gravityScale = _normalGravity;
-        }
-        else
-        {
-            _rigidbody.gravityScale = _reversedGravity;
-        }
-    }
+    private float _maxYPosition = 7.36f;
+    private float _minYPosition = 0.12f;
+    private Vector3 _position;
 
     private void Update()
     {
-        transform.position += Vector3.left * _speed* Time.deltaTime;
+        transform.Translate(Vector3.left * _speed * Time.deltaTime);
+    }
+
+    private void OnEnable()
+    {
+        int yPositionNumber = Random.Range(0, 2);
+
+        if (yPositionNumber == 0 )
+        {
+            _position = StartPositionFromPlayer + new Vector3(0f, _maxYPosition, 0f);
+        }
+        else
+        {
+            _position = StartPositionFromPlayer + new Vector3(0f, _minYPosition, 0f);
+        }
+
+        transform.position = _position;
     }
 }

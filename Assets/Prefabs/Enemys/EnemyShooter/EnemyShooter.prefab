@@ -98,16 +98,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408d927c6aa529d44884d247eb631830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 4
+  _maxHealth: 3
   _healthBarSample: {fileID: 111980126143739121, guid: c4bd9a126310e624e9c7240ac383fc58, type: 3}
-  _coin: {fileID: 9151226536257720570, guid: 6bc57435804896f4183c917cf8aa1e3e, type: 3}
-  _battery: {fileID: 8310121584227869769, guid: c1a9da91b94eb9b4991dd4c19e18d7fe, type: 3}
+  _startPositionFromPlayer: {x: 22, y: 3, z: 0}
   _damage: 1
-  _speed: 4
   _canBeDestroyedByPlayer: 1
-  _giveRewardAfterDie: 1
-  _enemyLaserMissile: {fileID: 8698617434253301314, guid: fda4b727817792a4aba797ecceefff0d, type: 3}
-  _timeBetweenShots: 3
+  _enemyLaserShot: {fileID: 2049028492664669908, guid: fda4b727817792a4aba797ecceefff0d, type: 3}
+  _timeBetweenShots: 4
 --- !u!61 &2534869290203293877
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -3,38 +3,39 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private int _health;
+    [SerializeField] private int _maxHealth;
     [SerializeField] private EnemyHealthBar _healthBarSample;
-    [SerializeField] private Coin _coin;
-    [SerializeField] private Battery _battery;
-    [SerializeField] private Vector3 _additionalPositionToPlayer;
+    [SerializeField] private Vector3 _startPositionFromPlayer;
     [SerializeField] private int _damage;
-    [SerializeField] protected float _speed;
     [SerializeField] private bool _canBeDestroyedByPlayer;
-    [SerializeField] private bool _giveRewardAfterDie;
 
     const string ChangeColorToDefaultMethodName = "ChangeColorToDefault";
 
     protected SpriteRenderer SpriteRenderer;
-    protected Player Player;
+    protected Player PlayerObject;
+    protected Vector3 StartPositionFromPlayer;
+    protected int MaxHealth;
+    protected int CurrentHealth;
+    protected EnemyHealthBar EnemyHealthBar;
 
     private UnityEngine.Color _hitColor = UnityEngine.Color.red;
     private Vector3 _healthBarPosition;
     private UnityEngine.Color _defaultColor;
     private float _colorReturnTime;
-    private EnemyHealthBar _healthBar;
 
     public bool CanBeDestroyedByPlayer { get; private set; }
-    public Vector3 AdditionalPositionToPlayer { get; private set; }
+    public float Speed { get; private set; }
 
     private void Awake()
     {
+        MaxHealth = _maxHealth;
+        CurrentHealth = _maxHealth;
         _healthBarPosition = new Vector3(0f, 0.6f, 0f);
         _colorReturnTime = 0.1f;
         SpriteRenderer = GetComponent<SpriteRenderer>();
         _defaultColor = SpriteRenderer.color;
         CanBeDestroyedByPlayer = _canBeDestroyedByPlayer;
-        AdditionalPositionToPlayer = _additionalPositionToPlayer;
+        StartPositionFromPlayer = _startPositionFromPlayer;
         ShowHealthBar();
     }
 
@@ -42,19 +43,24 @@ public class Enemy : MonoBehaviour
     {
         if (collision.TryGetComponent(out Player player))
         {
-            _speed = 0;
+            Speed = 0;
             player.Die();
+        }
+
+        if(collision.TryGetComponent(out BackFrame backFrame))
+        {
+            gameObject.SetActive(false);
         }
     }
 
-    public void Init(Player player)
+    public void Init(Player player, float speed)
     {
-        Player = player;
+        PlayerObject = player;
+        Speed = speed;
     }
-
     public void TakeDamage(int damage)
     {
-        if (_health - damage <= 0)
+        if (CurrentHealth - damage <= 0)
         {
             Die();
         }
@@ -62,18 +68,24 @@ public class Enemy : MonoBehaviour
         {
             SpriteRenderer.color = _hitColor;
             Invoke(ChangeColorToDefaultMethodName, _colorReturnTime);
-            _health -= damage;
-            _healthBar.HealthChange(_health);
+            CurrentHealth -= damage;
+            EnemyHealthBar.HealthChange(CurrentHealth);
         }
+    }
+
+    public void AttackPlayer(float speed)
+    {
+        Speed = speed;
+        gameObject.SetActive(true);
     }
 
     private void ShowHealthBar()
     {
-        if (_health > 1 && _canBeDestroyedByPlayer == true)
+        if (CurrentHealth > 1 && _canBeDestroyedByPlayer == true)
         {
-            _healthBar = Instantiate(_healthBarSample, transform.position + _healthBarPosition, Quaternion.identity);
-            _healthBar.SetMaxHealth(_health);
-            _healthBar.transform.SetParent(transform);
+            EnemyHealthBar = Instantiate(_healthBarSample, transform.position + _healthBarPosition, Quaternion.identity);
+            EnemyHealthBar.SetMaxHealth(CurrentHealth);
+            EnemyHealthBar.transform.SetParent(transform);
         }
     }
 
@@ -84,22 +96,6 @@ public class Enemy : MonoBehaviour
 
     public virtual void Die() 
     {
-        Destroy(gameObject);
-
-        if(_giveRewardAfterDie)
-        {
-            int randomResourceNumber = Random.Range(0, 2);
-
-            if (randomResourceNumber == 0)
-            {
-                var dropdownResource = Instantiate(_coin, transform.position, Quaternion.identity);
-                dropdownResource.SetVolume();
-            }
-            else
-            {
-                var dropdownResource = Instantiate(_battery, transform.position, Quaternion.identity);
-                dropdownResource.SetVolume();
-            }
-        }
+        gameObject.SetActive(false);
     }
 }

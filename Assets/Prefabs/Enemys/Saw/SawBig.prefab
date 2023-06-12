@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4632578252776053247}
   - component: {fileID: 4632578252776053244}
-  - component: {fileID: 4632578252776053245}
-  - component: {fileID: 4632578252776053233}
   - component: {fileID: 4632578252776053246}
+  - component: {fileID: 211815034565116894}
   m_Layer: 0
   m_Name: SawBig
   m_TagString: Untagged
@@ -28,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4632578252776053243}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.918652, y: -0.36794186, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -89,45 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4632578252776053245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4632578252776053243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a5dd920075c47c48bc48cd83cac3f13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 10
-  _healthBarSample: {fileID: 111980126143739121, guid: c4bd9a126310e624e9c7240ac383fc58, type: 3}
-  _coin: {fileID: 9151226536257720570, guid: 6bc57435804896f4183c917cf8aa1e3e, type: 3}
-  _battery: {fileID: 8310121584227869769, guid: c1a9da91b94eb9b4991dd4c19e18d7fe, type: 3}
-  _damage: 0
-  _speed: 0
-  _canBeDestroyedByPlayer: 0
---- !u!95 &4632578252776053233
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4632578252776053243}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 85f7a380782df434588894c0d13307ca, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!58 &4632578252776053246
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -144,6 +104,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.87
+--- !u!114 &211815034565116894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4632578252776053243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829d6c9fb64671c4e9dac238e2b1c2f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 0
+  _healthBarSample: {fileID: 0}
+  _startPositionFromPlayer: {x: 22, y: 0, z: 0}
+  _damage: 0
+  _canBeDestroyedByPlayer: 0
+  _isSmallSaw: 0
 --- !u!1001 &4632578251234387520
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -169,11 +147,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6318975128321239528, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.05
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6318975128321239528, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.25
+      value: -1.2
       objectReference: {fileID: 0}
     - target: {fileID: 6318975128321239528, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -211,13 +189,40 @@ PrefabInstance:
       propertyPath: m_Name
       value: Saw
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6318975128321239532, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -7231321116354018834, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
 --- !u!4 &1728180518066524072 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6318975128321239528, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
   m_PrefabInstance: {fileID: 4632578251234387520}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1728180518066524076 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6318975128321239532, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
+  m_PrefabInstance: {fileID: 4632578251234387520}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3997081627579531642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728180518066524076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34a91a364d143f54a9f89d796211dd25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 0
+  _healthBarSample: {fileID: 0}
+  _startPositionFromPlayer: {x: 0, y: 0, z: 0}
+  _damage: 0
+  _canBeDestroyedByPlayer: 0
 --- !u!1001 &4632578252023995066
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -243,11 +248,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6318975128321239528, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.06
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6318975128321239528, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.263
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 6318975128321239528, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -285,10 +290,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: Saw (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6318975128321239532, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -7231321116354018834, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
 --- !u!4 &1728180518317110098 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6318975128321239528, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
   m_PrefabInstance: {fileID: 4632578252023995066}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1728180518317110102 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6318975128321239532, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
+  m_PrefabInstance: {fileID: 4632578252023995066}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &818012786795539644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728180518317110102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34a91a364d143f54a9f89d796211dd25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 0
+  _healthBarSample: {fileID: 0}
+  _startPositionFromPlayer: {x: 0, y: 0, z: 0}
+  _damage: 0
+  _canBeDestroyedByPlayer: 0

@@ -117,3 +117,4 @@ MonoBehaviour:
   _volume: 10
   _minVolume: 2
   _maxVolume: 7
+  _speed: 2

@@ -12,6 +12,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private List<Weapon> _availableWeapons;
     [SerializeField] private TMP_Text _batteryValueText;
     [SerializeField] private float _changeEnergyTextEffectTime;
+    [SerializeField] private GameUIController _gameUIController;
 
     private bool _onMenu;
     private float _batteryTextMaxFontSize = 60;
@@ -25,6 +26,7 @@ public class WeaponController : MonoBehaviour
     private int _currentWeaponNumber = 0;
     private Weapon _currentWeapon;
     private int _batteryValue;
+    private int _startBatteryValue = 100;
     private WeaponViewObject _weaponViewObject;
 
     public event UnityAction<string, Sprite> WeaponChange;
@@ -40,7 +42,7 @@ public class WeaponController : MonoBehaviour
         }
         _onMenu = true;
         _playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
-        _batteryValue = 10;
+        _batteryValue = _startBatteryValue;
         _weaponViewObject = GetComponentInChildren<WeaponViewObject>();
         _playerMover = GetComponent<PlayerMover>();
         _currentWeapon = _availableWeapons[0];
@@ -59,17 +61,25 @@ public class WeaponController : MonoBehaviour
 
     private void OnEnable()
     {
+        _gameUIController.StartGame += StartGame;
         _playerCollisionHandler.BatteryTaken += AddEnergy;
     }
 
     private void OnDisable()
     {
+        _gameUIController.StartGame -= StartGame;
         _playerCollisionHandler.BatteryTaken -= AddEnergy;
     }
 
     public void ChangeOnMenuValue(bool value)
     {
         _onMenu = value;
+    }
+
+    private void StartGame()
+    {
+        _batteryValue = _startBatteryValue;
+        CalculateAvailableNumberOfShots();
     }
 
     private void AddEnergy(int energyPoints)

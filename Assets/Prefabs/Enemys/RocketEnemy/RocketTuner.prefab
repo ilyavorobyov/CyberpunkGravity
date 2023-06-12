@@ -97,9 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e5d7fdcafcda54eabf1d618e4653aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 1
+  _maxHealth: 0
+  _healthBarSample: {fileID: 111980126143739121, guid: c4bd9a126310e624e9c7240ac383fc58, type: 3}
+  _startPositionFromPlayer: {x: 0, y: 0, z: 0}
   _damage: 0
-  _speed: 0
+  _canBeDestroyedByPlayer: 0
   _rocket: {fileID: 1735409482561163880, guid: deff58c0bb4778f4e9ab4a1d88b469af, type: 3}
   _iterationsNumber: 5
   _iterationTime: 0.2

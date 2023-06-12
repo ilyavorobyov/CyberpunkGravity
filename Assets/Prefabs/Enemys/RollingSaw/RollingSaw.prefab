@@ -11,10 +11,8 @@ GameObject:
   - component: {fileID: 4600695225426231657}
   - component: {fileID: 4600695225426231656}
   - component: {fileID: 4600695225426231658}
-  - component: {fileID: 4600695225426231659}
   - component: {fileID: 4600695225426231661}
   - component: {fileID: 4600695225426231663}
-  - component: {fileID: 4600695225426231664}
   m_Layer: 0
   m_Name: RollingSaw
   m_TagString: Untagged
@@ -105,27 +103,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.0057444572}
   serializedVersion: 2
   m_Radius: 0.65509844
---- !u!50 &4600695225426231659
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4600695225426231654}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!58 &4600695225426231661
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -154,30 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e22a6b4c5a7804dbcdedd84f89e183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 1
+  _maxHealth: 0
   _healthBarSample: {fileID: 111980126143739121, guid: c4bd9a126310e624e9c7240ac383fc58, type: 3}
-  _coin: {fileID: 9151226536257720570, guid: 6bc57435804896f4183c917cf8aa1e3e, type: 3}
-  _battery: {fileID: 8310121584227869769, guid: c1a9da91b94eb9b4991dd4c19e18d7fe, type: 3}
+  _startPositionFromPlayer: {x: 22, y: 0, z: 0}
   _damage: 0
-  _speed: 6
-  _canBeDestroyedByPlayer: 1
---- !u!95 &4600695225426231664
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4600695225426231654}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0a721741a27008c4aa0122f11014d251, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  _canBeDestroyedByPlayer: 0
+  _speed: 5

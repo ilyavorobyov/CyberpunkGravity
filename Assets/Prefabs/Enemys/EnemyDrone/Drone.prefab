@@ -98,15 +98,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4dbd8ad5ca9d1240a27556f801b55a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 3
+  _maxHealth: 1
   _healthBarSample: {fileID: 111980126143739121, guid: c4bd9a126310e624e9c7240ac383fc58, type: 3}
-  _coin: {fileID: 9151226536257720570, guid: 6bc57435804896f4183c917cf8aa1e3e, type: 3}
-  _battery: {fileID: 8310121584227869769, guid: c1a9da91b94eb9b4991dd4c19e18d7fe, type: 3}
+  _startPositionFromPlayer: {x: 20, y: 0, z: 0}
   _damage: 0
-  _speed: 4
   _canBeDestroyedByPlayer: 1
   _giveRewardAfterDie: 1
   _attackSprite: {fileID: 21300000, guid: 10d817151e150d44db3b28e9ef0d33e0, type: 3}
+  _runningSprite: {fileID: 21300000, guid: 1b9144b98f6df5445bd1dc57d2426583, type: 3}
 --- !u!61 &8960122042235943682
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _jumpForce;
-    [SerializeField] private float _speed;
     [SerializeField] private PlayerBullet _playerBullet;
     [SerializeField] private GameUIController _gameStateController;
     [SerializeField] private PowerBoots _powerBoots;
@@ -26,7 +25,7 @@ public class PlayerMover : MonoBehaviour
 
     private void Awake()
     {
-        _startPosition = new Vector3(0, -3.96f, -3);
+        _startPosition = new Vector3(0, 0f, -3);
         _onMenu = true;
         Speed = 0;
         _canGravityChange = true;
@@ -37,8 +36,6 @@ public class PlayerMover : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(Vector3.right * Speed * Time.deltaTime);
-
         if(_rigidbody.velocity.y != 0)
         {
             _powerBoots.gameObject.SetActive(true);
@@ -65,11 +62,22 @@ public class PlayerMover : MonoBehaviour
         _gameStateController.MenuButtonClick -= SetStartPosition;
     }
 
+    public void TurnOnGravityChanger()
+    {
+        _canGravityChange = true;
+    }
+
+    public void TurnOffGravityChanger()
+    {
+        SwitchToStandardGravity();
+        _canGravityChange = false;
+    }
+
     private void StartGame()
     {
-        Speed = _speed;
         ChangeState(false);
         SetStartPosition();
+        SwitchToStandardGravity();
     }
 
     private void SetStartPosition()
@@ -123,7 +131,6 @@ public class PlayerMover : MonoBehaviour
                 {
                     _rigidbody.velocity = Vector2.zero;
                     SwitchToStandardGravity();
-                    transform.rotation = Quaternion.Euler(Vector3.zero);
                 }
             }
         }
@@ -133,16 +140,6 @@ public class PlayerMover : MonoBehaviour
     {
         _isAlteredGravity = false;
         _rigidbody.gravityScale = _normalGravity;
-    }
-
-    public void TurnOnGravityChanger()
-    {
-        _canGravityChange = true;
-    }
-
-    public void TurnOffGravityChanger()
-    {
-        SwitchToStandardGravity();
-        _canGravityChange = false;
+        transform.rotation = Quaternion.Euler(Vector3.zero);
     }
 }

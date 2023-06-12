@@ -19,13 +19,17 @@ public class RocketTuner : Enemy
         _camera = Camera.main;
         _positionToConvert = new Vector3(Screen.width, 0, 0);
         _startSprite = SpriteRenderer.sprite;
-        BeginRocketLaunch();
     }
 
     private void Update()
     {
         _xPosition = _camera.ScreenToWorldPoint(_positionToConvert).x -1;
-        transform.position = new Vector3(_xPosition, Player.transform.position.y, Player.transform.position.z);
+        transform.position = new Vector3(_xPosition, PlayerObject.transform.position.y, PlayerObject.transform.position.z);
+    }
+
+    private void OnEnable()
+    {
+        BeginRocketLaunch();
     }
 
     private void BeginRocketLaunch()
@@ -44,13 +48,13 @@ public class RocketTuner : Enemy
 
         for (int i = 0; i <= _iterationsNumber; i++)
         {
+            yield return waitForSeconds;
             SpriteRenderer.sprite = _startSprite;
             yield return waitForSeconds;
             SpriteRenderer.sprite = _secondSprite;
-            yield return waitForSeconds;
         }
 
         Instantiate(_rocket, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8698617434253301313}
   - component: {fileID: 8698617434253301312}
   - component: {fileID: 8698617434253301315}
-  - component: {fileID: 8698617434253301314}
+  - component: {fileID: 2049028492664669908}
   m_Layer: 0
   m_Name: LaserShoot
   m_TagString: Untagged
@@ -112,7 +112,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.4665015, y: 0.33892292}
   m_EdgeRadius: 0
---- !u!114 &8698617434253301314
+--- !u!114 &2049028492664669908
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,14 +121,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8698617434253301317}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6fadc7426a3e04438c6e2507e40cd00, type: 3}
+  m_Script: {fileID: 11500000, guid: 2aee4d2c9862e824a862cc88208d171d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 1
-  _healthBarSample: {fileID: 111980126143739121, guid: c4bd9a126310e624e9c7240ac383fc58, type: 3}
-  _coin: {fileID: 9151226536257720570, guid: 6bc57435804896f4183c917cf8aa1e3e, type: 3}
-  _battery: {fileID: 8310121584227869769, guid: c1a9da91b94eb9b4991dd4c19e18d7fe, type: 3}
-  _damage: 2
-  _speed: 6
-  _canBeDestroyedByPlayer: 1
-  _giveRewardAfterDie: 0
