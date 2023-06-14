@@ -12,6 +12,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private int _maxNextLevelScore;
     [SerializeField] private float _startSpeed;
     [SerializeField] private float _additionToSpeed;
+    [SerializeField] private int _scoreMultiplier;
     [SerializeField] private GameUIController _gameUIController;
 
     private const string ScoreValue = "Score";
@@ -21,7 +22,6 @@ public class ScoreManager : MonoBehaviour
     private float _timeFromStart;
     private float _speedObjects;
     private int _nextLevelScore;
-    private int _scoreMultiplier = 5;
     private int _currentResult;
 
     public event UnityAction<float> SpeedChange;
@@ -42,11 +42,10 @@ public class ScoreManager : MonoBehaviour
     private void Update()
     {
         _timeFromStart += Time.deltaTime;
-        _tempCurrentResult = _timeFromStart * _scoreMultiplier;
-        _currentResult = (int)_tempCurrentResult;
+        _currentResult = (int)((_timeFromStart * _scoreMultiplier) * _speedObjects);
         _scoreText.text = _currentResult.ToString();
 
-        if (_currentResult >= _nextLevelScore)
+        if (_currentResult >= _nextLevelScore * _speedObjects)
         {
             _speedObjects += _additionToSpeed;
             _nextLevelScore += Random.Range(_minNextLevelScore, _maxNextLevelScore);

@@ -11,7 +11,6 @@ public class Ground : MonoBehaviour
     private float _speed;
     private Vector3 _startPosition = new Vector3(18f, -1.26f, 0f);
     private float _minX = 2;
-    private float _speedMultiplier = 0.3f;
 
     private void Update()
     {
@@ -35,6 +34,6 @@ public class Ground : MonoBehaviour
 
     private void SetMovingSpeed(float speed)
     {
-        _speed = speed * _speedMultiplier;
+        _speed = speed;
     }
 }

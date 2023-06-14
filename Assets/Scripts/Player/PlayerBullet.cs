@@ -34,11 +34,6 @@ public class PlayerBullet : MonoBehaviour
         }
     }
 
-    public void Init(float speed)
-    {
-        _speed += speed;
-    }
-
     public void Die()
     {
         Destroy(gameObject);

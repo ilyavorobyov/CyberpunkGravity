@@ -103,7 +103,7 @@ public class WeaponController : MonoBehaviour
 
             if (energyConsuming <= _batteryValue)
             {
-                _currentWeapon.Shoot(_playerMover.Speed);
+                _currentWeapon.Shoot();
                 _batteryValue -= energyConsuming;
                 CalculateAvailableNumberOfShots();
             }

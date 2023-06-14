@@ -103,7 +103,7 @@ MonoBehaviour:
   _startPositionFromPlayer: {x: 20, y: 0, z: 0}
   _damage: 0
   _canBeDestroyedByPlayer: 1
-  _giveRewardAfterDie: 1
+  _isMissle: 0
   _attackSprite: {fileID: 21300000, guid: 10d817151e150d44db3b28e9ef0d33e0, type: 3}
   _runningSprite: {fileID: 21300000, guid: 1b9144b98f6df5445bd1dc57d2426583, type: 3}
 --- !u!61 &8960122042235943682

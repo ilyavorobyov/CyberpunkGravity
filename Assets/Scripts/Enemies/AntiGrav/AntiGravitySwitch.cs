@@ -3,6 +3,16 @@ using UnityEngine;
 public class AntiGravitySwitch : Enemy
 {
     private PlayerMover _playerMover;
+    private Vector3 _playerPosition;
+    private float _addToXPosition = 20;
+
+    private void Start()
+    {
+        _playerMover = PlayerObject.GetComponent<PlayerMover>();
+        _playerPosition = PlayerObject.transform.position;
+        StartPosition = PlayerObject.transform.position + new Vector3(_playerPosition.x + _addToXPosition, 0, 0);
+        transform.position = StartPosition;
+    }
 
     private void Update()
     {
@@ -16,8 +26,6 @@ public class AntiGravitySwitch : Enemy
         CurrentHealth = MaxHealth;
         EnemyHealthBar.HealthChange(CurrentHealth);
         float _yPosition = Random.Range(_minY, _maxY);
-        Vector3 position = new Vector3(StartPositionFromPlayer.x, _yPosition, StartPositionFromPlayer.z);
-        transform.position = position;
     }
 
     public override void Die()

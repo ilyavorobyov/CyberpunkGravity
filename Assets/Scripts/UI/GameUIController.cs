@@ -23,6 +23,9 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private float _animationDuration;
     [SerializeField] private Image _selectedWeaponIcon;
     [SerializeField] private TMP_Text _selectedWeaponText;
+    [SerializeField] private Button _shopButton;
+    [SerializeField] private Button _closeShopButton;
+    [SerializeField] private GameObject _shopPanel;
 
     private WeaponController _weaponController;
 
@@ -48,6 +51,8 @@ public class GameUIController : MonoBehaviour
         _menuButtonPausePanel.onClick.AddListener(OnMenuUiState);
         _player.PlayerDied += GameOverUiState;
         _weaponController.WeaponChange += OnWeaponChanged;
+        _shopButton.onClick.AddListener(OnShopButtonClick);
+        _closeShopButton.onClick.AddListener(OnCloseShopButtonClick);
     }
 
     private void OnDisable()
@@ -60,6 +65,8 @@ public class GameUIController : MonoBehaviour
         _menuButtonPausePanel.onClick.RemoveListener(OnMenuUiState);
         _player.PlayerDied -= GameOverUiState;
         _weaponController.WeaponChange -= OnWeaponChanged;
+        _shopButton.onClick.RemoveListener(OnShopButtonClick);
+        _closeShopButton.onClick.RemoveListener(OnCloseShopButtonClick);
     }
 
     private void ShrinkAnimation(GameObject uiElement)
@@ -94,6 +101,7 @@ public class GameUIController : MonoBehaviour
         }
 
         ZoomAnimation(_startButton.gameObject);
+        ZoomAnimation(_shopButton.gameObject);
         ShrinkAnimation(_coinText.gameObject);
         ShrinkAnimation(_coinsPerGameSession.gameObject);
         ShrinkAnimation(_scoreText.gameObject);
@@ -107,8 +115,10 @@ public class GameUIController : MonoBehaviour
     {
         Time.timeScale = 1f;
         _pausePanel.gameObject.SetActive(false);
+        _shopPanel.gameObject.SetActive(false);
         ZoomAnimation(_pauseButton.gameObject);
         ShrinkAnimation(_startButton.gameObject);
+        ShrinkAnimation(_shopButton.gameObject);
         ZoomAnimation(_coinText.gameObject);
         ZoomAnimation(_coinsPerGameSession.gameObject);
         ZoomAnimation(_scoreText.gameObject);
@@ -156,5 +166,15 @@ public class GameUIController : MonoBehaviour
     {
         _selectedWeaponIcon.sprite = icon;
         _selectedWeaponText.text = label;
+    }
+
+    private void OnShopButtonClick()
+    {
+        _shopPanel.SetActive(true);
+    }
+
+    private void OnCloseShopButtonClick()
+    {
+        _shopPanel.SetActive(false);
     }
 }

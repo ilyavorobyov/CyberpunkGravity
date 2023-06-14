@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Rocket : MonoBehaviour
+public class Rocket : Enemy
 {
     [SerializeField] private float _speed;
 
@@ -20,22 +20,8 @@ public class Rocket : MonoBehaviour
         _direction.y = yDirection;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public override void Die()
     {
-        if (collision.TryGetComponent(out BackFrame backFrame))
-        {
-            Destroy(gameObject);
-        }
-
-        if (collision.TryGetComponent(out Player player))
-        {
-            player.Die();
-        }
-
-        if(collision.TryGetComponent(out PlayerBullet bullet))
-        {
-            Destroy(gameObject);
-            bullet.Die();
-        }
+        Destroy(gameObject);
     }
 }

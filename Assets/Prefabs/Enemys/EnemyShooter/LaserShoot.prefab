@@ -124,3 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aee4d2c9862e824a862cc88208d171d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 0
+  _healthBarSample: {fileID: 0}
+  _startPositionFromPlayer: {x: 0, y: 0, z: 0}
+  _damage: 0
+  _canBeDestroyedByPlayer: 1
+  _isMissle: 1

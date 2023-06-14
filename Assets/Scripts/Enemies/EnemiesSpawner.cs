@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemiesResourcesSpawner : MonoBehaviour
+public class EnemiesSpawner : MonoBehaviour
 {
     [SerializeField] private List<Enemy> _enemySamples;
-    [SerializeField] private List<Enemy> _enemys;
     [SerializeField] private Player _player;
     [SerializeField] private float _minTimeOfAppearance;
     [SerializeField] private float _maxTimeOfAppearance;
     [SerializeField] private GameUIController _gameUIController;
     [SerializeField] private ScoreManager _scoreManager;
 
+    private List<Enemy> _enemys = new List<Enemy>();
     private Coroutine _performAppearance;
     private float _timeOfAppearance;
     private float _speedObjects;
@@ -34,14 +34,14 @@ public class EnemiesResourcesSpawner : MonoBehaviour
     private void OnEnable()
     {
         _gameUIController.StartGame += StartGame;
-        _gameUIController.ChangeState += ControlSpawn;
+        _gameUIController.ChangeState += ControlSpawner;
         _scoreManager.SpeedChange += SetObjectsSpeed;
     }
 
     private void OnDisable()
     {
         _gameUIController.StartGame -= StartGame;
-        _gameUIController.ChangeState -= ControlSpawn;
+        _gameUIController.ChangeState -= ControlSpawner;
         _scoreManager.SpeedChange -= SetObjectsSpeed;
     }
 
@@ -85,7 +85,8 @@ public class EnemiesResourcesSpawner : MonoBehaviour
 
         return false;
     }
-    private void ControlSpawn(bool state)
+
+    private void ControlSpawner(bool state)
     {
         if (!state)
         {

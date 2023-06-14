@@ -6,7 +6,13 @@ public class RollingSaw : Enemy
 
     private float _maxYPosition = 7.36f;
     private float _minYPosition = 0.12f;
-    private Vector3 _position;
+    private float _addToXPosition = 21;
+  //  private Vector3 _playerPosition;
+
+    private void Start()
+    {
+      //  _playerPosition = PlayerObject.transform.position;
+    }
 
     private void Update()
     {
@@ -19,13 +25,11 @@ public class RollingSaw : Enemy
 
         if (yPositionNumber == 0 )
         {
-            _position = StartPositionFromPlayer + new Vector3(0f, _maxYPosition, 0f);
+            StartPosition = new Vector3(_addToXPosition, _maxYPosition, 0f);
         }
         else
         {
-            _position = StartPositionFromPlayer + new Vector3(0f, _minYPosition, 0f);
+            StartPosition = new Vector3(_addToXPosition, _minYPosition, 0f);
         }
-
-        transform.position = _position;
     }
 }

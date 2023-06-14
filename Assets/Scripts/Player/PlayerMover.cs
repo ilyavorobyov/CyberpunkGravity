@@ -9,9 +9,9 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float _jumpForce;
     [SerializeField] private PlayerBullet _playerBullet;
     [SerializeField] private GameUIController _gameStateController;
-    [SerializeField] private PowerBoots _powerBoots;
 
     private WeaponController _weaponController;
+    private PlayerCollisionHandler _playerCollisionHandler;
     private Rigidbody2D _rigidbody;
     private Vector3 _startPosition;
     private bool _isAlteredGravity;
@@ -21,29 +21,15 @@ public class PlayerMover : MonoBehaviour
     private float _reversedGravity = -2;
     private Vector3 _reversedRotation = new Vector3(0, 180, 180);
 
-    public float Speed { get; private set; }
-
     private void Awake()
     {
         _startPosition = new Vector3(0, 0f, -3);
         _onMenu = true;
-        Speed = 0;
         _canGravityChange = true;
         _isAlteredGravity = false;
         _rigidbody = GetComponent<Rigidbody2D>();
         _weaponController = GetComponent<WeaponController>();
-    }
-
-    private void Update()
-    {
-        if(_rigidbody.velocity.y != 0)
-        {
-            _powerBoots.gameObject.SetActive(true);
-        }
-        else
-        {
-            _powerBoots.gameObject.SetActive(false);
-        }
+        _playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
     }
 
     private void OnEnable()
@@ -69,8 +55,8 @@ public class PlayerMover : MonoBehaviour
 
     public void TurnOffGravityChanger()
     {
-        SwitchToStandardGravity();
         _canGravityChange = false;
+        SwitchToStandardGravity();
     }
 
     private void StartGame()
@@ -87,7 +73,6 @@ public class PlayerMover : MonoBehaviour
 
     private void GameOverState()
     {
-        Speed = 0;
         ChangeState(true);
     }
 
@@ -99,7 +84,7 @@ public class PlayerMover : MonoBehaviour
 
     private void OnJump()
     {
-        if(!_onMenu)
+        if (!_onMenu)
         {
             if (!_isAlteredGravity)
             {
@@ -116,26 +101,23 @@ public class PlayerMover : MonoBehaviour
 
     private void OnChangeGravity()
     {
-        if(!_onMenu)
+        if (!_onMenu && _canGravityChange && _rigidbody.velocity.y == 0)
         {
-            if (_canGravityChange)
+            if (!_isAlteredGravity)
             {
-                if (!_isAlteredGravity)
-                {
-                    _rigidbody.velocity = Vector2.zero;
-                    _isAlteredGravity = true;
-                    _rigidbody.gravityScale = _reversedGravity;
-                    transform.rotation = Quaternion.Euler(_reversedRotation);
-                }
-                else
-                {
-                    _rigidbody.velocity = Vector2.zero;
-                    SwitchToStandardGravity();
-                }
+                _rigidbody.velocity = Vector2.zero;
+                _isAlteredGravity = true;
+                _rigidbody.gravityScale = _reversedGravity;
+                transform.rotation = Quaternion.Euler(_reversedRotation);
+            }
+            else
+            {
+                _rigidbody.velocity = Vector2.zero;
+                SwitchToStandardGravity();
             }
         }
     }
-    
+
     private void SwitchToStandardGravity()
     {
         _isAlteredGravity = false;

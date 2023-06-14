@@ -8,15 +8,16 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Vector3 _startPositionFromPlayer;
     [SerializeField] private int _damage;
     [SerializeField] private bool _canBeDestroyedByPlayer;
+    [SerializeField] private bool _isMissle;
 
     const string ChangeColorToDefaultMethodName = "ChangeColorToDefault";
 
     protected SpriteRenderer SpriteRenderer;
     protected Player PlayerObject;
-    protected Vector3 StartPositionFromPlayer;
     protected int MaxHealth;
     protected int CurrentHealth;
     protected EnemyHealthBar EnemyHealthBar;
+    protected Vector3 StartPosition;
 
     private UnityEngine.Color _hitColor = UnityEngine.Color.red;
     private Vector3 _healthBarPosition;
@@ -35,22 +36,7 @@ public class Enemy : MonoBehaviour
         SpriteRenderer = GetComponent<SpriteRenderer>();
         _defaultColor = SpriteRenderer.color;
         CanBeDestroyedByPlayer = _canBeDestroyedByPlayer;
-        StartPositionFromPlayer = _startPositionFromPlayer;
         ShowHealthBar();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out Player player))
-        {
-            Speed = 0;
-            player.Die();
-        }
-
-        if(collision.TryGetComponent(out BackFrame backFrame))
-        {
-            gameObject.SetActive(false);
-        }
     }
 
     public void Init(Player player, float speed)
@@ -77,6 +63,7 @@ public class Enemy : MonoBehaviour
     {
         Speed = speed;
         gameObject.SetActive(true);
+        transform.position = StartPosition;
     }
 
     private void ShowHealthBar()
@@ -96,6 +83,13 @@ public class Enemy : MonoBehaviour
 
     public virtual void Die() 
     {
-        gameObject.SetActive(false);
+        if(_isMissle)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

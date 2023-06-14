@@ -22,5 +22,5 @@ public abstract class Weapon : MonoBehaviour
         WeaponView = weaponView;
     }
 
-    public abstract void Shoot(float speed);
+    public abstract void Shoot();
 }

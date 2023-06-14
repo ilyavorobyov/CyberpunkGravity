@@ -11,12 +11,15 @@ public class EnemyMissileSystem : Enemy
     private Coroutine _missileShooting;
     private bool _isShooting = true;
     private float _distanceToPlayer = 13;
+    private float _startYPosition = 1;
     private Vector3 _shootingPosition; 
     private float _step = 0.01f;
+    private float _addToXPosition = 20;
 
     private void Start()
     {
-        transform.position = StartPositionFromPlayer;
+        StartPosition = new Vector3(PlayerObject.transform.position.x + _addToXPosition, _startYPosition, 0);
+        transform.position = StartPosition;
         _shootingPosition = new Vector3(_distanceToPlayer, 1, 0);
     }
 
@@ -33,7 +36,6 @@ public class EnemyMissileSystem : Enemy
         }
 
         _missileShooting = StartCoroutine(MissileShooting());
-        transform.position = StartPositionFromPlayer;
         CurrentHealth = MaxHealth;
         EnemyHealthBar.HealthChange(CurrentHealth);
     }

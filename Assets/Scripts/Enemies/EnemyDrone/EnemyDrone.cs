@@ -7,20 +7,26 @@ public class EnemyDrone : Enemy
     [SerializeField] private Sprite _attackSprite;
     [SerializeField] private Sprite _runningSprite;
 
+    private float _addToXPosition = 22;
     private SpriteRenderer _spriteRenderer;
     private float _distanceToPlayer;
     private float _attackDistance = 10;
+    float _yPosition;
+    float _maxY = 7.6f;
+    float _minY = 0.1f;
     private bool _isRunning;
     private bool _isAttack;
-    private Vector3 _startPosition;
+    private Vector3 _playerPosition;
 
     private void Start()
     {
+        _yPosition = Random.Range(_minY, _maxY);
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer.sprite = _runningSprite;
         _isRunning = true;
         _isAttack = false;
-        _startPosition = new Vector3(StartPositionFromPlayer.x, 3, 0);
-        transform.position = _startPosition;
+        StartPosition = new Vector3(_addToXPosition, _yPosition, 0);
+        transform.position = StartPosition;
     }
 
     private void Update()
@@ -49,16 +55,13 @@ public class EnemyDrone : Enemy
     {
         _isRunning = true;
         _isAttack = false;
-        _spriteRenderer.sprite = _runningSprite;
-        float _maxY = 7.6f;
-        float _minY = 0.1f;
-        float _yPosition = Random.Range(_minY, _maxY);
-        Vector3 position = new Vector3(StartPositionFromPlayer.x, _yPosition, StartPositionFromPlayer.z);
-        transform.position = position;
+        _yPosition = Random.Range(_minY, _maxY);
+        StartPosition = new Vector3(_addToXPosition, _yPosition, 0);
     }
 
     public override void Die()
     {
+        _spriteRenderer.sprite = _runningSprite;
         base.Die();
     }
 }
