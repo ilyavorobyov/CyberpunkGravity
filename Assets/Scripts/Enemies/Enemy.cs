@@ -1,12 +1,12 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] protected int AddToXPosition;
     [SerializeField] private int _maxHealth;
     [SerializeField] private EnemyHealthBar _healthBarSample;
-    [SerializeField] private Vector3 _startPositionFromPlayer;
-    [SerializeField] private int _damage;
     [SerializeField] private bool _canBeDestroyedByPlayer;
     [SerializeField] private bool _isMissle;
 
@@ -18,13 +18,13 @@ public class Enemy : MonoBehaviour
     protected int CurrentHealth;
     protected EnemyHealthBar EnemyHealthBar;
     protected Vector3 StartPosition;
+    protected Vector3 PlayerPosition;
 
     private UnityEngine.Color _hitColor = UnityEngine.Color.red;
     private Vector3 _healthBarPosition;
     private UnityEngine.Color _defaultColor;
     private float _colorReturnTime;
 
-    public bool CanBeDestroyedByPlayer { get; private set; }
     public float Speed { get; private set; }
 
     private void Awake()
@@ -35,15 +35,9 @@ public class Enemy : MonoBehaviour
         _colorReturnTime = 0.1f;
         SpriteRenderer = GetComponent<SpriteRenderer>();
         _defaultColor = SpriteRenderer.color;
-        CanBeDestroyedByPlayer = _canBeDestroyedByPlayer;
         ShowHealthBar();
     }
 
-    public void Init(Player player, float speed)
-    {
-        PlayerObject = player;
-        Speed = speed;
-    }
     public void TakeDamage(int damage)
     {
         if (CurrentHealth - damage <= 0)
@@ -59,11 +53,22 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public bool IsCanBeDestroy()
+    {
+        if(_canBeDestroyedByPlayer) return true;
+        return false;
+    }
+
+    public void Init(Player player, float speed)
+    {
+        PlayerObject = player;
+        Speed = speed;
+    }
+
     public void AttackPlayer(float speed)
     {
         Speed = speed;
-        gameObject.SetActive(true);
-        transform.position = StartPosition;
+        SetStartInfo();
     }
 
     private void ShowHealthBar()
@@ -80,6 +85,9 @@ public class Enemy : MonoBehaviour
     {
         SpriteRenderer.color = _defaultColor;
     }
+
+    public virtual void SetStartInfo()
+    {}
 
     public virtual void Die() 
     {

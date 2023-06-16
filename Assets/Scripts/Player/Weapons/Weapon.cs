@@ -22,5 +22,10 @@ public abstract class Weapon : MonoBehaviour
         WeaponView = weaponView;
     }
 
+    public void Buying()
+    {
+        _isBuyed = true;
+    }
+
     public abstract void Shoot();
 }

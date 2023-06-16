@@ -35,6 +35,7 @@ public class EnemiesSpawner : MonoBehaviour
     {
         _gameUIController.StartGame += StartGame;
         _gameUIController.ChangeState += ControlSpawner;
+        _gameUIController.MenuButtonClick += StartGame;
         _scoreManager.SpeedChange += SetObjectsSpeed;
     }
 
@@ -42,6 +43,7 @@ public class EnemiesSpawner : MonoBehaviour
     {
         _gameUIController.StartGame -= StartGame;
         _gameUIController.ChangeState -= ControlSpawner;
+        _gameUIController.MenuButtonClick -= StartGame;
         _scoreManager.SpeedChange -= SetObjectsSpeed;
     }
 

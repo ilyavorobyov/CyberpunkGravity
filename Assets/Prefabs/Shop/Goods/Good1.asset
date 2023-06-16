@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bd370ae1c711254d9de23e0988f644e, type: 3}
   m_Name: Good1
   m_EditorClassIdentifier: 
-  _label: jgbcftvt
-  _price: 50
-  _icon: {fileID: 21300000, guid: 748ae8b33df036b46a86e0387f1602cf, type: 3}
+  _label: "+1 \u0441\u0435\u043A\u0443\u043D\u0434\u0430 \u043A \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u044E
+    \u0449\u0438\u0442\u0430"
+  _price: 10
+  _icon: {fileID: 21300000, guid: 2bf5094a3ecb5bb43a2a4769ecfd213b, type: 3}
+  _purchasedEffect: {fileID: 5240529328899104826, guid: db4cb2fdfd6dd9a488c8745a4e5b0f05, type: 3}

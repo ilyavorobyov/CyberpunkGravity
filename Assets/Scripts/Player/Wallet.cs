@@ -36,18 +36,24 @@ public class Wallet : MonoBehaviour
         _playerCollisionHandler.CoinCollected -= AddCoins;
     }
 
-    private void AddCoins(int denomination)
+    public void RemoveCoins(int coins)
     {
-        _coinsPerGameSessionValue += denomination;
-        _coinsPerGameSessionText.text = _coinsPerGameSessionValue.ToString();
+        Coins -= coins;
+        _allCoinsText.text = Coins.ToString();
     }
 
-    private void SaveCoins()
+    public void SaveCoins()
     {
         Coins += _coinsPerGameSessionValue;
         PlayerPrefs.SetInt(ALLCOINSVALUE, Coins);
         _allCoinsText.text = Coins.ToString();
         _coinsPerGameSessionValue = 0;
+        _coinsPerGameSessionText.text = _coinsPerGameSessionValue.ToString();
+    }
+
+    private void AddCoins(int denomination)
+    {
+        _coinsPerGameSessionValue += denomination;
         _coinsPerGameSessionText.text = _coinsPerGameSessionValue.ToString();
     }
 }

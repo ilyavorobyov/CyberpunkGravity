@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class RocketTuner : Enemy
 {
@@ -27,19 +28,25 @@ public class RocketTuner : Enemy
         transform.position = new Vector3(_xPosition, PlayerObject.transform.position.y, PlayerObject.transform.position.z);
     }
 
-    private void OnEnable()
+    private void OnDisable()
     {
-        BeginRocketLaunch();
+        if (_launchRocket != null)
+        {
+            StopCoroutine(_launchRocket);
+        }
     }
 
-    private void BeginRocketLaunch()
+    public override void SetStartInfo()
     {
-        if( _launchRocket != null )
+        gameObject.SetActive(true);
+
+        if (_launchRocket != null)
         {
             StopCoroutine(_launchRocket);
         }
 
         _launchRocket = StartCoroutine(LaunchRocket());
+        PlayerPosition = PlayerObject.transform.position;
     }
 
     private IEnumerator LaunchRocket()

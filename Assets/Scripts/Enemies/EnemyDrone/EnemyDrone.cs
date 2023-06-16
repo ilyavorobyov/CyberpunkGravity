@@ -1,5 +1,5 @@
+using System.Drawing;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class EnemyDrone : Enemy
@@ -7,26 +7,18 @@ public class EnemyDrone : Enemy
     [SerializeField] private Sprite _attackSprite;
     [SerializeField] private Sprite _runningSprite;
 
-    private float _addToXPosition = 22;
     private SpriteRenderer _spriteRenderer;
     private float _distanceToPlayer;
     private float _attackDistance = 10;
-    float _yPosition;
-    float _maxY = 7.6f;
-    float _minY = 0.1f;
+    private float _yPosition;
+    private float _maxY = 7.6f;
+    private float _minY = 0.1f;
     private bool _isRunning;
     private bool _isAttack;
-    private Vector3 _playerPosition;
 
-    private void Start()
+    private void Awake()
     {
-        _yPosition = Random.Range(_minY, _maxY);
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.sprite = _runningSprite;
-        _isRunning = true;
-        _isAttack = false;
-        StartPosition = new Vector3(_addToXPosition, _yPosition, 0);
-        transform.position = StartPosition;
     }
 
     private void Update()
@@ -45,23 +37,26 @@ public class EnemyDrone : Enemy
 
         if (_isAttack)
         {
-            var step = Speed * Time.deltaTime;
+            var step = (Speed + 2) * Time.deltaTime;
             _spriteRenderer.sprite = _attackSprite;
             transform.position = Vector2.MoveTowards(transform.position, PlayerObject.transform.position, step);
         }
     }
 
-    private void OnEnable()
+    public override void SetStartInfo()
     {
         _isRunning = true;
         _isAttack = false;
+        _spriteRenderer.sprite = _runningSprite;
         _yPosition = Random.Range(_minY, _maxY);
-        StartPosition = new Vector3(_addToXPosition, _yPosition, 0);
+        gameObject.SetActive(true);
+        PlayerPosition = PlayerObject.transform.position;
+        StartPosition = new Vector3(AddToXPosition, _yPosition, 0);
+        transform.position = StartPosition;
     }
 
     public override void Die()
     {
-        _spriteRenderer.sprite = _runningSprite;
         base.Die();
     }
 }

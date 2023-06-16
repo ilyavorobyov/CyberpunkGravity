@@ -50,3 +50,4 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 392da06d474d01248ba58c684da34cc3, type: 3}
   _sprite: {fileID: 21300000, guid: fe6f02a8621256a4e8d53259b39b41e8, type: 3}
   _isBuyed: 1
+  _number: 1

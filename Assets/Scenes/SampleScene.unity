@@ -761,7 +761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &241477846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,7 +774,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ab8583f8a1143c4fa6f947dc75ab044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 50
 --- !u!61 &241477847
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3511,6 +3510,7 @@ MonoBehaviour:
   - {fileID: 6777141425251159288, guid: 0df803c5dbbb2a641b67de80da0f32ca, type: 3}
   - {fileID: 3425192120034756418, guid: 622d7368075209945b33a700a5167cc7, type: 3}
   - {fileID: 5393450724589739224, guid: 6a1e5375e747ee6489a6b69fe848733c, type: 3}
+  - {fileID: 4623803387047334136, guid: f9f2e164190fc304b8ef99e240d8afdc, type: 3}
   _availableWeapons: []
   _batteryValueText: {fileID: 1587580522}
   _changeEnergyTextEffectTime: 0.5
@@ -5108,9 +5108,8 @@ MonoBehaviour:
   - {fileID: 8314080245967623570, guid: b15a544c3ddb50b4ebd72a24e1cc2b19, type: 3}
   - {fileID: 4182928545213603902, guid: ef0a8ffbbb2507d40832b014660797df, type: 3}
   - {fileID: 4600695225426231663, guid: a6512cd2ae5785e4b9637165a7a5b7bd, type: 3}
-  - {fileID: -7231321116354018834, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
   - {fileID: 211815034565116894, guid: 66ffa89dc833b9a4f992d4713e58ebf1, type: 3}
-  - {fileID: 4790160507524791770, guid: 111739717b0cc8441b201988e8540e8d, type: 3}
+  - {fileID: -7231321116354018834, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
   _player: {fileID: 1052711191}
   _minTimeOfAppearance: 1
   _maxTimeOfAppearance: 5

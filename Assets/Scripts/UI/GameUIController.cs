@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using DG.Tweening;
+using System.Collections.Generic;
 
 public class GameUIController : MonoBehaviour
 {
@@ -28,7 +29,6 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private GameObject _shopPanel;
 
     private WeaponController _weaponController;
-
     public event UnityAction StartGame;
     public event UnityAction GameOver;
     public event UnityAction MenuButtonClick;
@@ -171,6 +171,7 @@ public class GameUIController : MonoBehaviour
     private void OnShopButtonClick()
     {
         _shopPanel.SetActive(true);
+        _shopPanel.GetComponent<Shop>().RenderGoods();
     }
 
     private void OnCloseShopButtonClick()

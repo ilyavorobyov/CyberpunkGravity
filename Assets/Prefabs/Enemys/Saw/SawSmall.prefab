@@ -114,9 +114,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 829d6c9fb64671c4e9dac238e2b1c2f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AddToXPosition: 22
   _maxHealth: 0
   _healthBarSample: {fileID: 0}
-  _startPositionFromPlayer: {x: 22, y: 0, z: 0}
-  _damage: 0
   _canBeDestroyedByPlayer: 0
+  _isMissle: 0
   _isSmallSaw: 1

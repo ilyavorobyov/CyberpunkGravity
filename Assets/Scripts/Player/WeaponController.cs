@@ -33,13 +33,7 @@ public class WeaponController : MonoBehaviour
 
     private void Awake()
     {
-        foreach (var weapon in _allWeapons)
-        {
-            if(weapon.IsBuyed == true)
-            {
-                _availableWeapons.Add(weapon);
-            }
-        }
+        CheckAvailableWeapons();
         _onMenu = true;
         _playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
         _batteryValue = _startBatteryValue;
@@ -78,8 +72,20 @@ public class WeaponController : MonoBehaviour
 
     private void StartGame()
     {
+        CheckAvailableWeapons();
         _batteryValue = _startBatteryValue;
         CalculateAvailableNumberOfShots();
+    }
+
+    private void CheckAvailableWeapons()
+    {
+        foreach (var weapon in _allWeapons)
+        {
+            if (weapon.IsBuyed == true)
+            {
+                _availableWeapons.Add(weapon);
+            }
+        }
     }
 
     private void AddEnergy(int energyPoints)

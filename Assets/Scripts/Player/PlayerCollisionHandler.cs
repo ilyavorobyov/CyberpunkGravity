@@ -83,7 +83,6 @@ public class PlayerCollisionHandler : MonoBehaviour
         var waitForSeconds = new WaitForSeconds(_playerForceField.GetDuration());
         _playerForceField.gameObject.SetActive(true);
         yield return waitForSeconds;
-        Debug.Log("end");
         _inForceField = false;
         _playerForceField.gameObject.SetActive(false);
     }

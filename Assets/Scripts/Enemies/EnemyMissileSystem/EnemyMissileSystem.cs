@@ -7,29 +7,24 @@ public class EnemyMissileSystem : Enemy
     [SerializeField] private float _timeBetweenShots;
     [SerializeField] private float _minYDirectionMissle;
     [SerializeField] private float _maxYDirectionMissle;
+    [SerializeField] private float _shootXPosition;
+    [SerializeField] private float _startYPosition;
+    [SerializeField] private float _shootYPosition;
 
     private Coroutine _missileShooting;
     private bool _isShooting = true;
-    private float _distanceToPlayer = 13;
-    private float _startYPosition = 1;
     private Vector3 _shootingPosition; 
-    private float _step = 0.01f;
-    private float _addToXPosition = 20;
-
-    private void Start()
-    {
-        StartPosition = new Vector3(PlayerObject.transform.position.x + _addToXPosition, _startYPosition, 0);
-        transform.position = StartPosition;
-        _shootingPosition = new Vector3(_distanceToPlayer, 1, 0);
-    }
+    private float _step = 0.015f;
 
     private void Update()
     {
         transform.position = Vector2.MoveTowards(transform.position, _shootingPosition, _step);
     }
 
-    private void OnEnable()
+    public override void SetStartInfo()
     {
+        gameObject.SetActive(true);
+
         if (_missileShooting != null)
         {
             StopCoroutine(_missileShooting);
@@ -38,6 +33,18 @@ public class EnemyMissileSystem : Enemy
         _missileShooting = StartCoroutine(MissileShooting());
         CurrentHealth = MaxHealth;
         EnemyHealthBar.HealthChange(CurrentHealth);
+        PlayerPosition = PlayerObject.transform.position;
+        StartPosition = PlayerPosition + new Vector3(PlayerPosition.x + AddToXPosition, _startYPosition, 0);
+        transform.position = StartPosition;
+        _shootingPosition = new Vector3(_shootXPosition, _shootYPosition, 0);
+    }
+
+    private void OnDisable()
+    {
+        if (_missileShooting != null)
+        {
+            StopCoroutine(_missileShooting);
+        }
     }
 
     private IEnumerator MissileShooting()
@@ -49,7 +56,7 @@ public class EnemyMissileSystem : Enemy
             while (true)
             {
                 yield return waitForSeconds;
-                float yDirectionMissle = Random.Range(-0.2f, 0.7f);
+                float yDirectionMissle = Random.Range(_minYDirectionMissle, _maxYDirectionMissle);
                 var missile = Instantiate(_enemyShooterMissile, transform.position + new Vector3(0.15f, 0.33f, 0f), Quaternion.identity);
                 missile.SetYDirection(yDirectionMissle);
             }

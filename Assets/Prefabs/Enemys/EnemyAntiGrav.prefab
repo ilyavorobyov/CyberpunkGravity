@@ -170,11 +170,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bce69e0c35baf142a4aeacda910b8be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AddToXPosition: 22
   _maxHealth: 5
   _healthBarSample: {fileID: 111980126143739121, guid: c4bd9a126310e624e9c7240ac383fc58, type: 3}
-  _startPositionFromPlayer: {x: 22, y: 0, z: 0}
-  _damage: 0
   _canBeDestroyedByPlayer: 1
+  _isMissle: 0
+  _maxY: 6.3
+  _minY: 1.2
 --- !u!58 &4790160507524791765
 CircleCollider2D:
   m_ObjectHideFlags: 0

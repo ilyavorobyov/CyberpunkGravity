@@ -22,7 +22,7 @@ public class PlayerBullet : MonoBehaviour
     {
         if (collision.TryGetComponent(out Enemy enemy))
         {
-            if (enemy.CanBeDestroyedByPlayer == true)
+            if (enemy.IsCanBeDestroy())
             {
                 enemy.TakeDamage(_damage);
                 Die();

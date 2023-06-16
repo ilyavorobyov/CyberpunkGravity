@@ -9,13 +9,32 @@ public class Shop : MonoBehaviour
     [SerializeField] private GoodsView _goodsView;
     [SerializeField] private GameObject _itemContainer;
 
-    private void Start()
+    private List<GoodsView> _availableGoods = new List<GoodsView>();
+    private bool _isRendered = false;
+
+    public void RenderGoods()
     {
-        foreach (var item in _goods)
+        if (!_isRendered)
         {
-            item.SetInfo();
-            var good = Instantiate(_goodsView, _itemContainer.transform);
-            good.Render(item, _wallet);
+            foreach (var item in _goods)
+            {
+                var good = Instantiate(_goodsView, _itemContainer.transform);
+                good.Render(item, _wallet);
+                _availableGoods.Add(good);
+                _isRendered = true;
+            }
+        }
+        else
+        {
+            CheckWallet();
+        }
+    }
+
+    private void CheckWallet()
+    {
+        foreach (var item in _availableGoods)
+        {
+            item.CheckWallet();
         }
     }
 }

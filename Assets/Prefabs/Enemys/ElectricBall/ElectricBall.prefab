@@ -98,13 +98,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62af352868aca6c45ac80c6790a6adbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AddToXPosition: 22
   _maxHealth: 1
   _healthBarSample: {fileID: 111980126143739121, guid: c4bd9a126310e624e9c7240ac383fc58, type: 3}
-  _startPositionFromPlayer: {x: 20, y: 0, z: 0}
   _damage: 0
   _canBeDestroyedByPlayer: 0
-  _giveRewardAfterDie: 0
-  _additionalSpeed: 5
+  _isMissle: 0
+  _additionalSpeed: 7
 --- !u!58 &7360837600094530347
 CircleCollider2D:
   m_ObjectHideFlags: 0
