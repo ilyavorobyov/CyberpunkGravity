@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMissileSystem : Enemy
@@ -11,6 +12,7 @@ public class EnemyMissileSystem : Enemy
     [SerializeField] private float _startYPosition;
     [SerializeField] private float _shootYPosition;
 
+    private List<Rocket> _missiles = new List<Rocket>();
     private Coroutine _missileShooting;
     private bool _isShooting = true;
     private Vector3 _shootingPosition; 
@@ -41,6 +43,13 @@ public class EnemyMissileSystem : Enemy
 
     private void OnDisable()
     {
+        foreach (Rocket missile in _missiles)
+        {
+            Destroy(missile.gameObject);
+        }
+
+        _missiles.Clear();
+
         if (_missileShooting != null)
         {
             StopCoroutine(_missileShooting);
@@ -59,6 +68,7 @@ public class EnemyMissileSystem : Enemy
                 float yDirectionMissle = Random.Range(_minYDirectionMissle, _maxYDirectionMissle);
                 var missile = Instantiate(_enemyShooterMissile, transform.position + new Vector3(0.15f, 0.33f, 0f), Quaternion.identity);
                 missile.SetYDirection(yDirectionMissle);
+                _missiles.Add(missile);
             }
         }
     }

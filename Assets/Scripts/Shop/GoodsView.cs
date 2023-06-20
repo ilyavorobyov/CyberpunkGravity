@@ -10,11 +10,11 @@ public class GoodsView : MonoBehaviour
     [SerializeField] private Image _icon;
     [SerializeField] private Button _sellButton;
 
+    private const string IsBuyedText = "Уже куплено";
     private Good _good;
     private PurchasedEffect _purchasedEffect;
     private int _priceValue;
     private Wallet _wallet;
-    private bool _repurchasable;
 
     private void OnEnable()
     {
@@ -35,9 +35,7 @@ public class GoodsView : MonoBehaviour
         _priceValue = good.Price;
         _purchasedEffect = good.PurchasedEffect;
         _wallet = wallet;
-        _repurchasable = good.IsRepurchasable;
         CheckWallet();
-
     }
 
     public void CheckWallet()
@@ -54,6 +52,7 @@ public class GoodsView : MonoBehaviour
         if (_good.IsBuyed)
         {
             _sellButton.interactable = false;
+            _price.text = IsBuyedText;
         }
     }
 

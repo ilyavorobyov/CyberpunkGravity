@@ -5,12 +5,11 @@ using UnityEngine;
 public class Ground : MonoBehaviour
 {
     [SerializeField] private Player _player;
-    [SerializeField] private float _xOffset;
     [SerializeField] private ScoreManager _scoreManager;
 
     private float _speed;
-    private Vector3 _startPosition = new Vector3(18f, -1.26f, 0f);
-    private float _minX = 2;
+    private Vector3 _startPosition = new Vector3(14.5f, -1.26f, 0f);
+    private float _minX = 1;
 
     private void Update()
     {

@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-using UnityEditor.U2D.Path;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Good", menuName = "Create New Good")]

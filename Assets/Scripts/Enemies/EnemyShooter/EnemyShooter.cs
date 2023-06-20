@@ -7,8 +7,9 @@ public class EnemyShooter : Enemy
     [SerializeField] private EnemyLaserShot _enemyLaserShot;
     [SerializeField] private float _timeBetweenShots;
 
+    private List<EnemyLaserShot> _enemyLaserShots = new List<EnemyLaserShot>();
     private Coroutine _laserShooting;
-    private float _distanceToPlayer = 15;
+    private float _distanceToPlayer = 11;
     private float _startYPosition = 2;
     private Vector3 _shootingPosition;
     private float _step = 0.01f;
@@ -38,6 +39,13 @@ public class EnemyShooter : Enemy
 
     private void OnDisable()
     {
+        foreach (EnemyLaserShot enemyLaserShot in _enemyLaserShots)
+        {
+            Destroy(enemyLaserShot.gameObject);
+        }
+
+        _enemyLaserShots.Clear();
+
         if (_laserShooting != null)
         {
             StopCoroutine(_laserShooting);
@@ -52,6 +60,7 @@ public class EnemyShooter : Enemy
         {
             yield return waitForSeconds;
             var shoot = Instantiate(_enemyLaserShot, transform.position, Quaternion.identity);
+            _enemyLaserShots.Add(shoot);
         }
     }
 }

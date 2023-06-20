@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEngine.EventSystems.EventTrigger;
 using Color = UnityEngine.Color;
 
 [RequireComponent(typeof(PlayerCollisionHandler))]
@@ -11,8 +12,11 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private List<Weapon> _allWeapons;
     [SerializeField] private List<Weapon> _availableWeapons;
     [SerializeField] private TMP_Text _batteryValueText;
+    [SerializeField] private TMP_Text _addingBatteryText;
     [SerializeField] private float _changeEnergyTextEffectTime;
     [SerializeField] private GameUIController _gameUIController;
+
+    private const string BatteryValueName = "BatteryValue";
 
     private bool _onMenu;
     private float _batteryTextMaxFontSize = 60;
@@ -22,23 +26,20 @@ public class WeaponController : MonoBehaviour
     private Color _changeEnergyColorAdd;
     private Coroutine _changeEnergyTextColor;
     private PlayerCollisionHandler _playerCollisionHandler;
-    private PlayerMover _playerMover;
     private int _currentWeaponNumber = 0;
     private Weapon _currentWeapon;
     private int _batteryValue;
-    private int _startBatteryValue = 100;
+    private int _defaultBatteryEnergy = 10;
     private WeaponViewObject _weaponViewObject;
 
-    public event UnityAction<string, Sprite> WeaponChange;
+    public event UnityAction<Sprite> WeaponChange;
 
     private void Awake()
     {
         CheckAvailableWeapons();
         _onMenu = true;
         _playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
-        _batteryValue = _startBatteryValue;
         _weaponViewObject = GetComponentInChildren<WeaponViewObject>();
-        _playerMover = GetComponent<PlayerMover>();
         _currentWeapon = _availableWeapons[0];
         _currentWeapon.Init(_weaponViewObject);
         CalculateAvailableNumberOfShots();
@@ -50,7 +51,7 @@ public class WeaponController : MonoBehaviour
         _regularEnergyText—olor = _batteryValueText.color;
         _changeEnergyColorLacks = Color.red;
         _changeEnergyColorAdd = Color.green;
-        WeaponChange?.Invoke(_currentWeapon.Label, _currentWeapon.Icon);
+        WeaponChange?.Invoke(_currentWeapon.Icon);
     }
 
     private void OnEnable()
@@ -73,7 +74,17 @@ public class WeaponController : MonoBehaviour
     private void StartGame()
     {
         CheckAvailableWeapons();
-        _batteryValue = _startBatteryValue;
+
+        if (PlayerPrefs.HasKey(BatteryValueName))
+        {
+            _batteryValue = PlayerPrefs.GetInt(BatteryValueName);
+        }
+        else
+        {
+            _batteryValue = _defaultBatteryEnergy;
+            PlayerPrefs.SetInt(BatteryValueName, _batteryValue);
+        }
+
         CalculateAvailableNumberOfShots();
     }
 
@@ -92,7 +103,7 @@ public class WeaponController : MonoBehaviour
     {
         _batteryValue += energyPoints;
         CalculateAvailableNumberOfShots();
-        StartTextEffectCoroutine(_changeEnergyColorAdd);
+        StartTextEffectCoroutine(_changeEnergyColorAdd, energyPoints);
     }
 
     private void CalculateAvailableNumberOfShots()
@@ -115,19 +126,20 @@ public class WeaponController : MonoBehaviour
             }
             else
             {
-                StartTextEffectCoroutine(_changeEnergyColorLacks);
+                _batteryValueText.color = _changeEnergyColorLacks;
+               //  Ò˛‰‡ ‰Ó·‡‚¸ Á‚ÛÍ ÚËÔ‡ ÌÂÚ Ô‡ÚÓÌÓ‚
             }
         }
     }
 
-    private void StartTextEffectCoroutine(Color color)
+    private void StartTextEffectCoroutine(Color color, int energyPoints)
     {
         if (_changeEnergyTextColor != null)
         {
             StopCoroutine(_changeEnergyTextColor);
         }
 
-        _changeEnergyTextColor = StartCoroutine(ChangeEnergyTextColor(color));
+        _changeEnergyTextColor = StartCoroutine(ChangeEnergyTextColor(color, energyPoints));
     }
 
     private void OnNextWeapon()
@@ -168,18 +180,20 @@ public class WeaponController : MonoBehaviour
 
     private void ChangeWeapon(Weapon weapon)
     {
-        WeaponChange?.Invoke(weapon.Label, weapon.Icon);
+        WeaponChange?.Invoke(weapon.Icon);
         _currentWeapon = weapon;
         _currentWeapon.Init(_weaponViewObject);
         _weaponViewObject.SetSprite(_currentWeapon.Sprite);
     }
 
-    private IEnumerator ChangeEnergyTextColor(Color temp—olor)
+    private IEnumerator ChangeEnergyTextColor(Color temp—olor, int addedEnergy)
     {
         var waitForSeconds = new WaitForSeconds(_changeEnergyTextEffectTime);
+        _addingBatteryText.text = $"+ {addedEnergy}".ToString();
         _batteryValueText.color = temp—olor;
         _batteryValueText.fontSize = _batteryTextMaxFontSize;
         yield return waitForSeconds;
+        _addingBatteryText.text = "";
         _batteryValueText.color = _regularEnergyText—olor;
         _batteryValueText.fontSize = _regularTextSize;
     }

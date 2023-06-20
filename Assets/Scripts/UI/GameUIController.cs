@@ -4,12 +4,15 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Collections.Generic;
+using System;
 
 public class GameUIController : MonoBehaviour
 {
     [SerializeField] private RectTransform _gameOverPanel;
     [SerializeField] private RectTransform _pausePanel;
     [SerializeField] private Player _player;
+    [SerializeField] private TMP_Text _allCoinsText;
+    [SerializeField] private TMP_Text _allCoinsValue;
     [SerializeField] private TMP_Text _coinText;
     [SerializeField] private TMP_Text _coinsPerGameSession;
     [SerializeField] private TMP_Text _scoreText;
@@ -23,11 +26,12 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private Button _menuButtonPausePanel;
     [SerializeField] private float _animationDuration;
     [SerializeField] private Image _selectedWeaponIcon;
-    [SerializeField] private TMP_Text _selectedWeaponText;
     [SerializeField] private Button _shopButton;
     [SerializeField] private Button _closeShopButton;
     [SerializeField] private GameObject _shopPanel;
+    [SerializeField] private Button _clearAllDataButton;   // не забудь потом удалить!
 
+    public static Action RocketsRemovalEvent;
     private WeaponController _weaponController;
     public event UnityAction StartGame;
     public event UnityAction GameOver;
@@ -38,7 +42,6 @@ public class GameUIController : MonoBehaviour
     {
         _weaponController = _player.GetComponent<WeaponController>();
         Time.timeScale = 0;
-        OnMenuUiState();
     }
 
     private void OnEnable()
@@ -53,6 +56,7 @@ public class GameUIController : MonoBehaviour
         _weaponController.WeaponChange += OnWeaponChanged;
         _shopButton.onClick.AddListener(OnShopButtonClick);
         _closeShopButton.onClick.AddListener(OnCloseShopButtonClick);
+        _clearAllDataButton.onClick.AddListener(ClearAllData);
     }
 
     private void OnDisable()
@@ -67,6 +71,12 @@ public class GameUIController : MonoBehaviour
         _weaponController.WeaponChange -= OnWeaponChanged;
         _shopButton.onClick.RemoveListener(OnShopButtonClick);
         _closeShopButton.onClick.RemoveListener(OnCloseShopButtonClick);
+        _clearAllDataButton.onClick.AddListener(ClearAllData);
+    }
+
+    private void ClearAllData()
+    {
+        PlayerPrefs.DeleteAll();
     }
 
     private void ShrinkAnimation(GameObject uiElement)
@@ -100,6 +110,8 @@ public class GameUIController : MonoBehaviour
             ShrinkAnimation(_gameOverPanel.gameObject);
         }
 
+        ZoomAnimation(_allCoinsText.gameObject);
+        ZoomAnimation(_allCoinsValue.gameObject);
         ZoomAnimation(_startButton.gameObject);
         ZoomAnimation(_shopButton.gameObject);
         ShrinkAnimation(_coinText.gameObject);
@@ -107,8 +119,10 @@ public class GameUIController : MonoBehaviour
         ShrinkAnimation(_scoreText.gameObject);
         ShrinkAnimation(_scoreValue.gameObject);
         ShrinkAnimation(_batteryValueText.gameObject);
+        ShrinkAnimation(_selectedWeaponIcon.gameObject);   
         ChangeState?.Invoke(true);
         MenuButtonClick.Invoke();
+        RocketsRemovalEvent?.Invoke();
     }
 
     private void OnStartButtonClick()
@@ -118,14 +132,20 @@ public class GameUIController : MonoBehaviour
         _shopPanel.gameObject.SetActive(false);
         ZoomAnimation(_pauseButton.gameObject);
         ShrinkAnimation(_startButton.gameObject);
+        ShrinkAnimation(_startButton.gameObject);
+        ShrinkAnimation(_startButton.gameObject);
         ShrinkAnimation(_shopButton.gameObject);
         ZoomAnimation(_coinText.gameObject);
         ZoomAnimation(_coinsPerGameSession.gameObject);
         ZoomAnimation(_scoreText.gameObject);
         ZoomAnimation(_scoreValue.gameObject);
         ZoomAnimation(_batteryValueText.gameObject);
+        ZoomAnimation(_selectedWeaponIcon.gameObject);
+        ShrinkAnimation(_allCoinsText.gameObject);
+        ShrinkAnimation(_allCoinsValue.gameObject);
         ChangeState?.Invoke(false);
         StartGame.Invoke();
+        RocketsRemovalEvent?.Invoke();
     }
 
     private void OnRestartButtonClick()
@@ -135,6 +155,7 @@ public class GameUIController : MonoBehaviour
         ZoomAnimation(_pauseButton.gameObject);
         ChangeState?.Invoke(false);
         StartGame.Invoke();
+        RocketsRemovalEvent?.Invoke();
     }
 
     private void GameOverUiState()
@@ -162,10 +183,9 @@ public class GameUIController : MonoBehaviour
         ZoomAnimation(_pauseButton.gameObject);
     }
 
-    private void OnWeaponChanged(string label, Sprite icon)
+    private void OnWeaponChanged(Sprite icon)
     {
         _selectedWeaponIcon.sprite = icon;
-        _selectedWeaponText.text = label;
     }
 
     private void OnShopButtonClick()

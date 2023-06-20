@@ -29,7 +29,7 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
         _timeFromStart = 0;
-        _maxScoreText.text = PlayerPrefs.GetInt(ScoreValue).ToString();
+        _maxScoreText.text = PlayerPrefs.GetInt(ScoreValue).ToString() + " ì";
     }
 
     private void Start()
@@ -80,6 +80,6 @@ public class ScoreManager : MonoBehaviour
         }
 
         Debug.Log("save result");
-        _maxScoreText.text = PlayerPrefs.GetInt(ScoreValue).ToString();
+        _maxScoreText.text = PlayerPrefs.GetInt(ScoreValue).ToString() + " ì";
     }
 }

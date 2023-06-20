@@ -124,10 +124,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6fadc7426a3e04438c6e2507e40cd00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _coin: {fileID: 9151226536257720570, guid: 6bc57435804896f4183c917cf8aa1e3e, type: 3}
+  _battery: {fileID: 8310121584227869769, guid: c1a9da91b94eb9b4991dd4c19e18d7fe, type: 3}
+  AddToXPosition: 0
   _maxHealth: 0
   _healthBarSample: {fileID: 0}
-  _startPositionFromPlayer: {x: 0, y: 0, z: 0}
-  _damage: 0
   _canBeDestroyedByPlayer: 1
-  _isMissle: 1
-  _speed: 8
+  _isDropResourceAfterDie: 0
+  _speed: 5

@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8698617434253301317}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.5938, y: -1.5545, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5535791, y: 0.4079475, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -124,9 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aee4d2c9862e824a862cc88208d171d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AddToXPosition: 0
   _maxHealth: 0
   _healthBarSample: {fileID: 0}
-  _startPositionFromPlayer: {x: 0, y: 0, z: 0}
-  _damage: 0
   _canBeDestroyedByPlayer: 1
   _isMissle: 1

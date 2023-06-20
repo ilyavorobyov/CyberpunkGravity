@@ -26,15 +26,10 @@ public class Shop : MonoBehaviour
         }
         else
         {
-            CheckWallet();
-        }
-    }
-
-    private void CheckWallet()
-    {
-        foreach (var item in _availableGoods)
-        {
-            item.CheckWallet();
+            foreach (var item in _availableGoods)
+            {
+                item.CheckWallet();
+            }
         }
     }
 }

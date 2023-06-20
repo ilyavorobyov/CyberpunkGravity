@@ -7,8 +7,9 @@ public class Wallet : MonoBehaviour
 {
     [SerializeField] private TMP_Text _allCoinsText;
     [SerializeField] private TMP_Text _coinsPerGameSessionText;
+    [SerializeField] private TMP_Text _gameOverPanelText;
 
-    private const string ALLCOINSVALUE = "Coins";
+    private const string AllCoinsValue = "Coins";
 
     private PlayerCollisionHandler _playerCollisionHandler;
     private Player _player;
@@ -18,7 +19,7 @@ public class Wallet : MonoBehaviour
 
     private void Awake()
     {
-        Coins = PlayerPrefs.GetInt(ALLCOINSVALUE);
+        Coins = PlayerPrefs.GetInt(AllCoinsValue);
         _allCoinsText.text = Coins.ToString();
         _playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
         _player = GetComponent<Player>();
@@ -45,7 +46,8 @@ public class Wallet : MonoBehaviour
     public void SaveCoins()
     {
         Coins += _coinsPerGameSessionValue;
-        PlayerPrefs.SetInt(ALLCOINSVALUE, Coins);
+        _gameOverPanelText.text = $"Игра окончена! Заработано {_coinsPerGameSessionValue} монет";
+        PlayerPrefs.SetInt(AllCoinsValue, Coins);
         _allCoinsText.text = Coins.ToString();
         _coinsPerGameSessionValue = 0;
         _coinsPerGameSessionText.text = _coinsPerGameSessionValue.ToString();

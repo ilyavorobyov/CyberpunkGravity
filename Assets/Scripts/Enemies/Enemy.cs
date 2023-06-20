@@ -4,11 +4,13 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private Coin _coin;
+    [SerializeField] private Battery _battery;
     [SerializeField] protected int AddToXPosition;
     [SerializeField] private int _maxHealth;
     [SerializeField] private EnemyHealthBar _healthBarSample;
     [SerializeField] private bool _canBeDestroyedByPlayer;
-    [SerializeField] private bool _isMissle;
+    [SerializeField] private bool _isDropResourceAfterDie;
 
     const string ChangeColorToDefaultMethodName = "ChangeColorToDefault";
 
@@ -55,7 +57,7 @@ public class Enemy : MonoBehaviour
 
     public bool IsCanBeDestroy()
     {
-        if(_canBeDestroyedByPlayer) return true;
+        if (_canBeDestroyedByPlayer) return true;
         return false;
     }
 
@@ -86,18 +88,31 @@ public class Enemy : MonoBehaviour
         SpriteRenderer.color = _defaultColor;
     }
 
-    public virtual void SetStartInfo()
-    {}
+    public virtual void SetStartInfo() { }
 
-    public virtual void Die() 
+    public virtual void Die()
     {
-        if(_isMissle)
+        if (_isDropResourceAfterDie)
         {
-            Destroy(gameObject);
+            int numberOfResourse = Random.Range(0, 2);
+
+            if(numberOfResourse == 0)
+            {
+                var coin = Instantiate(_coin, transform.position, Quaternion.identity);
+                coin.SetVolume();
+                coin.SetSpeed(Speed);
+                Debug.Log(Speed);
+
+            }
+            else
+            {
+                var battery = Instantiate(_battery, transform.position, Quaternion.identity);
+                battery.SetVolume();
+                battery.SetSpeed(Speed);
+                Debug.Log(Speed);
+            }
         }
-        else
-        {
-            gameObject.SetActive(false);
-        }
+
+        gameObject.SetActive(false);
     }
 }

@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(PlayerMover))]
@@ -12,6 +11,7 @@ public class PlayerCollisionHandler : MonoBehaviour
     private PlayerMover _playerMover;
     private Player _player;
     private bool _inForceField;
+    private float _shieldFlashTime = 0.2f;
 
     private Coroutine _turnOnForceField;
 
@@ -41,7 +41,7 @@ public class PlayerCollisionHandler : MonoBehaviour
 
         if (collision.TryGetComponent(out Enemy enemy))
         {
-            if(!_inForceField)
+            if (!_inForceField)
             {
                 _player.Die();
             }
@@ -70,7 +70,7 @@ public class PlayerCollisionHandler : MonoBehaviour
 
     private void TurnOnForceField()
     {
-        if(_turnOnForceField != null)
+        if (_turnOnForceField != null)
         {
             StopCoroutine(_turnOnForceField);
         }
@@ -80,10 +80,15 @@ public class PlayerCollisionHandler : MonoBehaviour
 
     private IEnumerator ForceFieldAction()
     {
-        var waitForSeconds = new WaitForSeconds(_playerForceField.GetDuration());
+        var waitForSecondsShieldFlash = new WaitForSeconds(_shieldFlashTime);
+        var waitForSeconds = new WaitForSeconds(_playerForceField.GetDuration() - (_shieldFlashTime * 2));
         _playerForceField.gameObject.SetActive(true);
         yield return waitForSeconds;
-        _inForceField = false;
         _playerForceField.gameObject.SetActive(false);
+        yield return waitForSecondsShieldFlash;
+        _playerForceField.gameObject.SetActive(true);
+        yield return waitForSecondsShieldFlash;
+        _playerForceField.gameObject.SetActive(false);
+        _inForceField = false;
     }
 }
