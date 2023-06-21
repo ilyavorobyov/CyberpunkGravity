@@ -101,7 +101,7 @@ public class PlayerMover : MonoBehaviour
 
     private void OnChangeGravity()
     {
-        if (!_onMenu && _canGravityChange && _rigidbody.velocity.y == 0)
+        if (!_onMenu && _canGravityChange)
         {
             if (!_isAlteredGravity)
             {

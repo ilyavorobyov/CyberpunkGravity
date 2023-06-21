@@ -101,15 +101,12 @@ public class Enemy : MonoBehaviour
                 var coin = Instantiate(_coin, transform.position, Quaternion.identity);
                 coin.SetVolume();
                 coin.SetSpeed(Speed);
-                Debug.Log(Speed);
-
             }
             else
             {
                 var battery = Instantiate(_battery, transform.position, Quaternion.identity);
                 battery.SetVolume();
                 battery.SetSpeed(Speed);
-                Debug.Log(Speed);
             }
         }
 

@@ -18,7 +18,6 @@ public class ScoreManager : MonoBehaviour
     private const string ScoreValue = "Score";
 
     private int _maxResult;
-    private float _tempCurrentResult;
     private float _timeFromStart;
     private float _speedObjects;
     private int _nextLevelScore;
@@ -43,7 +42,7 @@ public class ScoreManager : MonoBehaviour
     {
         _timeFromStart += Time.deltaTime;
         _currentResult = (int)((_timeFromStart * _scoreMultiplier) * _speedObjects);
-        _scoreText.text = _currentResult.ToString();
+        _scoreText.text = _currentResult.ToString() + " ì";
 
         if (_currentResult >= _nextLevelScore * _speedObjects)
         {
@@ -63,6 +62,11 @@ public class ScoreManager : MonoBehaviour
     {
         _player.PlayerDied -= SaveResult;
         _gameUIController.StartGame -= StartGame;
+    }
+
+    public float GetSpeed()
+    {
+        return _speedObjects;
     }
 
     private void StartGame()

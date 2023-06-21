@@ -88,7 +88,7 @@ public class ResourcesAndBuffsSpawner : MonoBehaviour
 
     private bool SelectCoinRespawn()
     {
-        int numberOfResorce = Random.Range(0, 5);
+        int numberOfResorce = Random.Range(0, 4);
 
         if (numberOfResorce == 0)
         {

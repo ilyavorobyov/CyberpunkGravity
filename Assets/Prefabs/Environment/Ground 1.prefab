@@ -76,12 +76,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fa9f2cbd742dbfd4cacfc7c338c70e83, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0c842117fef8be74bb7f14dcc5e1d855, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.0909091, y: 1.0909091}
+  m_Size: {x: 3.35, y: 2.775}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -100,18 +100,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00003027916, y: 0}
+  m_Offset: {x: 0.000030189753, y: 0.012639642}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.0909091, y: 1.0909091}
-    newSize: {x: 1.0909091, y: 1.0909091}
+    oldSize: {x: 1.0666667, y: 1.0666667}
+    newSize: {x: 3.35, y: 2.775}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0912142, y: 1}
+  m_Size: {x: 1.0665667, y: 1.0252793}
   m_EdgeRadius: 0
 --- !u!114 &6153937310136988861
 MonoBehaviour:
@@ -126,7 +126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
-  _xOffset: 0
   _scoreManager: {fileID: 0}
 --- !u!1001 &1054500408880808586
 PrefabInstance:
@@ -141,12 +140,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2295407340265790897, guid: a02ee9f51dcf6ff48b844c40f662bbc4, type: 3}
       propertyPath: m_Size.x
-      value: 1.0907489
+      value: 1.0657856
       objectReference: {fileID: 0}
     - target: {fileID: 2295407340265790897, guid: a02ee9f51dcf6ff48b844c40f662bbc4, type: 3}
       propertyPath: m_Offset.x
-      value: -0.00020235777
+      value: -0.000044345856
       objectReference: {fileID: 0}
+    - target: {fileID: 2295407340265790897, guid: a02ee9f51dcf6ff48b844c40f662bbc4, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.0666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 2295407340265790897, guid: a02ee9f51dcf6ff48b844c40f662bbc4, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.0666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 2295407340265790898, guid: a02ee9f51dcf6ff48b844c40f662bbc4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 619bf1e2c61fd794394972086d3def47, type: 3}
     - target: {fileID: 2295407340265790899, guid: a02ee9f51dcf6ff48b844c40f662bbc4, type: 3}
       propertyPath: m_RootOrder
       value: 0

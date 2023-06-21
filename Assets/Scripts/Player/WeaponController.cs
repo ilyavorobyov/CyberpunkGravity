@@ -189,7 +189,7 @@ public class WeaponController : MonoBehaviour
     private IEnumerator ChangeEnergyTextColor(Color temp—olor, int addedEnergy)
     {
         var waitForSeconds = new WaitForSeconds(_changeEnergyTextEffectTime);
-        _addingBatteryText.text = $"+ {addedEnergy}".ToString();
+        _addingBatteryText.text = $"+ {addedEnergy / _currentWeapon.EnergyConsuming}".ToString();
         _batteryValueText.color = temp—olor;
         _batteryValueText.fontSize = _batteryTextMaxFontSize;
         yield return waitForSeconds;

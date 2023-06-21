@@ -170,11 +170,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bce69e0c35baf142a4aeacda910b8be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AddToXPosition: 22
+  _coin: {fileID: 0}
+  _battery: {fileID: 0}
+  AddToXPosition: 20
   _maxHealth: 5
   _healthBarSample: {fileID: 111980126143739121, guid: c4bd9a126310e624e9c7240ac383fc58, type: 3}
   _canBeDestroyedByPlayer: 1
-  _isMissle: 0
+  _isDropResourceAfterDie: 0
   _maxY: 6.3
   _minY: 1.2
 --- !u!58 &4790160507524791765

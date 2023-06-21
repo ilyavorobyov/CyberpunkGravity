@@ -42,7 +42,7 @@ public class Decoration : MonoBehaviour
         return _yPosition;
     }
 
-    private void SetSpeed(float speed)
+    public void SetSpeed(float speed)
     {
         _speed = speed - _speedReducer;
 

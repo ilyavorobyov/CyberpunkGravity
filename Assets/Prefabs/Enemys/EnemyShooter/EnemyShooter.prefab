@@ -106,7 +106,7 @@ MonoBehaviour:
   _canBeDestroyedByPlayer: 1
   _isDropResourceAfterDie: 1
   _enemyLaserShot: {fileID: 2049028492664669908, guid: fda4b727817792a4aba797ecceefff0d, type: 3}
-  _timeBetweenShots: 4
+  _timeBetweenShots: 3
 --- !u!61 &2534869290203293877
 BoxCollider2D:
   m_ObjectHideFlags: 0

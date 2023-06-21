@@ -13,14 +13,13 @@ public class DecorationSpawner : MonoBehaviour
     private Coroutine _respawnDecoration;
     private List<Decoration> _decorations = new List<Decoration>();
     private Vector3 _respawnPosition;
+    private float _xPosition = 16;
 
     private void Start()
     {
-        _respawnPosition = new Vector3(21f, 0f, 1f);
-
         foreach (var decorationSample in _decorationSamples)
         {
-            _respawnPosition = new Vector3(23f, decorationSample.GetYPosition(), 1f);
+            _respawnPosition = new Vector3(_xPosition, decorationSample.GetYPosition(), 1f);
             var decoration = Instantiate(decorationSample, _respawnPosition, Quaternion.identity);
             decoration.Init(_scoreManager, _respawnPosition);
             decoration.transform.SetParent(transform, false);
@@ -88,6 +87,7 @@ public class DecorationSpawner : MonoBehaviour
             if(!CheckActive())
             {
                 _decorations[GetRandomNumberDecoration()].gameObject.SetActive(true);
+                _decorations[GetRandomNumberDecoration()].SetSpeed(_scoreManager.GetSpeed());
             }
 
             yield return waitForSeconds;

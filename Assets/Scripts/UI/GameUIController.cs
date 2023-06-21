@@ -13,9 +13,7 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private TMP_Text _allCoinsText;
     [SerializeField] private TMP_Text _allCoinsValue;
-    [SerializeField] private TMP_Text _coinText;
     [SerializeField] private TMP_Text _coinsPerGameSession;
-    [SerializeField] private TMP_Text _scoreText;
     [SerializeField] private TMP_Text _scoreValue;
     [SerializeField] private TMP_Text _batteryValueText;
     [SerializeField] private Button _startButton;
@@ -29,7 +27,6 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private Button _shopButton;
     [SerializeField] private Button _closeShopButton;
     [SerializeField] private GameObject _shopPanel;
-    [SerializeField] private Button _clearAllDataButton;   // не забудь потом удалить!
 
     public static Action RocketsRemovalEvent;
     private WeaponController _weaponController;
@@ -56,7 +53,6 @@ public class GameUIController : MonoBehaviour
         _weaponController.WeaponChange += OnWeaponChanged;
         _shopButton.onClick.AddListener(OnShopButtonClick);
         _closeShopButton.onClick.AddListener(OnCloseShopButtonClick);
-        _clearAllDataButton.onClick.AddListener(ClearAllData);
     }
 
     private void OnDisable()
@@ -71,12 +67,6 @@ public class GameUIController : MonoBehaviour
         _weaponController.WeaponChange -= OnWeaponChanged;
         _shopButton.onClick.RemoveListener(OnShopButtonClick);
         _closeShopButton.onClick.RemoveListener(OnCloseShopButtonClick);
-        _clearAllDataButton.onClick.AddListener(ClearAllData);
-    }
-
-    private void ClearAllData()
-    {
-        PlayerPrefs.DeleteAll();
     }
 
     private void ShrinkAnimation(GameObject uiElement)
@@ -114,9 +104,7 @@ public class GameUIController : MonoBehaviour
         ZoomAnimation(_allCoinsValue.gameObject);
         ZoomAnimation(_startButton.gameObject);
         ZoomAnimation(_shopButton.gameObject);
-        ShrinkAnimation(_coinText.gameObject);
         ShrinkAnimation(_coinsPerGameSession.gameObject);
-        ShrinkAnimation(_scoreText.gameObject);
         ShrinkAnimation(_scoreValue.gameObject);
         ShrinkAnimation(_batteryValueText.gameObject);
         ShrinkAnimation(_selectedWeaponIcon.gameObject);   
@@ -135,9 +123,7 @@ public class GameUIController : MonoBehaviour
         ShrinkAnimation(_startButton.gameObject);
         ShrinkAnimation(_startButton.gameObject);
         ShrinkAnimation(_shopButton.gameObject);
-        ZoomAnimation(_coinText.gameObject);
         ZoomAnimation(_coinsPerGameSession.gameObject);
-        ZoomAnimation(_scoreText.gameObject);
         ZoomAnimation(_scoreValue.gameObject);
         ZoomAnimation(_batteryValueText.gameObject);
         ZoomAnimation(_selectedWeaponIcon.gameObject);

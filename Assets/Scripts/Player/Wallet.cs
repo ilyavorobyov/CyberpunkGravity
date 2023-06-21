@@ -46,7 +46,16 @@ public class Wallet : MonoBehaviour
     public void SaveCoins()
     {
         Coins += _coinsPerGameSessionValue;
-        _gameOverPanelText.text = $"Игра окончена! Заработано {_coinsPerGameSessionValue} монет";
+
+        if(_coinsPerGameSessionValue == 0)
+        {
+            _gameOverPanelText.text = "Игра окончена! Попробуй снова!";
+        }
+        else
+        {
+            _gameOverPanelText.text = "Игра окончена! Собрано " + _coinsPerGameSessionValue + " монет";
+        }
+
         PlayerPrefs.SetInt(AllCoinsValue, Coins);
         _allCoinsText.text = Coins.ToString();
         _coinsPerGameSessionValue = 0;
