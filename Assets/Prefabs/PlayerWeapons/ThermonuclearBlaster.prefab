@@ -48,7 +48,6 @@ MonoBehaviour:
   _label: "\u0422\u0435\u0440\u043C\u043E\u044F\u0434\u0435\u0440\u043D\u044B\u0439
     \u0431\u043B\u0430\u0441\u0442\u0435\u0440"
   _energyConsuming: 3
-  _icon: {fileID: 21300000, guid: 8eccb5b3bc30c6a46916bc73b296342b, type: 3}
-  _sprite: {fileID: 21300000, guid: 7337595408f634b47b93938f439ad0c8, type: 3}
+  _icon: {fileID: 21300000, guid: b75d3eb0f6cb25e4b870a104f4f4e37a, type: 3}
+  _sprite: {fileID: 21300000, guid: 50ccab93d36aaf447ae73c86c51b4907, type: 3}
   _isBuyed: 1
-  _number: 3

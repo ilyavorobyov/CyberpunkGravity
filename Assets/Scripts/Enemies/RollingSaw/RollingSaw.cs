@@ -4,8 +4,8 @@ public class RollingSaw : Enemy
 {
     [SerializeField] private float _addSpeed;
 
-    private float _maxYPosition = 7.36f;
-    private float _minYPosition = 0.12f;
+    private float _maxYPosition = 8.15f;
+    private float _minYPosition = 0.78f;
 
     private void Update()
     {

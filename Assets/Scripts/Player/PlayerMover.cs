@@ -4,15 +4,22 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerCollisionHandler))]
 [RequireComponent(typeof(WeaponController))]
+[RequireComponent(typeof(Animator))]
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _jumpForce;
     [SerializeField] private PlayerBullet _playerBullet;
     [SerializeField] private GameUIController _gameStateController;
 
+    private const string RunAnimationName = "Run";
+    private const string IdleAnimationName = "Idle";
+    private const string JumpAnimationName = "Jump";
+    private const string DieAnimationName = "Die";
+
     private WeaponController _weaponController;
-    private PlayerCollisionHandler _playerCollisionHandler;
+    private WeaponViewObject _weaponViewObject;
     private Rigidbody2D _rigidbody;
+    private Animator _animator;
     private Vector3 _startPosition;
     private bool _isAlteredGravity;
     private bool _canGravityChange;
@@ -29,7 +36,9 @@ public class PlayerMover : MonoBehaviour
         _isAlteredGravity = false;
         _rigidbody = GetComponent<Rigidbody2D>();
         _weaponController = GetComponent<WeaponController>();
-        _playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
+        _weaponViewObject = GetComponentInChildren<WeaponViewObject>();
+        _animator = GetComponent<Animator>();
+        _animator.updateMode = AnimatorUpdateMode.UnscaledTime;
     }
 
     private void OnEnable()
@@ -48,6 +57,13 @@ public class PlayerMover : MonoBehaviour
         _gameStateController.MenuButtonClick -= SetStartPosition;
     }
 
+    public void PlayDeathAnimation()
+    {
+        _animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+        _animator.SetTrigger(DieAnimationName);
+        _weaponViewObject.gameObject.SetActive(false);
+    }
+
     public void TurnOnGravityChanger()
     {
         _canGravityChange = true;
@@ -62,13 +78,19 @@ public class PlayerMover : MonoBehaviour
     private void StartGame()
     {
         ChangeState(false);
-        SetStartPosition();
         SwitchToStandardGravity();
+        _animator.updateMode = AnimatorUpdateMode.Normal;
+        _animator.SetTrigger(RunAnimationName);
+        _weaponViewObject.gameObject.SetActive(true);
     }
 
     private void SetStartPosition()
     {
+        _animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+        SwitchToStandardGravity();
+        _animator.SetTrigger(IdleAnimationName);
         transform.position = _startPosition;
+        _weaponViewObject.gameObject.SetActive(true);
     }
 
     private void GameOverState()
@@ -90,11 +112,13 @@ public class PlayerMover : MonoBehaviour
             {
                 _rigidbody.velocity = Vector2.zero;
                 _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+                _animator.SetTrigger(JumpAnimationName);
             }
             else
             {
                 _rigidbody.velocity = Vector2.zero;
                 _rigidbody.AddForce(Vector2.down * _jumpForce, ForceMode2D.Impulse);
+                _animator.SetTrigger(JumpAnimationName);
             }
         }
     }

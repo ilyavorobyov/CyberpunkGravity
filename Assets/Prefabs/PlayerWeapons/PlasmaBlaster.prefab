@@ -47,7 +47,6 @@ MonoBehaviour:
   Bullet: {fileID: 2602792351547104091, guid: 9e5108cd977fa014bbdb5f3ac8402a6e, type: 3}
   _label: "\u041F\u043B\u0430\u0437\u043C\u0435\u043D\u043D\u044B\u0439 \u0431\u043B\u0430\u0441\u0442\u0435\u0440"
   _energyConsuming: 1
-  _icon: {fileID: 21300000, guid: 392da06d474d01248ba58c684da34cc3, type: 3}
-  _sprite: {fileID: 21300000, guid: fe6f02a8621256a4e8d53259b39b41e8, type: 3}
+  _icon: {fileID: 21300000, guid: 9a90f603518520c4fb076da60d628f54, type: 3}
+  _sprite: {fileID: 21300000, guid: 90a82a81d56c6d94296097c02b75e2ed, type: 3}
   _isBuyed: 1
-  _number: 1

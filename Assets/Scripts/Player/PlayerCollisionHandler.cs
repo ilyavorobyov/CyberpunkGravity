@@ -44,6 +44,7 @@ public class PlayerCollisionHandler : MonoBehaviour
             if (!_inForceField)
             {
                 _player.Die();
+                _playerMover.PlayDeathAnimation();
             }
         }
 

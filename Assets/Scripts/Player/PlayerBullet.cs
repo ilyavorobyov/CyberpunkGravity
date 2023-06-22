@@ -1,16 +1,22 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class PlayerBullet : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private int _damage;
     [SerializeField] private float _lifeTime;
 
-    private const string DieMethodName = "Die";
+    private const string DieName = "Die";
+    private const string HitAnimationName = "Hit";
+
+    private Animator _animator;
+    private float _dieAnimationDuration = 0.2f;
 
     private void Start()
     {
-        Invoke(DieMethodName, _lifeTime);
+        _animator = GetComponent<Animator>();
+        Invoke(DieName, _lifeTime);
     }
 
     private void Update()
@@ -25,7 +31,11 @@ public class PlayerBullet : MonoBehaviour
             if (enemy.IsCanBeDestroy())
             {
                 enemy.TakeDamage(_damage);
-                Die();
+                HitDie();
+            }
+            else if(!enemy.IsCanBeDestroy())
+            {
+                HitDie();
             }
             else
             {
@@ -34,8 +44,16 @@ public class PlayerBullet : MonoBehaviour
         }
     }
 
-    public void Die()
+    private void HitDie()
     {
-        Destroy(gameObject);
+        _speed = 0;
+        _animator.SetTrigger(HitAnimationName);
+        Destroy(gameObject, _dieAnimationDuration);
+    }
+
+    private void Die()
+    {
+        _animator.SetTrigger(DieName);
+        Destroy(gameObject, _dieAnimationDuration);
     }
 }
