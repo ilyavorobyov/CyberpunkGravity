@@ -6,7 +6,12 @@ public class BackFrame : MonoBehaviour
     {
         if (collision.TryGetComponent(out Enemy enemy))
         {
-            enemy.Die();
+            enemy.gameObject.SetActive(false);
+        }
+
+        if (collision.TryGetComponent(out Rocket rocket) || collision.TryGetComponent(out EnemyLaserShot enemyLaserShot))
+        {
+            Destroy(collision.gameObject);
         }
     }
 }

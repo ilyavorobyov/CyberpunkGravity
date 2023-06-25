@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3197747099630834240
 Transform:
   m_ObjectHideFlags: 0
@@ -49,5 +49,5 @@ MonoBehaviour:
     \u0431\u043B\u0430\u0441\u0442\u0435\u0440"
   _energyConsuming: 3
   _icon: {fileID: 21300000, guid: b75d3eb0f6cb25e4b870a104f4f4e37a, type: 3}
-  _sprite: {fileID: 21300000, guid: 50ccab93d36aaf447ae73c86c51b4907, type: 3}
+  _sprite: {fileID: 21300000, guid: c2bc4107c9808ee46ad14da0550b7eda, type: 3}
   _isBuyed: 1

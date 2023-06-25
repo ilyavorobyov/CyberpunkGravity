@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMissileSystem : Enemy
@@ -11,12 +10,32 @@ public class EnemyMissileSystem : Enemy
     [SerializeField] private float _shootXPosition;
     [SerializeField] private float _startYPosition;
     [SerializeField] private float _shootYPosition;
+    [SerializeField] private Sprite _shotPointAttackSprite;
 
-    private List<Rocket> _missiles = new List<Rocket>();
+    private Sprite _shotPointIdleSprite;
+    private ShotPoint _shotPoint;
+    private SpriteRenderer _shotPointSpriteRenderer;
     private Coroutine _missileShooting;
     private bool _isShooting = true;
-    private Vector3 _shootingPosition; 
+    private Vector3 _shootingPosition;
     private float _step = 0.015f;
+    private bool _isStarted = false;
+
+    private void Start()
+    {
+        _shotPoint = GetComponentInChildren<ShotPoint>();
+        _shotPointSpriteRenderer = _shotPoint.GetComponent<SpriteRenderer>();
+        _shotPointIdleSprite = _shotPointSpriteRenderer.sprite;
+
+        if (_missileShooting != null)
+        {
+            StopCoroutine(_missileShooting);
+        }
+
+        _missileShooting = StartCoroutine(MissileShooting());
+
+        _isStarted = true;
+    }
 
     private void Update()
     {
@@ -27,12 +46,6 @@ public class EnemyMissileSystem : Enemy
     {
         gameObject.SetActive(true);
 
-        if (_missileShooting != null)
-        {
-            StopCoroutine(_missileShooting);
-        }
-
-        _missileShooting = StartCoroutine(MissileShooting());
         CurrentHealth = MaxHealth;
         EnemyHealthBar.HealthChange(CurrentHealth);
         PlayerPosition = PlayerObject.transform.position;
@@ -43,16 +56,22 @@ public class EnemyMissileSystem : Enemy
 
     private void OnDisable()
     {
-        foreach (Rocket missile in _missiles)
-        {
-            Destroy(missile.gameObject);
-        }
-
-        _missiles.Clear();
-
         if (_missileShooting != null)
         {
             StopCoroutine(_missileShooting);
+        }
+    }
+
+    private void OnEnable()
+    {
+        if(_isStarted)
+        {
+            if (_missileShooting != null)
+            {
+                StopCoroutine(_missileShooting);
+            }
+
+            _missileShooting = StartCoroutine(MissileShooting());
         }
     }
 
@@ -60,16 +79,16 @@ public class EnemyMissileSystem : Enemy
     {
         var waitForSeconds = new WaitForSeconds(_timeBetweenShots);
 
-        if (_isShooting)
+        while (_isShooting)
         {
-            while (true)
-            {
-                yield return waitForSeconds;
-                float yDirectionMissle = Random.Range(_minYDirectionMissle, _maxYDirectionMissle);
-                var missile = Instantiate(_enemyShooterMissile, transform.position + new Vector3(0.15f, 0.33f, 0f), Quaternion.identity);
-                missile.SetYDirection(yDirectionMissle);
-                _missiles.Add(missile);
-            }
+            _shotPointSpriteRenderer.sprite = _shotPointIdleSprite;
+            yield return waitForSeconds;
+            float yDirectionMissle = Random.Range(_minYDirectionMissle, _maxYDirectionMissle);
+            var missile = Instantiate(_enemyShooterMissile, _shotPoint.transform.position, Quaternion.identity);
+            missile.SetYDirection(yDirectionMissle);
+            _shotPointSpriteRenderer.sprite = _shotPointAttackSprite;
+            yield return waitForSeconds;
+
         }
     }
 }

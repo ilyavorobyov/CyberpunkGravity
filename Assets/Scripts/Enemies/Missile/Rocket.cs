@@ -16,6 +16,23 @@ public class Rocket : Enemy
         GameUIController.RocketsRemovalEvent -= Delete;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out Player player))
+        {
+            ObjectAnimator.SetTrigger(DieAnimationName);
+            _speed = 0;
+            Destroy(gameObject, 0.2f);
+        }
+
+        if (collision.TryGetComponent(out PlayerBullet playerBullet))
+        {
+            ObjectAnimator.SetTrigger(DieAnimationName);
+            _speed = 0;
+            Destroy(gameObject, 0.2f);
+        }
+    }
+
     private void Update()
     {
         transform.Translate(_direction * _speed * Time.deltaTime);
@@ -28,11 +45,6 @@ public class Rocket : Enemy
     public void SetYDirection(float yDirection)
     {
         _direction.y = yDirection;
-    }
-
-    public void SetDeleteTime(float time)
-    {
-        Destroy(gameObject, time);
     }
 
     public void Delete()

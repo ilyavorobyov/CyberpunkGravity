@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedReducer: 1
-  _yPosition: 1
+  _yPosition: 0.48
 --- !u!61 &-8355051942356407677
 BoxCollider2D:
   m_ObjectHideFlags: 0

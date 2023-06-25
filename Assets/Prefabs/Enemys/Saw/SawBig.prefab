@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4632578252776053244}
   - component: {fileID: 4632578252776053246}
   - component: {fileID: 211815034565116894}
+  - component: {fileID: 1799375018741469428}
   m_Layer: 0
   m_Name: SawBig
   m_TagString: Untagged
@@ -77,12 +78,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 9f80799161e736a4292f4490ab46bc03, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 44605ab3a3ea23846abe71f595c6d0bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.74, y: 1.74}
+  m_Size: {x: 1.8342857, y: 1.8285714}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -124,6 +125,26 @@ MonoBehaviour:
   _canBeDestroyedByPlayer: 0
   _isDropResourceAfterDie: 0
   _isSmallSaw: 0
+--- !u!95 &1799375018741469428
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4632578252776053243}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 13376aa19e54ce04a9550e7f5f4fa659, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &4632578251234387520
 PrefabInstance:
   m_ObjectHideFlags: 0

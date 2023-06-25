@@ -13,9 +13,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool _canBeDestroyedByPlayer;
     [SerializeField] private bool _isDropResourceAfterDie;
 
-    const string ChangeColorToDefaultMethodName = "ChangeColorToDefault";
+    private const string ChangeColorToDefaultMethodName = "ChangeColorToDefault";
+
+    protected const string AttackAnimationName = "Attack";
+    protected const string DieAnimationName = "Die";
+    protected const string IdleAnimationName = "Idle";
 
     protected SpriteRenderer SpriteRenderer;
+    protected Animator ObjectAnimator;
     protected Player PlayerObject;
     protected int MaxHealth;
     protected int CurrentHealth;
@@ -37,6 +42,7 @@ public class Enemy : MonoBehaviour
         _healthBarPosition = new Vector3(0f, 0.6f, 0f);
         _colorReturnTime = 0.1f;
         SpriteRenderer = GetComponent<SpriteRenderer>();
+        ObjectAnimator = GetComponent<Animator>();
         _defaultColor = SpriteRenderer.color;
         ShowHealthBar();
     }
@@ -89,6 +95,11 @@ public class Enemy : MonoBehaviour
         SpriteRenderer.color = _defaultColor;
     }
 
+    protected void SetEnemyActive()
+    {
+        gameObject.SetActive(false);
+    }
+
     public virtual void SetStartInfo() { }
 
     public virtual void Die()
@@ -111,6 +122,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        gameObject.SetActive(false);
+        ObjectAnimator.SetTrigger(DieAnimationName);
+        Invoke("SetEnemyActive", 0.3f);
     }
 }

@@ -14,7 +14,6 @@ public class RocketTuner : Enemy
     private Camera _camera;
     private Vector3 _positionToConvert;
     private float _xPosition;
-    private float _rocketDeleteTime = 8;
 
     private void Start()
     {
@@ -64,7 +63,6 @@ public class RocketTuner : Enemy
 
         var rocket = Instantiate(_rocket, transform.position, Quaternion.identity);
         rocket.AddSpeed(Speed);
-        rocket.SetDeleteTime(_rocketDeleteTime);
         gameObject.SetActive(false);
     }
 }

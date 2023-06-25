@@ -125,4 +125,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedReducer: 1
-  _yPosition: 2.5
+  _yPosition: 0.5

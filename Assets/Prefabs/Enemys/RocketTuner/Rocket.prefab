@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1735409482561163882}
   - component: {fileID: 1735409482561163881}
   - component: {fileID: 1735409482561163880}
+  - component: {fileID: 4911996496453386605}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 421223d5efda749459f0f17749f8c9ff, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dca812e4127ef464a891fb588741b461, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,18 +100,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.4165268, y: -0.0038567483}
+  m_Offset: {x: -0.18114042, y: 0.03172505}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.22, y: 0.86}
+    oldSize: {x: 1.1428572, y: 0.62857145}
     newSize: {x: 5.55, y: 2.15}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2481041, y: 0.5591753}
+  m_Size: {x: 0.77733135, y: 0.46611524}
   m_EdgeRadius: 0
 --- !u!114 &1735409482561163880
 MonoBehaviour:
@@ -132,3 +133,23 @@ MonoBehaviour:
   _canBeDestroyedByPlayer: 1
   _isDropResourceAfterDie: 0
   _speed: 5
+--- !u!95 &4911996496453386605
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735409482561163887}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c2bc6050ee6e2a0409da6710a3a80b7f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

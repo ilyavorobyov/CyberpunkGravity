@@ -32,6 +32,7 @@ public class AntiGravitySwitch : Enemy
 
     public override void Die()
     {
+        ObjectAnimator.SetTrigger(DieAnimationName);
         base.Die();
         _playerMover.TurnOnGravityChanger();
     }

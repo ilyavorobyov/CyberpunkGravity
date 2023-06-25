@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedReducer: 1
-  _yPosition: 4
+  _yPosition: 2
 --- !u!61 &2803317968969561149
 BoxCollider2D:
   m_ObjectHideFlags: 0

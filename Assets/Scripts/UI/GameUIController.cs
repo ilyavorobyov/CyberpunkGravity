@@ -27,6 +27,9 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private Button _shopButton;
     [SerializeField] private Button _closeShopButton;
     [SerializeField] private GameObject _shopPanel;
+    [SerializeField] private GameObject _learningPanel;
+
+    private const string LearningPanelPref = "LearningPanel";
 
     public static Action RocketsRemovalEvent;
     private WeaponController _weaponController;
@@ -39,6 +42,15 @@ public class GameUIController : MonoBehaviour
     {
         _weaponController = _player.GetComponent<WeaponController>();
         Time.timeScale = 0;
+    }
+
+    private void Start()
+    {
+        if (!PlayerPrefs.HasKey(LearningPanelPref))
+        {
+            _learningPanel.gameObject.SetActive(true);
+            PlayerPrefs.SetInt(LearningPanelPref, 0);
+        }
     }
 
     private void OnEnable()

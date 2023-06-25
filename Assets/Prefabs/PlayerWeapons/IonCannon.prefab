@@ -49,9 +49,8 @@ MonoBehaviour:
   _label: "\u0418\u043E\u043D\u043D\u0430\u044F \u043F\u0443\u0448\u043A\u0430"
   _energyConsuming: 2
   _icon: {fileID: 21300000, guid: 41cc578e336373a4d9afd1b6282a14e3, type: 3}
-  _sprite: {fileID: 21300000, guid: cbdb6f5f655353d4bb143dae9dc3ac79, type: 3}
+  _sprite: {fileID: 21300000, guid: 6a944add02c55c5419afa8a79522fce7, type: 3}
   _isBuyed: 1
-  _shootPoint: {fileID: 907769211837932669}
 --- !u!1 &5137154965236595293
 GameObject:
   m_ObjectHideFlags: 0

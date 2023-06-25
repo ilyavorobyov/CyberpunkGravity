@@ -15,7 +15,6 @@ public class EnemiesSpawner : MonoBehaviour
     private Coroutine _performAppearance;
     private float _timeOfAppearance;
     private float _speedObjects;
-    private int _numberDangerousEnemies = 4;
 
     private void Start()
     {
@@ -67,12 +66,12 @@ public class EnemiesSpawner : MonoBehaviour
             var enemy = _enemys[Random.Range(0, _enemySamples.Count)];
             enemy.AttackPlayer(_speedObjects);
 
-            if (enemy as AntiGravitySwitch)
+/*            if (enemy as AntiGravitySwitch)
             {
                 var secondEnemy = _enemys[Random.Range(0, _numberDangerousEnemies)];
                 secondEnemy.AttackPlayer(_speedObjects);
             }
-        }
+*/        }
     }
 
     private bool CheckEnemyActive()

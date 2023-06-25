@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BlasterSale : PurchasedEffect
 {
-    [SerializeField] private BlackBlaster _blackBlaster;
+    [SerializeField] private SuperBlaster _blackBlaster;
 
     public override void Buy()
     {
