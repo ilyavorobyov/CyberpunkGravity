@@ -1,19 +1,19 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Animator))]
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] protected AudioSource DieSound;
+    [SerializeField] protected AudioSource HitSound;
+    [SerializeField] protected int AddToXPosition;
     [SerializeField] private Coin _coin;
     [SerializeField] private Battery _battery;
-    [SerializeField] protected int AddToXPosition;
     [SerializeField] private int _maxHealth;
     [SerializeField] private EnemyHealthBar _healthBarSample;
     [SerializeField] private bool _canBeDestroyedByPlayer;
     [SerializeField] private bool _isDropResourceAfterDie;
-
-    private const string ChangeColorToDefaultMethodName = "ChangeColorToDefault";
 
     protected const string AttackAnimationName = "Attack";
     protected const string DieAnimationName = "Die";
@@ -56,9 +56,10 @@ public class Enemy : MonoBehaviour
         else
         {
             SpriteRenderer.color = _hitColor;
-            Invoke(ChangeColorToDefaultMethodName, _colorReturnTime);
+            Invoke(nameof(ChangeColorToDefault), _colorReturnTime);
             CurrentHealth -= damage;
             EnemyHealthBar.HealthChange(CurrentHealth);
+            HitSound.PlayDelayed(0);
         }
     }
 
@@ -123,6 +124,7 @@ public class Enemy : MonoBehaviour
         }
 
         ObjectAnimator.SetTrigger(DieAnimationName);
-        Invoke("SetEnemyActive", 0.3f);
+        Invoke(nameof(SetEnemyActive), 0.3f);
+        DieSound.PlayDelayed(0);
     }
 }

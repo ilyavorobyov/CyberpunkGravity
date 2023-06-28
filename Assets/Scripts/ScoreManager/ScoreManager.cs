@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using System.Collections;
 using UnityEngine.Events;
 
 public class ScoreManager : MonoBehaviour

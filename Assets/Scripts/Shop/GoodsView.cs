@@ -9,6 +9,7 @@ public class GoodsView : MonoBehaviour
     [SerializeField] private TMP_Text _price;
     [SerializeField] private Image _icon;
     [SerializeField] private Button _sellButton;
+    [SerializeField] private AudioSource _buttonSound;
 
     private const string IsBuyedText = "Уже куплено";
     private Good _good;
@@ -58,6 +59,7 @@ public class GoodsView : MonoBehaviour
 
     private void OnButtonClick()
     {
+        _buttonSound.PlayDelayed(0);
         _purchasedEffect.Buy();
         _wallet.RemoveCoins(_priceValue);
         _wallet.SaveCoins();

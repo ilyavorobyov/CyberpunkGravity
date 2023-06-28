@@ -3,6 +3,7 @@ using UnityEngine;
 public class RollingSaw : Enemy
 {
     [SerializeField] private float _addSpeed;
+    [SerializeField] private AudioSource _workSound;
 
     private float _maxYPosition = 8.15f;
     private float _minYPosition = 0.78f;
@@ -28,5 +29,6 @@ public class RollingSaw : Enemy
         }
 
         transform.position = StartPosition;
+        _workSound.PlayDelayed(0);
     }
 }

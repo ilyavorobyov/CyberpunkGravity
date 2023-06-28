@@ -3,6 +3,7 @@ using UnityEngine;
 public class Saw : Enemy
 {
     [SerializeField] private bool _isSmallSaw;
+    [SerializeField] private AudioSource _workSound;
 
     private float _maxYSmallSaw = 7;
     private float _minYSmallSaw = 0.6f;
@@ -31,5 +32,6 @@ public class Saw : Enemy
         }
 
         transform.position = StartPosition;
+        _workSound.PlayDelayed(0);
     }
 }

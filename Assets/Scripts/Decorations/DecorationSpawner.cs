@@ -10,8 +10,8 @@ public class DecorationSpawner : MonoBehaviour
     [SerializeField] private int _maxRespawnTime;
     [SerializeField] private int _minRespawnTime;
 
-    private Coroutine _respawnDecoration;
     private List<Decoration> _decorations = new List<Decoration>();
+    private Coroutine _respawnDecoration;
     private Vector3 _respawnPosition;
     private float _xPosition = 16;
 
@@ -82,9 +82,9 @@ public class DecorationSpawner : MonoBehaviour
         int waitTime = Random.Range(_minRespawnTime, _maxRespawnTime);
         var waitForSeconds = new WaitForSeconds(waitTime);
 
-        while(true)
+        while (true)
         {
-            if(!CheckActive())
+            if (!CheckActive())
             {
                 _decorations[GetRandomNumberDecoration()].gameObject.SetActive(true);
                 _decorations[GetRandomNumberDecoration()].SetSpeed(_scoreManager.GetSpeed());

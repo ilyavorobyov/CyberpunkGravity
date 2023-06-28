@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class RocketTuner : Enemy
 {
@@ -8,6 +7,7 @@ public class RocketTuner : Enemy
     [SerializeField] private float _iterationsNumber;
     [SerializeField] private float _iterationTime;
     [SerializeField] private Sprite _secondSprite;
+    [SerializeField] private AudioSource _alarmSound;
 
     private Sprite _startSprite;
     private Coroutine _launchRocket;
@@ -52,6 +52,7 @@ public class RocketTuner : Enemy
     private IEnumerator LaunchRocket()
     {
         var waitForSeconds = new WaitForSeconds(_iterationTime);
+        _alarmSound.PlayDelayed(0);
 
         for (int i = 0; i <= _iterationsNumber; i++)
         {
@@ -62,7 +63,7 @@ public class RocketTuner : Enemy
         }
 
         var rocket = Instantiate(_rocket, transform.position, Quaternion.identity);
-        rocket.AddSpeed(Speed);
+        rocket.SetSpeed(Speed);
         gameObject.SetActive(false);
     }
 }

@@ -10,6 +10,8 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float _jumpForce;
     [SerializeField] private PlayerBullet _playerBullet;
     [SerializeField] private GameUIController _gameStateController;
+    [SerializeField] private AudioSource _jumpSound;
+    [SerializeField] private AudioSource _changeGravitySound;
 
     private const string RunAnimationName = "Run";
     private const string IdleAnimationName = "Idle";
@@ -108,6 +110,8 @@ public class PlayerMover : MonoBehaviour
     {
         if (!_onMenu)
         {
+            _jumpSound.PlayDelayed(0);
+
             if (!_isAlteredGravity)
             {
                 _rigidbody.velocity = Vector2.zero;
@@ -127,6 +131,8 @@ public class PlayerMover : MonoBehaviour
     {
         if (!_onMenu && _canGravityChange)
         {
+            _changeGravitySound.PlayDelayed(0);
+
             if (!_isAlteredGravity)
             {
                 _rigidbody.velocity = Vector2.zero;

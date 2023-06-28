@@ -7,7 +7,7 @@ public class PlayerBullet : MonoBehaviour
     [SerializeField] private int _damage;
     [SerializeField] private float _lifeTime;
 
-    private const string DieName = "Die";
+    private const string DieAnimationName = "Die";
     private const string HitAnimationName = "Hit";
 
     private Animator _animator;
@@ -16,7 +16,7 @@ public class PlayerBullet : MonoBehaviour
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        Invoke(DieName, _lifeTime);
+        Invoke(nameof(Die), _lifeTime);
     }
 
     private void Update()
@@ -53,7 +53,7 @@ public class PlayerBullet : MonoBehaviour
 
     private void Die()
     {
-        _animator.SetTrigger(DieName);
+        _animator.SetTrigger(DieAnimationName);
         Destroy(gameObject, _dieAnimationDuration);
     }
 }

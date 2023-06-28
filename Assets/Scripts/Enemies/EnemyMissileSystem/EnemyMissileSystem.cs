@@ -11,6 +11,7 @@ public class EnemyMissileSystem : Enemy
     [SerializeField] private float _startYPosition;
     [SerializeField] private float _shootYPosition;
     [SerializeField] private Sprite _shotPointAttackSprite;
+    [SerializeField] private AudioSource _shootSound;
 
     private Sprite _shotPointIdleSprite;
     private ShotPoint _shotPoint;
@@ -45,7 +46,6 @@ public class EnemyMissileSystem : Enemy
     public override void SetStartInfo()
     {
         gameObject.SetActive(true);
-
         CurrentHealth = MaxHealth;
         EnemyHealthBar.HealthChange(CurrentHealth);
         PlayerPosition = PlayerObject.transform.position;
@@ -64,7 +64,7 @@ public class EnemyMissileSystem : Enemy
 
     private void OnEnable()
     {
-        if(_isStarted)
+        if (_isStarted)
         {
             if (_missileShooting != null)
             {
@@ -85,10 +85,11 @@ public class EnemyMissileSystem : Enemy
             yield return waitForSeconds;
             float yDirectionMissle = Random.Range(_minYDirectionMissle, _maxYDirectionMissle);
             var missile = Instantiate(_enemyShooterMissile, _shotPoint.transform.position, Quaternion.identity);
+            missile.SetSpeed(Speed);
             missile.SetYDirection(yDirectionMissle);
+            _shootSound.PlayDelayed(0);
             _shotPointSpriteRenderer.sprite = _shotPointAttackSprite;
             yield return waitForSeconds;
-
         }
     }
 }

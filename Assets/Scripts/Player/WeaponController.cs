@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEngine.EventSystems.EventTrigger;
+using UnityEngine.UIElements;
 using Color = UnityEngine.Color;
 
 [RequireComponent(typeof(PlayerCollisionHandler))]
@@ -15,6 +15,8 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private TMP_Text _addingBatteryText;
     [SerializeField] private float _changeEnergyTextEffectTime;
     [SerializeField] private GameUIController _gameUIController;
+    [SerializeField] private AudioSource _weaponChangedSound;
+    [SerializeField] private AudioSource _noAmmoSound;
 
     private const string BatteryValueName = "BatteryValue";
 
@@ -29,8 +31,9 @@ public class WeaponController : MonoBehaviour
     private int _currentWeaponNumber = 0;
     private Weapon _currentWeapon;
     private int _batteryValue;
-    private int _defaultBatteryEnergy = 10;
+    private int _defaultBatteryEnergy = 20;
     private WeaponViewObject _weaponViewObject;
+    private float _soundVolume = 1f;
 
     public event UnityAction<Sprite> WeaponChange;
 
@@ -123,11 +126,12 @@ public class WeaponController : MonoBehaviour
                 _currentWeapon.Shoot();
                 _batteryValue -= energyConsuming;
                 CalculateAvailableNumberOfShots();
+                AudioSource.PlayClipAtPoint(_currentWeapon.ShootSound, transform.position, _soundVolume);
             }
             else
             {
                 _batteryValueText.color = _changeEnergyColorLacks;
-               //  сюда добавь звук типа нет патронов
+                _noAmmoSound.PlayDelayed(0);
             }
         }
     }
@@ -157,6 +161,7 @@ public class WeaponController : MonoBehaviour
 
             ChangeWeapon(_availableWeapons[_currentWeaponNumber]);
             CalculateAvailableNumberOfShots();
+            _weaponChangedSound.PlayDelayed(0);
         }
     }
 
@@ -175,6 +180,7 @@ public class WeaponController : MonoBehaviour
 
             ChangeWeapon(_availableWeapons[_currentWeaponNumber]);
             CalculateAvailableNumberOfShots();
+            _weaponChangedSound.PlayDelayed(0);
         }
     }
 

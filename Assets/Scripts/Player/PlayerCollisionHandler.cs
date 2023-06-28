@@ -7,6 +7,11 @@ using UnityEngine.Events;
 public class PlayerCollisionHandler : MonoBehaviour
 {
     [SerializeField] private PlayerForceField _playerForceField;
+    [SerializeField] private AudioSource _coinSound;
+    [SerializeField] private AudioSource _energySound;
+    [SerializeField] private AudioSource _forceFieldOnSound;
+    [SerializeField] private AudioSource _forceFieldOffSound;
+    [SerializeField] private AudioSource _dieSound;
 
     private PlayerMover _playerMover;
     private Player _player;
@@ -34,6 +39,7 @@ public class PlayerCollisionHandler : MonoBehaviour
 
         if (collision.TryGetComponent(out ForceField forceField))
         {
+            _forceFieldOnSound.PlayDelayed(0);
             _inForceField = true;
             TurnOnForceField();
             Destroy(forceField.gameObject);
@@ -43,6 +49,7 @@ public class PlayerCollisionHandler : MonoBehaviour
         {
             if (!_inForceField)
             {
+                _dieSound.PlayDelayed(0);
                 _player.Die();
                 _playerMover.PlayDeathAnimation();
             }
@@ -50,12 +57,14 @@ public class PlayerCollisionHandler : MonoBehaviour
 
         if (collision.TryGetComponent(out Coin coin))
         {
+            _coinSound.PlayDelayed(0);
             CoinCollected?.Invoke(coin.GetVolume());
             coin.Die();
         }
 
         if (collision.TryGetComponent(out Battery battery))
         {
+            _energySound.PlayDelayed(0);
             BatteryTaken?.Invoke(battery.GetVolume());
             battery.Die();
         }
@@ -91,5 +100,6 @@ public class PlayerCollisionHandler : MonoBehaviour
         yield return waitForSecondsShieldFlash;
         _playerForceField.gameObject.SetActive(false);
         _inForceField = false;
+        _forceFieldOffSound.PlayDelayed(0);
     }
 }

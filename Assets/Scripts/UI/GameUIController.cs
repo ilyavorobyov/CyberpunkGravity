@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using DG.Tweening;
-using System.Collections.Generic;
 using System;
 
 public class GameUIController : MonoBehaviour
@@ -27,7 +26,11 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private Button _shopButton;
     [SerializeField] private Button _closeShopButton;
     [SerializeField] private GameObject _shopPanel;
-    [SerializeField] private GameObject _learningPanel;
+    [SerializeField] private LearningPanel _learningPanel;
+    [SerializeField] private Button _viewControlButton;
+    [SerializeField] private AudioSource _startButtonClick;
+    [SerializeField] private AudioSource _simpleButtonClick;
+    [SerializeField] private AudioSource _gameOverSound;
 
     private const string LearningPanelPref = "LearningPanel";
 
@@ -42,14 +45,12 @@ public class GameUIController : MonoBehaviour
     {
         _weaponController = _player.GetComponent<WeaponController>();
         Time.timeScale = 0;
-    }
 
-    private void Start()
-    {
         if (!PlayerPrefs.HasKey(LearningPanelPref))
         {
             _learningPanel.gameObject.SetActive(true);
             PlayerPrefs.SetInt(LearningPanelPref, 0);
+            _viewControlButton.gameObject.SetActive(false);
         }
     }
 
@@ -65,6 +66,7 @@ public class GameUIController : MonoBehaviour
         _weaponController.WeaponChange += OnWeaponChanged;
         _shopButton.onClick.AddListener(OnShopButtonClick);
         _closeShopButton.onClick.AddListener(OnCloseShopButtonClick);
+        _viewControlButton.onClick.AddListener(ShowControl);
     }
 
     private void OnDisable()
@@ -79,6 +81,7 @@ public class GameUIController : MonoBehaviour
         _weaponController.WeaponChange -= OnWeaponChanged;
         _shopButton.onClick.RemoveListener(OnShopButtonClick);
         _closeShopButton.onClick.RemoveListener(OnCloseShopButtonClick);
+        _viewControlButton.onClick.RemoveListener(ShowControl);
     }
 
     private void ShrinkAnimation(GameObject uiElement)
@@ -116,6 +119,7 @@ public class GameUIController : MonoBehaviour
         ZoomAnimation(_allCoinsValue.gameObject);
         ZoomAnimation(_startButton.gameObject);
         ZoomAnimation(_shopButton.gameObject);
+        ZoomAnimation(_viewControlButton.gameObject);
         ShrinkAnimation(_coinsPerGameSession.gameObject);
         ShrinkAnimation(_scoreValue.gameObject);
         ShrinkAnimation(_batteryValueText.gameObject);
@@ -123,6 +127,7 @@ public class GameUIController : MonoBehaviour
         ChangeState?.Invoke(true);
         MenuButtonClick.Invoke();
         RocketsRemovalEvent?.Invoke();
+        _simpleButtonClick.PlayDelayed(0);
     }
 
     private void OnStartButtonClick()
@@ -135,6 +140,12 @@ public class GameUIController : MonoBehaviour
         ShrinkAnimation(_startButton.gameObject);
         ShrinkAnimation(_startButton.gameObject);
         ShrinkAnimation(_shopButton.gameObject);
+
+        if (_viewControlButton.gameObject.activeSelf == true)
+        {
+            ShrinkAnimation(_viewControlButton.gameObject);
+        }
+
         ZoomAnimation(_coinsPerGameSession.gameObject);
         ZoomAnimation(_scoreValue.gameObject);
         ZoomAnimation(_batteryValueText.gameObject);
@@ -144,6 +155,7 @@ public class GameUIController : MonoBehaviour
         ChangeState?.Invoke(false);
         StartGame.Invoke();
         RocketsRemovalEvent?.Invoke();
+        _startButtonClick.PlayDelayed(0);
     }
 
     private void OnRestartButtonClick()
@@ -154,6 +166,7 @@ public class GameUIController : MonoBehaviour
         ChangeState?.Invoke(false);
         StartGame.Invoke();
         RocketsRemovalEvent?.Invoke();
+        _simpleButtonClick.PlayDelayed(0);
     }
 
     private void GameOverUiState()
@@ -163,6 +176,7 @@ public class GameUIController : MonoBehaviour
         ZoomAnimation(_gameOverPanel.gameObject);
         ChangeState?.Invoke(true);
         GameOver.Invoke();
+        _gameOverSound.PlayDelayed(0);
     }
 
     private void OnPauseButtonClick()
@@ -171,6 +185,7 @@ public class GameUIController : MonoBehaviour
         ChangeState?.Invoke(true);
         ZoomAnimation(_pausePanel.gameObject);
         ShrinkAnimation(_pauseButton.gameObject);
+        _simpleButtonClick.PlayDelayed(0);
     }
 
     private void OnResumeButtonClick()
@@ -179,6 +194,7 @@ public class GameUIController : MonoBehaviour
         ChangeState?.Invoke(false);
         ShrinkAnimation(_pausePanel.gameObject);
         ZoomAnimation(_pauseButton.gameObject);
+        _simpleButtonClick.PlayDelayed(0);
     }
 
     private void OnWeaponChanged(Sprite icon)
@@ -190,10 +206,19 @@ public class GameUIController : MonoBehaviour
     {
         _shopPanel.SetActive(true);
         _shopPanel.GetComponent<Shop>().RenderGoods();
+        _simpleButtonClick.PlayDelayed(0);
     }
 
     private void OnCloseShopButtonClick()
     {
         _shopPanel.SetActive(false);
+        _simpleButtonClick.PlayDelayed(0);
+    }
+
+    private void ShowControl()
+    {
+        _learningPanel.gameObject.SetActive(true);
+        _learningPanel.ShowControlInfo();
+        _simpleButtonClick.PlayDelayed(0);
     }
 }

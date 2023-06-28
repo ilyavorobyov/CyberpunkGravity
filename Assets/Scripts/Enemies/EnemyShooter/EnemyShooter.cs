@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class EnemyShooter : Enemy
 {
-    [SerializeField] private EnemyLaserShot _enemyLaserShot;
-    [SerializeField] private float _timeBetweenShots;
+    [SerializeField] private Rocket _enemyLaserShot;
+    [SerializeField] private float _minShotTime;
+    [SerializeField] private float _maxShotTime;
+    [SerializeField] private AudioSource _shootSound;
 
+    private float _shotTime;
     private ShotPoint _shotPoint;
     private Coroutine _laserShooting;
     private float _distanceToPlayer = 11;
@@ -51,12 +54,16 @@ public class EnemyShooter : Enemy
 
     private IEnumerator LaserShooting()
     {
-        var waitForSeconds = new WaitForSeconds(_timeBetweenShots);
+        _shotTime = Random.Range(_minShotTime, _maxShotTime + 1);
+        var waitForSeconds = new WaitForSeconds(_shotTime);
 
         while (true)
         {
             yield return waitForSeconds;
-            Instantiate(_enemyLaserShot, _shotPoint.transform.position, Quaternion.identity);
+            var laserShot = Instantiate(_enemyLaserShot, _shotPoint.transform.position, Quaternion.identity);
+            laserShot.SetSpeed(Speed);
+            _shootSound.PlayDelayed(0);
+            _shotTime = Random.Range(_minShotTime, _maxShotTime + 1);
         }
     }
 }

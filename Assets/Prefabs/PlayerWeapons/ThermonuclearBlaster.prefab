@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 2602792351547104091, guid: dd35d2ce0b81e19488074a1e0ff8e0a9, type: 3}
+  _shootSound: {fileID: 8300000, guid: 11f632555bcbc5e4e8c1173b4a43af04, type: 3}
   _label: "\u0422\u0435\u0440\u043C\u043E\u044F\u0434\u0435\u0440\u043D\u044B\u0439
     \u0431\u043B\u0430\u0441\u0442\u0435\u0440"
   _energyConsuming: 3

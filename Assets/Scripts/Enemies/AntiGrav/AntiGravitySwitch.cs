@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -5,6 +6,7 @@ public class AntiGravitySwitch : Enemy
 {
     [SerializeField] private float _maxY = 7.6f;
     [SerializeField] private float _minY = 0.1f;
+    [SerializeField] private AudioSource _soundOfDevice;
 
     private PlayerMover _playerMover;
     private float _yPosition;
@@ -28,12 +30,13 @@ public class AntiGravitySwitch : Enemy
         StartPosition = new Vector3(AddToXPosition, _yPosition, 0);
         transform.position = StartPosition;
         gameObject.SetActive(true);
+        _soundOfDevice.PlayDelayed(0);
     }
 
     public override void Die()
     {
-        ObjectAnimator.SetTrigger(DieAnimationName);
         base.Die();
         _playerMover.TurnOnGravityChanger();
+        _soundOfDevice.Stop();
     }
 }

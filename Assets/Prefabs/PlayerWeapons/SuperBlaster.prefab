@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 6888618308455694710, guid: 878c24641fbd7154d95291b18626e2f4, type: 3}
+  _shootSound: {fileID: 8300000, guid: a7af7ccfa44ddce498ae2c7f632766de, type: 3}
   _label: "\u041C\u043E\u0449\u043D\u0435\u0439\u0448\u0438\u0439 \u0431\u043B\u0430\u0441\u0442\u0435\u0440"
   _energyConsuming: 2
   _icon: {fileID: 21300000, guid: d795ac39653310b4183b267d40077b3c, type: 3}
   _sprite: {fileID: 21300000, guid: 804785df0cba68445ac52bb2e1308ede, type: 3}
-  _isBuyed: 1
+  _isBuyed: 0

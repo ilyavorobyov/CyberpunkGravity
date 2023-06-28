@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class BlasterSale : PurchasedEffect
 {
-    [SerializeField] private SuperBlaster _blackBlaster;
+    [SerializeField] private SuperBlaster _superBlaster;
 
     public override void Buy()
     {
-        _blackBlaster.Buying();
+        _superBlaster.Buying();
     }
 }

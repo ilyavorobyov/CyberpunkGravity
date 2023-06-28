@@ -9,7 +9,7 @@ public class BackFrame : MonoBehaviour
             enemy.gameObject.SetActive(false);
         }
 
-        if (collision.TryGetComponent(out Rocket rocket) || collision.TryGetComponent(out EnemyLaserShot enemyLaserShot))
+        if (collision.TryGetComponent(out Rocket rocket))
         {
             Destroy(collision.gameObject);
         }

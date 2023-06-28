@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1612243660888742724}
   - component: {fileID: 1612243660888742725}
   - component: {fileID: 1701959593323198156}
+  - component: {fileID: 3768785569640839249}
   m_Layer: 0
   m_Name: MissleSystemShoot
   m_TagString: Untagged
@@ -100,18 +101,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0037328005, y: -0.0022776127}
+  m_Offset: {x: -0.0012173057, y: -0.00510633}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.2, y: 0.2}
+    oldSize: {x: 0.26666668, y: 0.26666668}
     newSize: {x: 5.55, y: 2.15}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.20542002, y: 0.20797157}
+  m_Size: {x: 0.1926912, y: 0.19382834}
   m_EdgeRadius: 0
 --- !u!114 &1612243660888742725
 MonoBehaviour:
@@ -125,14 +126,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6fadc7426a3e04438c6e2507e40cd00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DieSound: {fileID: 3768785569640839249}
+  HitSound: {fileID: 3768785569640839249}
+  AddToXPosition: 0
   _coin: {fileID: 0}
   _battery: {fileID: 0}
-  AddToXPosition: 0
   _maxHealth: 0
   _healthBarSample: {fileID: 111980126143739121, guid: c4bd9a126310e624e9c7240ac383fc58, type: 3}
   _canBeDestroyedByPlayer: 1
   _isDropResourceAfterDie: 0
-  _speed: 5
+  _additionSpeed: 1
 --- !u!95 &1701959593323198156
 Animator:
   serializedVersion: 4
@@ -153,3 +156,99 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!82 &3768785569640839249
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612243660888742722}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 138b72da5c747ea44aa2ee1f73efdf8c, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.3
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

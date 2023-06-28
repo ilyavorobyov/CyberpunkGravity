@@ -4,29 +4,45 @@ using UnityEngine;
 
 public class EnemiesSpawner : MonoBehaviour
 {
-    [SerializeField] private List<Enemy> _enemySamples;
+    [SerializeField] private List<Enemy> _easyEnemiesSamples;
+    [SerializeField] private List<Enemy> _hardEnemiesSamples;
     [SerializeField] private Player _player;
-    [SerializeField] private float _minTimeOfAppearance;
-    [SerializeField] private float _maxTimeOfAppearance;
+    [SerializeField] private float _minTimeOfAppearanceEasyEnemies;
+    [SerializeField] private float _minTimeOfAppearanceHardEnemies;
+    [SerializeField] private float _maxTimeOfAppearanceEasyEnemies;
+    [SerializeField] private float _maxTimeOfAppearanceHardEnemies;
     [SerializeField] private GameUIController _gameUIController;
     [SerializeField] private ScoreManager _scoreManager;
 
-    private List<Enemy> _enemys = new List<Enemy>();
-    private Coroutine _performAppearance;
-    private float _timeOfAppearance;
+    private List<Enemy> _easyEnemies = new List<Enemy>();
+    private List<Enemy> _hardEnemies = new List<Enemy>();
+    private Coroutine _activateEasyEnemy;
+    private Coroutine _activateHardEnemy;
+    private float _timeOfAppearanceEasyEnemies;
+    private float _timeOfAppearanceHardEnemies;
     private float _speedObjects;
 
     private void Start()
     {
-        _timeOfAppearance = Random.Range(_minTimeOfAppearance, _maxTimeOfAppearance);
+        _timeOfAppearanceEasyEnemies = Random.Range(_minTimeOfAppearanceEasyEnemies, _maxTimeOfAppearanceEasyEnemies);
+        _timeOfAppearanceHardEnemies = Random.Range(_minTimeOfAppearanceHardEnemies, _maxTimeOfAppearanceHardEnemies);
 
-        foreach (var enemyObject in _enemySamples)
+        foreach (var enemyObject in _easyEnemiesSamples)
         {
             var enemy = Instantiate(enemyObject, transform.position, Quaternion.identity);
             enemy.Init(_player, _speedObjects);
             enemy.transform.SetParent(transform, false);
             enemy.gameObject.SetActive(false);
-            _enemys.Add(enemy);
+            _easyEnemies.Add(enemy);
+        }
+
+        foreach (var enemyObject in _hardEnemiesSamples)
+        {
+            var enemy = Instantiate(enemyObject, transform.position, Quaternion.identity);
+            enemy.Init(_player, _speedObjects);
+            enemy.transform.SetParent(transform, false);
+            enemy.gameObject.SetActive(false);
+            _hardEnemies.Add(enemy);
         }
     }
 
@@ -48,9 +64,51 @@ public class EnemiesSpawner : MonoBehaviour
 
     private void StartGame()
     {
-        foreach (var enemy in _enemys)
+        foreach (var enemy in _easyEnemies)
         {
             enemy.gameObject.SetActive(false);
+        }
+
+        foreach (var enemy in _hardEnemies)
+        {
+            enemy.gameObject.SetActive(false);
+        }
+    }
+
+    private void ControlSpawner(bool state)
+    {
+        if (!state)
+        {
+            if (_activateEasyEnemy != null)
+            {
+                StopCoroutine(_activateEasyEnemy);
+            }
+
+            _activateEasyEnemy = StartCoroutine(ActivateEasyEnemy());
+        }
+        else
+        {
+            if (_activateEasyEnemy != null)
+            {
+                StopCoroutine(_activateEasyEnemy);
+            }
+        }
+
+        if (!state)
+        {
+            if (_activateHardEnemy != null)
+            {
+                StopCoroutine(_activateHardEnemy);
+            }
+
+            _activateHardEnemy = StartCoroutine(ActivateHardEnemy());
+        }
+        else
+        {
+            if (_activateHardEnemy != null)
+            {
+                StopCoroutine(_activateHardEnemy);
+            }
         }
     }
 
@@ -59,24 +117,9 @@ public class EnemiesSpawner : MonoBehaviour
         _speedObjects = speed;
     }
 
-    private void SetEnemy()
+    private bool CheckEnemyActive(List<Enemy> enemies)
     {
-        if (!CheckEnemyActive())
-        {
-            var enemy = _enemys[Random.Range(0, _enemySamples.Count)];
-            enemy.AttackPlayer(_speedObjects);
-
-/*            if (enemy as AntiGravitySwitch)
-            {
-                var secondEnemy = _enemys[Random.Range(0, _numberDangerousEnemies)];
-                secondEnemy.AttackPlayer(_speedObjects);
-            }
-*/        }
-    }
-
-    private bool CheckEnemyActive()
-    {
-        foreach (var enemy in _enemys)
+        foreach (var enemy in enemies)
         {
             if (enemy.gameObject.activeSelf == true)
             {
@@ -87,35 +130,50 @@ public class EnemiesSpawner : MonoBehaviour
         return false;
     }
 
-    private void ControlSpawner(bool state)
+    private void SetEnemy(List<Enemy> enemies)
     {
-        if (!state)
+        if (!CheckEnemyActive(enemies))
         {
-            if (_performAppearance != null)
-            {
-                StopCoroutine(_performAppearance);
-            }
-
-            _performAppearance = StartCoroutine(PerformAppearance());
-        }
-        else
-        {
-            if (_performAppearance != null)
-            {
-                StopCoroutine(_performAppearance);
-            }
+            var enemy = enemies[Random.Range(0, enemies.Count)];
+            enemy.AttackPlayer(_speedObjects);
         }
     }
 
-    private IEnumerator PerformAppearance()
+    private IEnumerator ActivateEasyEnemy()
     {
-        var waitForSeconds = new WaitForSeconds(_timeOfAppearance);
+        var waitForSecondsEasyEnemies = new WaitForSeconds(_timeOfAppearanceEasyEnemies);
+        List<Enemy> easyEnemiesTemp = new List<Enemy>();
 
         while (true)
         {
-            yield return waitForSeconds;
-            SetEnemy();
-            _timeOfAppearance = Random.Range(_minTimeOfAppearance, _maxTimeOfAppearance);
+            yield return waitForSecondsEasyEnemies;
+
+            foreach (Enemy additionalEnemy in _easyEnemies)
+            {
+                if (additionalEnemy.gameObject.activeSelf == false)
+                    easyEnemiesTemp.Add(additionalEnemy);
+            }
+
+            if (easyEnemiesTemp.Count > 0)
+            {
+                var enemy = easyEnemiesTemp[Random.Range(0, easyEnemiesTemp.Count)];
+                enemy.AttackPlayer(_speedObjects);
+            }
+
+            easyEnemiesTemp.Clear();
+            _timeOfAppearanceEasyEnemies = Random.Range(_minTimeOfAppearanceEasyEnemies, _maxTimeOfAppearanceEasyEnemies);
+        }
+    }
+
+    private IEnumerator ActivateHardEnemy()
+    {
+        var waitForSecondsHardEnemies = new WaitForSeconds(_timeOfAppearanceHardEnemies);
+
+        while (true)
+        {
+            yield return waitForSecondsHardEnemies;
+            SetEnemy(_hardEnemies);
+            _timeOfAppearanceHardEnemies = Random.Range(_minTimeOfAppearanceHardEnemies, _maxTimeOfAppearanceHardEnemies);
         }
     }
 }

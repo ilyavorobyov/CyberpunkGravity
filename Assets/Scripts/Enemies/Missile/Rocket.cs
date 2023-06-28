@@ -2,9 +2,15 @@ using UnityEngine;
 
 public class Rocket : Enemy
 {
-    [SerializeField] private float _speed;
+    [SerializeField] private float _additionSpeed;
 
     private Vector3 _direction = Vector3.left;
+    private float _speed;
+
+    private void Update()
+    {
+        transform.Translate(_direction * _speed * Time.deltaTime);
+    }
 
     private void OnEnable()
     {
@@ -18,33 +24,20 @@ public class Rocket : Enemy
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Player player))
+        if (collision.TryGetComponent(out Player player) || collision.TryGetComponent(out PlayerForceField playerForceField))
         {
-            ObjectAnimator.SetTrigger(DieAnimationName);
-            _speed = 0;
-            Destroy(gameObject, 0.2f);
-        }
-
-        if (collision.TryGetComponent(out PlayerBullet playerBullet))
-        {
-            ObjectAnimator.SetTrigger(DieAnimationName);
-            _speed = 0;
-            Destroy(gameObject, 0.2f);
+            Die();
         }
     }
 
-    private void Update()
-    {
-        transform.Translate(_direction * _speed * Time.deltaTime);
-    }
-
-    public void AddSpeed(float speed)
-    {
-        _speed += speed;
-    }
     public void SetYDirection(float yDirection)
     {
         _direction.y = yDirection;
+    }
+
+    public void SetSpeed(float speed)
+    {
+        _speed = speed + _additionSpeed;
     }
 
     public void Delete()

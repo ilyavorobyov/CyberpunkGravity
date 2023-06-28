@@ -15,6 +15,7 @@ public class Decoration : MonoBehaviour
     private void Start()
     {
         _scoreManager.SpeedChange += SetSpeed;
+        SetSpeed(_scoreManager.GetSpeed());
     }
 
     private void Update()

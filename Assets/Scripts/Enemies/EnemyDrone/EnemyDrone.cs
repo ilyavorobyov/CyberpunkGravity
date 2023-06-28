@@ -1,9 +1,10 @@
-using System.Drawing;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public class EnemyDrone : Enemy
 {
+    [SerializeField] private AudioSource _flySound;
+    [SerializeField] private AudioSource _attackSound;
+
     private float _distanceToPlayer;
     private float _attackDistance = 10;
     private float _yPosition;
@@ -11,6 +12,7 @@ public class EnemyDrone : Enemy
     private float _minY = 0.1f;
     private bool _isRunning;
     private bool _isAttack;
+    private bool _isCanAttackSoundPlay = true;
 
     private void Update()
     {
@@ -31,6 +33,13 @@ public class EnemyDrone : Enemy
             ObjectAnimator.SetTrigger(AttackAnimationName);
             var step = (Speed + 2) * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, PlayerObject.transform.position, step);
+
+            if(_isCanAttackSoundPlay)
+            {
+                _flySound.Stop();
+                _attackSound.PlayDelayed(0);
+                _isCanAttackSoundPlay = false;
+            }
         }
     }
 
@@ -38,14 +47,12 @@ public class EnemyDrone : Enemy
     {
         if (collision.TryGetComponent(out Player player))
         {
-            ObjectAnimator.SetTrigger(DieAnimationName);
-            Invoke("SetEnemyActive", 0.3f);
+            Die();
         }
 
         if (collision.TryGetComponent(out PlayerForceField forceField))
         {
-            ObjectAnimator.SetTrigger(DieAnimationName);
-            Invoke("SetEnemyActive", 0.3f);
+            Die();
         }
     }
 
@@ -58,10 +65,14 @@ public class EnemyDrone : Enemy
         PlayerPosition = PlayerObject.transform.position;
         StartPosition = new Vector3(AddToXPosition, _yPosition, 0);
         transform.position = StartPosition;
+        _flySound.PlayDelayed(0);
+        _isCanAttackSoundPlay = true;
     }
 
     public override void Die()
     {
+        _flySound.Stop();
+        _attackSound.Stop();
         base.Die();
     }
 }
