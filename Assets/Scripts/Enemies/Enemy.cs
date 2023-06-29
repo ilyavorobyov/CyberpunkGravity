@@ -85,7 +85,8 @@ public class Enemy : MonoBehaviour
     {
         if (CurrentHealth > 1 && _canBeDestroyedByPlayer == true)
         {
-            EnemyHealthBar = Instantiate(_healthBarSample, transform.position + _healthBarPosition, Quaternion.identity);
+            EnemyHealthBar = Instantiate(_healthBarSample, transform.position 
+                + _healthBarPosition, Quaternion.identity);
             EnemyHealthBar.SetMaxHealth(CurrentHealth);
             EnemyHealthBar.transform.SetParent(transform);
         }

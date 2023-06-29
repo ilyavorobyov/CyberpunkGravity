@@ -14,17 +14,18 @@ public class Rocket : Enemy
 
     private void OnEnable()
     {
-        GameUIController.RocketsRemovalEvent += Delete;
+        GameUI.RocketsRemovalEvent += Delete;
     }
 
     private void OnDisable()
     {
-        GameUIController.RocketsRemovalEvent -= Delete;
+        GameUI.RocketsRemovalEvent -= Delete;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Player player) || collision.TryGetComponent(out PlayerForceField playerForceField))
+        if (collision.TryGetComponent(out Player player) 
+            || collision.TryGetComponent(out PlayerForceField playerForceField))
         {
             Die();
         }

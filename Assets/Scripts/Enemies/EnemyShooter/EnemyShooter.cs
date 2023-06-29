@@ -54,7 +54,7 @@ public class EnemyShooter : Enemy
 
     private IEnumerator LaserShooting()
     {
-        _shotTime = Random.Range(_minShotTime, _maxShotTime + 1);
+        _shotTime = Random.Range(_minShotTime, _maxShotTime);
         var waitForSeconds = new WaitForSeconds(_shotTime);
 
         while (true)
@@ -63,7 +63,7 @@ public class EnemyShooter : Enemy
             var laserShot = Instantiate(_enemyLaserShot, _shotPoint.transform.position, Quaternion.identity);
             laserShot.SetSpeed(Speed);
             _shootSound.PlayDelayed(0);
-            _shotTime = Random.Range(_minShotTime, _maxShotTime + 1);
+            _shotTime = Random.Range(_minShotTime, _maxShotTime);
         }
     }
 }

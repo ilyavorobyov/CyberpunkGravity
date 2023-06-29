@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System;
 
-public class GameUIController : MonoBehaviour
+public class GameUI : MonoBehaviour
 {
     [SerializeField] private RectTransform _gameOverPanel;
     [SerializeField] private RectTransform _pausePanel;
@@ -32,8 +32,6 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private AudioSource _simpleButtonClick;
     [SerializeField] private AudioSource _gameOverSound;
 
-    private const string LearningPanelPref = "LearningPanel";
-
     public static Action RocketsRemovalEvent;
     private WeaponController _weaponController;
     public event UnityAction StartGame;
@@ -45,13 +43,6 @@ public class GameUIController : MonoBehaviour
     {
         _weaponController = _player.GetComponent<WeaponController>();
         Time.timeScale = 0;
-
-        if (!PlayerPrefs.HasKey(LearningPanelPref))
-        {
-            _learningPanel.gameObject.SetActive(true);
-            PlayerPrefs.SetInt(LearningPanelPref, 0);
-            _viewControlButton.gameObject.SetActive(false);
-        }
     }
 
     private void OnEnable()
@@ -88,19 +79,22 @@ public class GameUIController : MonoBehaviour
     {
         uiElement.transform.localScale = Vector3.one;
         uiElement.SetActive(true);
-        uiElement.transform.DOScale(Vector3.zero, _animationDuration).SetLoops(1, LoopType.Yoyo).OnComplete(() => uiElement.SetActive(false)).SetUpdate(UpdateType.Normal, true);
+        uiElement.transform.DOScale(Vector3.zero, _animationDuration).
+            SetLoops(1, LoopType.Yoyo).OnComplete(() => uiElement.SetActive(false)).
+            SetUpdate(UpdateType.Normal, true);
     }
 
     private void ZoomAnimation(GameObject uiElement)
     {
         uiElement.transform.localScale = Vector3.zero;
         uiElement.SetActive(true);
-        uiElement.transform.DOScale(Vector3.one, _animationDuration).SetLoops(1, LoopType.Yoyo).SetUpdate(UpdateType.Normal, true);
+        uiElement.transform.DOScale(Vector3.one, _animationDuration).
+            SetLoops(1, LoopType.Yoyo).SetUpdate(UpdateType.Normal, true);
     }
 
     private void OnMenuUiState()
     {
-        if(_pauseButton.gameObject.activeSelf == true)
+        if (_pauseButton.gameObject.activeSelf == true)
         {
             ShrinkAnimation(_pauseButton.gameObject);
         }
@@ -110,7 +104,7 @@ public class GameUIController : MonoBehaviour
             ShrinkAnimation(_pausePanel.gameObject);
         }
 
-        if(_gameOverPanel.gameObject.activeSelf == true)
+        if (_gameOverPanel.gameObject.activeSelf == true)
         {
             ShrinkAnimation(_gameOverPanel.gameObject);
         }
@@ -123,7 +117,7 @@ public class GameUIController : MonoBehaviour
         ShrinkAnimation(_coinsPerGameSession.gameObject);
         ShrinkAnimation(_scoreValue.gameObject);
         ShrinkAnimation(_batteryValueText.gameObject);
-        ShrinkAnimation(_selectedWeaponIcon.gameObject);   
+        ShrinkAnimation(_selectedWeaponIcon.gameObject);
         ChangeState?.Invoke(true);
         MenuButtonClick.Invoke();
         RocketsRemovalEvent?.Invoke();

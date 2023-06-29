@@ -53,7 +53,8 @@ public class Wallet : MonoBehaviour
         }
         else
         {
-            _gameOverPanelText.text = "Игра окончена! Собрано " + _coinsPerGameSessionValue + " монет";
+            _gameOverPanelText.text = "Игра окончена! Собрано " 
+                + _coinsPerGameSessionValue + " монет";
         }
 
         PlayerPrefs.SetInt(AllCoinsValue, Coins);

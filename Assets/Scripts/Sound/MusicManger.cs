@@ -4,7 +4,7 @@ public class MusicManger : MonoBehaviour
 {
     [SerializeField] private AudioSource _menuMusic;
     [SerializeField] private AudioSource _gameMusic;
-    [SerializeField] private GameUIController _gameUIController;
+    [SerializeField] private GameUI _gameUI;
 
     private void Start()
     {
@@ -13,14 +13,14 @@ public class MusicManger : MonoBehaviour
 
     private void OnEnable()
     {
-        _gameUIController.StartGame += TurnGameMusic;
-        _gameUIController.MenuButtonClick += TurnMenuMusic;
+        _gameUI.StartGame += TurnGameMusic;
+        _gameUI.MenuButtonClick += TurnMenuMusic;
     }
 
     private void OnDisable()
     {
-        _gameUIController.StartGame -= TurnGameMusic;
-        _gameUIController.MenuButtonClick -= TurnMenuMusic;
+        _gameUI.StartGame -= TurnGameMusic;
+        _gameUI.MenuButtonClick -= TurnMenuMusic;
     }
 
     private void TurnMenuMusic()

@@ -91,7 +91,8 @@ public class PlayerCollisionHandler : MonoBehaviour
     private IEnumerator ForceFieldAction()
     {
         var waitForSecondsShieldFlash = new WaitForSeconds(_shieldFlashTime);
-        var waitForSeconds = new WaitForSeconds(_playerForceField.GetDuration() - (_shieldFlashTime * 2));
+        var waitForSeconds = new WaitForSeconds(_playerForceField.GetDuration() 
+            - (_shieldFlashTime * 2));
         _playerForceField.gameObject.SetActive(true);
         yield return waitForSeconds;
         _playerForceField.gameObject.SetActive(false);

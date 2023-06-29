@@ -13,7 +13,7 @@ public class AntiGravitySwitch : Enemy
 
     private void Start()
     {
-        _playerMover = PlayerObject.GetComponent<PlayerMover>();
+        _playerMover = PlayerObject.GetMover();
     }
 
     private void Update()

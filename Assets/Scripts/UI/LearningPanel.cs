@@ -12,9 +12,22 @@ public class LearningPanel : MonoBehaviour
     [SerializeField] private TMP_Text _antigravText;
     [SerializeField] private TMP_Text _unkillableEnemiesText;
     [SerializeField] private Image _antigravImage;
+    [SerializeField] private Button _viewControlButton;
     [SerializeField] private Button _closeButton;
 
+    private const string LearningPanelPref = "LearningPanel";
+
     private int _clicksCounter = 0;
+
+    private void Awake()
+    {
+        if (!PlayerPrefs.HasKey(LearningPanelPref))
+        {
+            gameObject.SetActive(true);
+            PlayerPrefs.SetInt(LearningPanelPref, 0);
+            _viewControlButton.gameObject.SetActive(false);
+        }
+    }
 
     private void OnEnable()
     {
@@ -62,6 +75,7 @@ public class LearningPanel : MonoBehaviour
         else if(_clicksCounter == 2)
         {
             gameObject.SetActive(false);
+            _viewControlButton.gameObject.SetActive(true);
         }
     }
 }

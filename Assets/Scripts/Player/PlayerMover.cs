@@ -9,7 +9,7 @@ public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _jumpForce;
     [SerializeField] private PlayerBullet _playerBullet;
-    [SerializeField] private GameUIController _gameStateController;
+    [SerializeField] private GameUI _gameUI;
     [SerializeField] private AudioSource _jumpSound;
     [SerializeField] private AudioSource _changeGravitySound;
 
@@ -45,18 +45,18 @@ public class PlayerMover : MonoBehaviour
 
     private void OnEnable()
     {
-        _gameStateController.ChangeState += ChangeState;
-        _gameStateController.StartGame += StartGame;
-        _gameStateController.GameOver += GameOverState;
-        _gameStateController.MenuButtonClick += SetStartPosition;
+        _gameUI.ChangeState += ChangeState;
+        _gameUI.StartGame += StartGame;
+        _gameUI.GameOver += GameOverState;
+        _gameUI.MenuButtonClick += SetStartPosition;
     }
 
     private void OnDisable()
     {
-        _gameStateController.ChangeState -= ChangeState;
-        _gameStateController.StartGame -= StartGame;
-        _gameStateController.GameOver -= GameOverState;
-        _gameStateController.MenuButtonClick -= SetStartPosition;
+        _gameUI.ChangeState -= ChangeState;
+        _gameUI.StartGame -= StartGame;
+        _gameUI.GameOver -= GameOverState;
+        _gameUI.MenuButtonClick -= SetStartPosition;
     }
 
     public void PlayDeathAnimation()

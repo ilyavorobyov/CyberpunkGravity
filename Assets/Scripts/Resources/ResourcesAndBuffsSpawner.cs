@@ -10,7 +10,7 @@ public class ResourcesAndBuffsSpawner : MonoBehaviour
     [SerializeField] private List<Buff> _buffSamples;
     [SerializeField] private int _minTimeCreateResources;
     [SerializeField] private int _maxTimeCreateResources;
-    [SerializeField] private GameUIController _gameUIController;
+    [SerializeField] private GameUI _gameUI;
     [SerializeField] private ScoreManager _scoreManager;
     [SerializeField] private Transform[] _shapesToSpawn;
     [SerializeField] private int _chanceCreateBuff;
@@ -22,6 +22,14 @@ public class ResourcesAndBuffsSpawner : MonoBehaviour
     private float _middleYPosition = 3.25f;
     private float _bottomYPosition = 0.3f;
     private float _speedObjects;
+    private int _topSpawnPositionNumber = 0;
+    private int _middleSpawnPositionNumber = 1;
+    private int _coinRespawnNumber = 0;
+    private int _maxRespawnNumber = 4;
+    private int _minAdditionXPosition = 6;
+    private int _maxAdditionXPosition = 13;
+    private int _minNumberToCalculateChance = 0;
+    private int _maxNumberToCalculateChance = 101;
     private Coroutine _createResources;
 
     private void Start()
@@ -33,13 +41,13 @@ public class ResourcesAndBuffsSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        _gameUIController.ChangeState += ControlSpawner;
+        _gameUI.ChangeState += ControlSpawner;
         _scoreManager.SpeedChange += SetObjectsSpeed;
     }
 
     private void OnDisable()
     {
-        _gameUIController.ChangeState -= ControlSpawner;
+        _gameUI.ChangeState -= ControlSpawner;
         _scoreManager.SpeedChange += SetObjectsSpeed;
     }
 
@@ -70,13 +78,13 @@ public class ResourcesAndBuffsSpawner : MonoBehaviour
 
     private Vector3 SelectSpawnPosition()
     {
-        int numberOfPosition = Random.Range(0, 3);
+        int numberOfPosition = Random.Range(_topSpawnPositionNumber, 3);
 
-        if (numberOfPosition == 0)
+        if (numberOfPosition == _topSpawnPositionNumber)
         {
             return _topSpawnPosition;
         }
-        else if (numberOfPosition == 1)
+        else if (numberOfPosition == _middleSpawnPositionNumber)
         {
             return _middleSpawnPosition;
         }
@@ -86,9 +94,9 @@ public class ResourcesAndBuffsSpawner : MonoBehaviour
 
     private bool SelectCoinRespawn()
     {
-        int numberOfResorce = Random.Range(0, 4);
+        int numberOfResorce = Random.Range(_coinRespawnNumber, _maxRespawnNumber);
 
-        if (numberOfResorce == 0)
+        if (numberOfResorce == _coinRespawnNumber)
         {
             return false;
         }
@@ -110,7 +118,8 @@ public class ResourcesAndBuffsSpawner : MonoBehaviour
 
             foreach (var respawnPosition in respawnPositions)
             {
-                Coin coin = Instantiate(_coin, respawnPosition.transform.position + position, Quaternion.identity);
+                Coin coin = Instantiate(_coin, respawnPosition.transform.position 
+                    + position, Quaternion.identity);
                 coin.SetSpeed(_speedObjects);
             }
         }
@@ -123,11 +132,11 @@ public class ResourcesAndBuffsSpawner : MonoBehaviour
 
     private void CreateBuff(Vector3 position)
     {
-        int numberToCalculateChance = Random.Range(0, 101);
+        int numberToCalculateChance = Random.Range(_minNumberToCalculateChance, _maxNumberToCalculateChance);
 
         if (numberToCalculateChance <= _chanceCreateBuff)
         {
-            int additionXPosition = Random.Range(6, 13);
+            int additionXPosition = Random.Range(_minAdditionXPosition, _maxAdditionXPosition);
             Vector3 buffPosition = position + new Vector3(additionXPosition, 0f, 0f);
             int numberOfBuff = Random.Range(0, _buffSamples.Count);
             var buff = Instantiate(_buffSamples[numberOfBuff], buffPosition, Quaternion.identity);
@@ -143,10 +152,10 @@ public class ResourcesAndBuffsSpawner : MonoBehaviour
         while (true)
         {
             yield return waitForSeconds;
-            timeCreateResources = Random.Range(_minTimeCreateResources, _maxTimeCreateResources);
             Vector3 position = SelectSpawnPosition();
             ÑreateSelectedResources(SelectCoinRespawn(), position, SelectSpawnShape());
             CreateBuff(position);
+            timeCreateResources = Random.Range(_minTimeCreateResources, _maxTimeCreateResources);
         }
     }
 }

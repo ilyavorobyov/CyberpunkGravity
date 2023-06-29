@@ -20,14 +20,6 @@ public class Resource : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out BackFrame backFrame))
-        {
-            Destroy(gameObject);
-        }
-    }
-
     public void SetVolume()
     {
         int randomVolume = Random.Range(_minVolume, _maxVolume);

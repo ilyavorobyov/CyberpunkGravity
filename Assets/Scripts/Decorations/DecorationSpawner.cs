@@ -6,7 +6,7 @@ public class DecorationSpawner : MonoBehaviour
 {
     [SerializeField] private List<Decoration> _decorationSamples;
     [SerializeField] private ScoreManager _scoreManager;
-    [SerializeField] private GameUIController _gameUIController;
+    [SerializeField] private GameUI _gameUI;
     [SerializeField] private int _maxRespawnTime;
     [SerializeField] private int _minRespawnTime;
 
@@ -30,12 +30,12 @@ public class DecorationSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        _gameUIController.ChangeState += ControlSpawner;
+        _gameUI.ChangeState += ControlSpawner;
     }
 
     private void OnDisable()
     {
-        _gameUIController.ChangeState -= ControlSpawner;
+        _gameUI.ChangeState -= ControlSpawner;
     }
 
     private bool CheckActive()

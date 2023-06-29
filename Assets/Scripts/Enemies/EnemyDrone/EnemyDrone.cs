@@ -34,7 +34,7 @@ public class EnemyDrone : Enemy
             var step = (Speed + 2) * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, PlayerObject.transform.position, step);
 
-            if(_isCanAttackSoundPlay)
+            if (_isCanAttackSoundPlay)
             {
                 _flySound.Stop();
                 _attackSound.PlayDelayed(0);

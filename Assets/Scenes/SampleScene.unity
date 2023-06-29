@@ -1349,7 +1349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _menuMusic: {fileID: 323261686}
   _gameMusic: {fileID: 323261685}
-  _gameUIController: {fileID: 1446457827}
+  _gameUI: {fileID: 1446457833}
 --- !u!4 &323261688
 Transform:
   m_ObjectHideFlags: 0
@@ -2413,7 +2413,7 @@ MonoBehaviour:
   - {fileID: 7738953591584048624, guid: 32a3e6271eb636a4bbf5a374ec156f49, type: 3}
   - {fileID: 8318468852171505409, guid: 6e13715499ceb8349b1df07bdc0adf43, type: 3}
   _scoreManager: {fileID: 1505060757}
-  _gameUIController: {fileID: 1446457827}
+  _gameUI: {fileID: 1446457833}
   _maxRespawnTime: 1
   _minRespawnTime: 2
 --- !u!1 &519420028
@@ -3937,6 +3937,7 @@ MonoBehaviour:
   _antigravText: {fileID: 1586088504}
   _unkillableEnemiesText: {fileID: 1846290100}
   _antigravImage: {fileID: 1435591609}
+  _viewControlButton: {fileID: 1809652440}
   _closeButton: {fileID: 348463283}
 --- !u!114 &951713982
 MonoBehaviour:
@@ -4345,7 +4346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _jumpForce: 40
   _playerBullet: {fileID: 2602792351547104091, guid: 9e5108cd977fa014bbdb5f3ac8402a6e, type: 3}
-  _gameStateController: {fileID: 1446457827}
+  _gameUI: {fileID: 1446457833}
   _jumpSound: {fileID: 1052711203}
   _changeGravitySound: {fileID: 1052711202}
 --- !u!212 &1052711186
@@ -4524,7 +4525,7 @@ MonoBehaviour:
   _batteryValueText: {fileID: 1587580522}
   _addingBatteryText: {fileID: 957462234}
   _changeEnergyTextEffectTime: 0.5
-  _gameUIController: {fileID: 1446457827}
+  _gameUI: {fileID: 1446457833}
   _weaponChangedSound: {fileID: 1052711195}
   _noAmmoSound: {fileID: 1052711196}
 --- !u!114 &1052711193
@@ -6020,15 +6021,15 @@ MonoBehaviour:
   _battery: {fileID: 8310121584227869769, guid: c1a9da91b94eb9b4991dd4c19e18d7fe, type: 3}
   _buffSamples:
   - {fileID: 7086486445130023842, guid: 0828c36b196a33f4d87ac9512c69290d, type: 3}
-  _minTimeCreateResources: 1
-  _maxTimeCreateResources: 3
-  _gameUIController: {fileID: 1446457827}
+  _minTimeCreateResources: 3
+  _maxTimeCreateResources: 10
+  _gameUI: {fileID: 1446457833}
   _scoreManager: {fileID: 1505060757}
   _shapesToSpawn:
   - {fileID: 1561821635}
   - {fileID: 1229275806}
   - {fileID: 1099834829}
-  _chanceCreateBuff: 100
+  _chanceCreateBuff: 50
 --- !u!1 &1324735902
 GameObject:
   m_ObjectHideFlags: 0
@@ -6526,14 +6527,14 @@ GameObject:
   - component: {fileID: 1446457825}
   - component: {fileID: 1446457824}
   - component: {fileID: 1446457823}
-  - component: {fileID: 1446457827}
   - component: {fileID: 1446457828}
+  - component: {fileID: 1446457833}
   - component: {fileID: 1446457830}
   - component: {fileID: 1446457829}
   - component: {fileID: 1446457831}
   - component: {fileID: 1446457832}
   m_Layer: 5
-  m_Name: Ui Canvas
+  m_Name: CanvasGameUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6629,42 +6630,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1446457827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1446457822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 228909dd31e30b24f9fe4d06acfa47c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameOverPanel: {fileID: 264419968}
-  _pausePanel: {fileID: 1562301731}
-  _player: {fileID: 1052711191}
-  _allCoinsText: {fileID: 2083724996}
-  _allCoinsValue: {fileID: 609200325}
-  _coinsPerGameSession: {fileID: 533881870}
-  _scoreValue: {fileID: 787042817}
-  _batteryValueText: {fileID: 1587580522}
-  _startButton: {fileID: 244756471}
-  _restartButton: {fileID: 1166641563}
-  _menuButton: {fileID: 413176731}
-  _pauseButton: {fileID: 131667439}
-  _resumeButton: {fileID: 1515923669}
-  _menuButtonPausePanel: {fileID: 258494363}
-  _animationDuration: 0.3
-  _selectedWeaponIcon: {fileID: 26531331}
-  _shopButton: {fileID: 1454837682}
-  _closeShopButton: {fileID: 1406705683}
-  _shopPanel: {fileID: 851220444}
-  _learningPanel: {fileID: 951713981}
-  _viewControlButton: {fileID: 1809652440}
-  _startButtonClick: {fileID: 1446457830}
-  _simpleButtonClick: {fileID: 1446457829}
-  _gameOverSound: {fileID: 1446457831}
 --- !u!225 &1446457828
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -7061,6 +7026,42 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1446457833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446457822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8fb524308d37c6479918f477cc83837, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameOverPanel: {fileID: 264419968}
+  _pausePanel: {fileID: 1562301731}
+  _player: {fileID: 1052711191}
+  _allCoinsText: {fileID: 2083724996}
+  _allCoinsValue: {fileID: 609200325}
+  _coinsPerGameSession: {fileID: 533881870}
+  _scoreValue: {fileID: 787042817}
+  _batteryValueText: {fileID: 1587580522}
+  _startButton: {fileID: 244756471}
+  _restartButton: {fileID: 1166641563}
+  _menuButton: {fileID: 413176731}
+  _pauseButton: {fileID: 131667439}
+  _resumeButton: {fileID: 1515923669}
+  _menuButtonPausePanel: {fileID: 258494363}
+  _animationDuration: 0.2
+  _selectedWeaponIcon: {fileID: 26531331}
+  _shopButton: {fileID: 1454837682}
+  _closeShopButton: {fileID: 1406705683}
+  _shopPanel: {fileID: 851220444}
+  _learningPanel: {fileID: 951713981}
+  _viewControlButton: {fileID: 1809652440}
+  _startButtonClick: {fileID: 1446457830}
+  _simpleButtonClick: {fileID: 1446457829}
+  _gameOverSound: {fileID: 1446457831}
 --- !u!1 &1454837678
 GameObject:
   m_ObjectHideFlags: 0
@@ -7340,9 +7341,9 @@ MonoBehaviour:
   - {fileID: 4790160507524791770, guid: 111739717b0cc8441b201988e8540e8d, type: 3}
   - {fileID: 6879082229795559258, guid: 0bf81e29a9c2505468508513680baf1e, type: 3}
   - {fileID: 4182928545213603902, guid: ef0a8ffbbb2507d40832b014660797df, type: 3}
-  - {fileID: 2109473954072467574, guid: 66ffa89dc833b9a4f992d4713e58ebf1, type: 3}
-  - {fileID: -6195765590407094873, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
   - {fileID: 4600695225426231663, guid: a6512cd2ae5785e4b9637165a7a5b7bd, type: 3}
+  - {fileID: -6195765590407094873, guid: 525e4e795f860e741bcc545fbf93222e, type: 3}
+  - {fileID: 2109473954072467574, guid: 66ffa89dc833b9a4f992d4713e58ebf1, type: 3}
   _hardEnemiesSamples:
   - {fileID: 8960122042235943681, guid: 9db29941fe0c2144796645844adff2c4, type: 3}
   - {fileID: 2534869290203293874, guid: 55263673a4317cb48b2f72d5100d795e, type: 3}
@@ -7352,7 +7353,7 @@ MonoBehaviour:
   _minTimeOfAppearanceHardEnemies: 2
   _maxTimeOfAppearanceEasyEnemies: 8
   _maxTimeOfAppearanceHardEnemies: 11
-  _gameUIController: {fileID: 1446457827}
+  _gameUI: {fileID: 1446457833}
   _scoreManager: {fileID: 1505060757}
 --- !u!4 &1481711326
 Transform:
@@ -7626,7 +7627,7 @@ MonoBehaviour:
   _startSpeed: 3
   _additionToSpeed: 0.1
   _scoreMultiplier: 2
-  _gameUIController: {fileID: 1446457827}
+  _gameUI: {fileID: 1446457833}
 --- !u!4 &1505060758
 Transform:
   m_ObjectHideFlags: 0

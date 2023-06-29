@@ -14,7 +14,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private TMP_Text _batteryValueText;
     [SerializeField] private TMP_Text _addingBatteryText;
     [SerializeField] private float _changeEnergyTextEffectTime;
-    [SerializeField] private GameUIController _gameUIController;
+    [SerializeField] private GameUI _gameUI;
     [SerializeField] private AudioSource _weaponChangedSound;
     [SerializeField] private AudioSource _noAmmoSound;
 
@@ -59,13 +59,13 @@ public class WeaponController : MonoBehaviour
 
     private void OnEnable()
     {
-        _gameUIController.StartGame += StartGame;
+        _gameUI.StartGame += StartGame;
         _playerCollisionHandler.BatteryTaken += AddEnergy;
     }
 
     private void OnDisable()
     {
-        _gameUIController.StartGame -= StartGame;
+        _gameUI.StartGame -= StartGame;
         _playerCollisionHandler.BatteryTaken -= AddEnergy;
     }
 

@@ -11,7 +11,7 @@ public class EnemiesSpawner : MonoBehaviour
     [SerializeField] private float _minTimeOfAppearanceHardEnemies;
     [SerializeField] private float _maxTimeOfAppearanceEasyEnemies;
     [SerializeField] private float _maxTimeOfAppearanceHardEnemies;
-    [SerializeField] private GameUIController _gameUIController;
+    [SerializeField] private GameUI _gameUI;
     [SerializeField] private ScoreManager _scoreManager;
 
     private List<Enemy> _easyEnemies = new List<Enemy>();
@@ -24,8 +24,10 @@ public class EnemiesSpawner : MonoBehaviour
 
     private void Start()
     {
-        _timeOfAppearanceEasyEnemies = Random.Range(_minTimeOfAppearanceEasyEnemies, _maxTimeOfAppearanceEasyEnemies);
-        _timeOfAppearanceHardEnemies = Random.Range(_minTimeOfAppearanceHardEnemies, _maxTimeOfAppearanceHardEnemies);
+        _timeOfAppearanceEasyEnemies = Random.Range(_minTimeOfAppearanceEasyEnemies, 
+            _maxTimeOfAppearanceEasyEnemies);
+        _timeOfAppearanceHardEnemies = Random.Range(_minTimeOfAppearanceHardEnemies, 
+            _maxTimeOfAppearanceHardEnemies);
 
         foreach (var enemyObject in _easyEnemiesSamples)
         {
@@ -48,17 +50,17 @@ public class EnemiesSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        _gameUIController.StartGame += StartGame;
-        _gameUIController.ChangeState += ControlSpawner;
-        _gameUIController.MenuButtonClick += StartGame;
+        _gameUI.StartGame += StartGame;
+        _gameUI.ChangeState += ControlSpawner;
+        _gameUI.MenuButtonClick += StartGame;
         _scoreManager.SpeedChange += SetObjectsSpeed;
     }
 
     private void OnDisable()
     {
-        _gameUIController.StartGame -= StartGame;
-        _gameUIController.ChangeState -= ControlSpawner;
-        _gameUIController.MenuButtonClick -= StartGame;
+        _gameUI.StartGame -= StartGame;
+        _gameUI.ChangeState -= ControlSpawner;
+        _gameUI.MenuButtonClick -= StartGame;
         _scoreManager.SpeedChange -= SetObjectsSpeed;
     }
 
@@ -161,7 +163,8 @@ public class EnemiesSpawner : MonoBehaviour
             }
 
             easyEnemiesTemp.Clear();
-            _timeOfAppearanceEasyEnemies = Random.Range(_minTimeOfAppearanceEasyEnemies, _maxTimeOfAppearanceEasyEnemies);
+            _timeOfAppearanceEasyEnemies = Random.Range(_minTimeOfAppearanceEasyEnemies, 
+                _maxTimeOfAppearanceEasyEnemies);
         }
     }
 
@@ -173,7 +176,8 @@ public class EnemiesSpawner : MonoBehaviour
         {
             yield return waitForSecondsHardEnemies;
             SetEnemy(_hardEnemies);
-            _timeOfAppearanceHardEnemies = Random.Range(_minTimeOfAppearanceHardEnemies, _maxTimeOfAppearanceHardEnemies);
+            _timeOfAppearanceHardEnemies = Random.Range(_minTimeOfAppearanceHardEnemies, 
+                _maxTimeOfAppearanceHardEnemies);
         }
     }
 }

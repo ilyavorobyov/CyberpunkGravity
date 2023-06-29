@@ -12,7 +12,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private float _startSpeed;
     [SerializeField] private float _additionToSpeed;
     [SerializeField] private int _scoreMultiplier;
-    [SerializeField] private GameUIController _gameUIController;
+    [SerializeField] private GameUI _gameUI;
 
     private const string ScoreValue = "Score";
 
@@ -54,13 +54,13 @@ public class ScoreManager : MonoBehaviour
     private void OnEnable()
     {
         _player.PlayerDied += SaveResult;
-        _gameUIController.StartGame += StartGame;
+        _gameUI.StartGame += StartGame;
     }
 
     private void OnDisable()
     {
         _player.PlayerDied -= SaveResult;
-        _gameUIController.StartGame -= StartGame;
+        _gameUI.StartGame -= StartGame;
     }
 
     public float GetSpeed()
@@ -82,7 +82,6 @@ public class ScoreManager : MonoBehaviour
             PlayerPrefs.SetInt(ScoreValue, _currentResult);
         }
 
-        Debug.Log("save result");
         _maxScoreText.text = PlayerPrefs.GetInt(ScoreValue).ToString() + " ì";
     }
 }

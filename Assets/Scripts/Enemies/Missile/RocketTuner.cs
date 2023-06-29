@@ -25,7 +25,8 @@ public class RocketTuner : Enemy
     private void Update()
     {
         _xPosition = _camera.ScreenToWorldPoint(_positionToConvert).x -1;
-        transform.position = new Vector3(_xPosition, PlayerObject.transform.position.y, PlayerObject.transform.position.z);
+        transform.position = new Vector3(_xPosition, PlayerObject.transform.position.y, 
+            PlayerObject.transform.position.z);
     }
 
     private void OnDisable()

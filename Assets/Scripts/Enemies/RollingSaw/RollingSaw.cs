@@ -7,6 +7,8 @@ public class RollingSaw : Enemy
 
     private float _maxYPosition = 8.15f;
     private float _minYPosition = 0.78f;
+    private int _minPositionNumber = 0;
+    private int _maxPositionNumber = 2;
 
     private void Update()
     {
@@ -17,9 +19,9 @@ public class RollingSaw : Enemy
     {
         gameObject.SetActive(true);
 
-        int yPositionNumber = Random.Range(0, 2);
+        int yPositionNumber = Random.Range(_minPositionNumber, _maxPositionNumber);
 
-        if (yPositionNumber == 0)
+        if (yPositionNumber == _minPositionNumber)
         {
             StartPosition = new Vector3(AddToXPosition, _maxYPosition, 0f);
         }
