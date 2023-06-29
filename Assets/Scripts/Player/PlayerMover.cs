@@ -45,18 +45,18 @@ public class PlayerMover : MonoBehaviour
 
     private void OnEnable()
     {
-        _gameUI.ChangeState += ChangeState;
-        _gameUI.StartGame += StartGame;
-        _gameUI.GameOver += GameOverState;
-        _gameUI.MenuButtonClick += SetStartPosition;
+        _gameUI.ChangeState += OnChangeState;
+        _gameUI.StartGame += OnStartGame;
+        _gameUI.GameOver += OnGameOverState;
+        _gameUI.MenuButtonClick += OnMenuButtonClick;
     }
 
     private void OnDisable()
     {
-        _gameUI.ChangeState -= ChangeState;
-        _gameUI.StartGame -= StartGame;
-        _gameUI.GameOver -= GameOverState;
-        _gameUI.MenuButtonClick -= SetStartPosition;
+        _gameUI.ChangeState -= OnChangeState;
+        _gameUI.StartGame -= OnStartGame;
+        _gameUI.GameOver -= OnGameOverState;
+        _gameUI.MenuButtonClick -= OnMenuButtonClick;
     }
 
     public void PlayDeathAnimation()
@@ -77,16 +77,16 @@ public class PlayerMover : MonoBehaviour
         SwitchToStandardGravity();
     }
 
-    private void StartGame()
+    private void OnStartGame()
     {
-        ChangeState(false);
+        OnChangeState(false);
         SwitchToStandardGravity();
         _animator.updateMode = AnimatorUpdateMode.Normal;
         _animator.SetTrigger(RunAnimationName);
         _weaponViewObject.gameObject.SetActive(true);
     }
 
-    private void SetStartPosition()
+    private void OnMenuButtonClick()
     {
         _animator.updateMode = AnimatorUpdateMode.UnscaledTime;
         SwitchToStandardGravity();
@@ -95,12 +95,12 @@ public class PlayerMover : MonoBehaviour
         _weaponViewObject.gameObject.SetActive(true);
     }
 
-    private void GameOverState()
+    private void OnGameOverState()
     {
-        ChangeState(true);
+        OnChangeState(true);
     }
 
-    private void ChangeState(bool state)
+    private void OnChangeState(bool state)
     {
         _onMenu = state;
         _weaponController.ChangeOnMenuValue(_onMenu);

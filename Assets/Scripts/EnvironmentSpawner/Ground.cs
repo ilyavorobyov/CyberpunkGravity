@@ -21,15 +21,15 @@ public class Ground : MonoBehaviour
 
     private void OnEnable()
     {
-        _scoreManager.SpeedChange += SetMovingSpeed;
+        _scoreManager.SpeedChange += OnSpeedChange;
     }
 
     private void OnDisable()
     {
-        _scoreManager.SpeedChange -= SetMovingSpeed;
+        _scoreManager.SpeedChange -= OnSpeedChange;
     }
 
-    private void SetMovingSpeed(float speed)
+    private void OnSpeedChange(float speed)
     {
         _speed = speed;
     }

@@ -59,14 +59,14 @@ public class WeaponController : MonoBehaviour
 
     private void OnEnable()
     {
-        _gameUI.StartGame += StartGame;
-        _playerCollisionHandler.BatteryTaken += AddEnergy;
+        _gameUI.StartGame += OnStartGame;
+        _playerCollisionHandler.BatteryTaken += OnBatteryTaken;
     }
 
     private void OnDisable()
     {
-        _gameUI.StartGame -= StartGame;
-        _playerCollisionHandler.BatteryTaken -= AddEnergy;
+        _gameUI.StartGame -= OnStartGame;
+        _playerCollisionHandler.BatteryTaken -= OnBatteryTaken;
     }
 
     public void ChangeOnMenuValue(bool value)
@@ -74,7 +74,7 @@ public class WeaponController : MonoBehaviour
         _onMenu = value;
     }
 
-    private void StartGame()
+    private void OnStartGame()
     {
         CheckAvailableWeapons();
 
@@ -102,7 +102,7 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    private void AddEnergy(int energyPoints)
+    private void OnBatteryTaken(int energyPoints)
     {
         _batteryValue += energyPoints;
         CalculateAvailableNumberOfShots();

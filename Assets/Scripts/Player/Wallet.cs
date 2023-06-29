@@ -27,14 +27,14 @@ public class Wallet : MonoBehaviour
 
     private void OnEnable()
     {
-        _player.PlayerDied += SaveCoins;
-        _playerCollisionHandler.CoinCollected += AddCoins;
+        _player.PlayerDied += OnPlayerDied;
+        _playerCollisionHandler.CoinCollected += OnCoinCollected;
     }
 
     private void OnDisable()
     {
-        _player.PlayerDied -= SaveCoins;
-        _playerCollisionHandler.CoinCollected -= AddCoins;
+        _player.PlayerDied -= OnPlayerDied;
+        _playerCollisionHandler.CoinCollected -= OnCoinCollected;
     }
 
     public void RemoveCoins(int coins)
@@ -43,7 +43,7 @@ public class Wallet : MonoBehaviour
         _allCoinsText.text = Coins.ToString();
     }
 
-    public void SaveCoins()
+    public void OnPlayerDied()
     {
         Coins += _coinsPerGameSessionValue;
 
@@ -63,7 +63,7 @@ public class Wallet : MonoBehaviour
         _coinsPerGameSessionText.text = _coinsPerGameSessionValue.ToString();
     }
 
-    private void AddCoins(int denomination)
+    private void OnCoinCollected(int denomination)
     {
         _coinsPerGameSessionValue += denomination;
         _coinsPerGameSessionText.text = _coinsPerGameSessionValue.ToString();

@@ -53,14 +53,14 @@ public class ScoreManager : MonoBehaviour
 
     private void OnEnable()
     {
-        _player.PlayerDied += SaveResult;
-        _gameUI.StartGame += StartGame;
+        _player.PlayerDied += OnPlayerDied;
+        _gameUI.StartGame += OnStartGame;
     }
 
     private void OnDisable()
     {
-        _player.PlayerDied -= SaveResult;
-        _gameUI.StartGame -= StartGame;
+        _player.PlayerDied -= OnPlayerDied;
+        _gameUI.StartGame -= OnStartGame;
     }
 
     public float GetSpeed()
@@ -68,12 +68,12 @@ public class ScoreManager : MonoBehaviour
         return _speedObjects;
     }
 
-    private void StartGame()
+    private void OnStartGame()
     {
         _timeFromStart = 0;
     }
 
-    private void SaveResult()
+    private void OnPlayerDied()
     {
         _maxResult = PlayerPrefs.GetInt(ScoreValue);
 

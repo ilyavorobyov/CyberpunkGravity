@@ -13,23 +13,23 @@ public class MusicManger : MonoBehaviour
 
     private void OnEnable()
     {
-        _gameUI.StartGame += TurnGameMusic;
-        _gameUI.MenuButtonClick += TurnMenuMusic;
+        _gameUI.StartGame += OnStartGame;
+        _gameUI.MenuButtonClick += OnMenuButtonClick;
     }
 
     private void OnDisable()
     {
-        _gameUI.StartGame -= TurnGameMusic;
-        _gameUI.MenuButtonClick -= TurnMenuMusic;
+        _gameUI.StartGame -= OnStartGame;
+        _gameUI.MenuButtonClick -= OnMenuButtonClick;
     }
 
-    private void TurnMenuMusic()
+    private void OnMenuButtonClick()
     {
         _menuMusic.PlayDelayed(0);
         _gameMusic.Stop();
     }
 
-    private void TurnGameMusic()
+    private void OnStartGame()
     {
         _gameMusic.PlayDelayed(0);
         _menuMusic.Stop();

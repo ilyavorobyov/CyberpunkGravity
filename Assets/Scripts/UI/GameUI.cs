@@ -32,7 +32,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] private AudioSource _simpleButtonClick;
     [SerializeField] private AudioSource _gameOverSound;
 
-    public static Action RocketsRemovalEvent;
+    public static Action RocketsRemoval;
     private WeaponController _weaponController;
     public event UnityAction StartGame;
     public event UnityAction GameOver;
@@ -53,11 +53,11 @@ public class GameUI : MonoBehaviour
         _pauseButton.onClick.AddListener(OnPauseButtonClick);
         _resumeButton.onClick.AddListener(OnResumeButtonClick);
         _menuButtonPausePanel.onClick.AddListener(OnMenuUiState);
-        _player.PlayerDied += GameOverUiState;
+        _player.PlayerDied += OnPlayerDied;
         _weaponController.WeaponChange += OnWeaponChanged;
         _shopButton.onClick.AddListener(OnShopButtonClick);
         _closeShopButton.onClick.AddListener(OnCloseShopButtonClick);
-        _viewControlButton.onClick.AddListener(ShowControl);
+        _viewControlButton.onClick.AddListener(OnShowControlButtonClick);
     }
 
     private void OnDisable()
@@ -68,11 +68,11 @@ public class GameUI : MonoBehaviour
         _pauseButton.onClick.RemoveListener(OnPauseButtonClick);
         _resumeButton.onClick.RemoveListener(OnResumeButtonClick);
         _menuButtonPausePanel.onClick.RemoveListener(OnMenuUiState);
-        _player.PlayerDied -= GameOverUiState;
+        _player.PlayerDied -= OnPlayerDied;
         _weaponController.WeaponChange -= OnWeaponChanged;
         _shopButton.onClick.RemoveListener(OnShopButtonClick);
         _closeShopButton.onClick.RemoveListener(OnCloseShopButtonClick);
-        _viewControlButton.onClick.RemoveListener(ShowControl);
+        _viewControlButton.onClick.RemoveListener(OnShowControlButtonClick);
     }
 
     private void ShrinkAnimation(GameObject uiElement)
@@ -120,7 +120,7 @@ public class GameUI : MonoBehaviour
         ShrinkAnimation(_selectedWeaponIcon.gameObject);
         ChangeState?.Invoke(true);
         MenuButtonClick.Invoke();
-        RocketsRemovalEvent?.Invoke();
+        RocketsRemoval?.Invoke();
         _simpleButtonClick.PlayDelayed(0);
     }
 
@@ -148,7 +148,7 @@ public class GameUI : MonoBehaviour
         ShrinkAnimation(_allCoinsValue.gameObject);
         ChangeState?.Invoke(false);
         StartGame.Invoke();
-        RocketsRemovalEvent?.Invoke();
+        RocketsRemoval?.Invoke();
         _startButtonClick.PlayDelayed(0);
     }
 
@@ -159,11 +159,11 @@ public class GameUI : MonoBehaviour
         ZoomAnimation(_pauseButton.gameObject);
         ChangeState?.Invoke(false);
         StartGame.Invoke();
-        RocketsRemovalEvent?.Invoke();
+        RocketsRemoval?.Invoke();
         _simpleButtonClick.PlayDelayed(0);
     }
 
-    private void GameOverUiState()
+    private void OnPlayerDied()
     {
         Time.timeScale = 0;
         ShrinkAnimation(_pauseButton.gameObject);
@@ -209,7 +209,7 @@ public class GameUI : MonoBehaviour
         _simpleButtonClick.PlayDelayed(0);
     }
 
-    private void ShowControl()
+    private void OnShowControlButtonClick()
     {
         _learningPanel.gameObject.SetActive(true);
         _learningPanel.ShowControlInfo();

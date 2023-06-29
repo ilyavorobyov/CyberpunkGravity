@@ -14,12 +14,12 @@ public class Rocket : Enemy
 
     private void OnEnable()
     {
-        GameUI.RocketsRemovalEvent += Delete;
+        GameUI.RocketsRemoval += OnRocketsRemoval;
     }
 
     private void OnDisable()
     {
-        GameUI.RocketsRemovalEvent -= Delete;
+        GameUI.RocketsRemoval -= OnRocketsRemoval;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,7 +41,7 @@ public class Rocket : Enemy
         _speed = speed + _additionSpeed;
     }
 
-    public void Delete()
+    public void OnRocketsRemoval()
     {
         Destroy(gameObject);
     }

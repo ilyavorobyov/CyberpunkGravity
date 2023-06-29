@@ -32,6 +32,9 @@ public class Enemy : MonoBehaviour
     private Vector3 _healthBarPosition;
     private UnityEngine.Color _defaultColor;
     private float _colorReturnTime;
+    private float _dieDuration = 0.3f;
+    private int _numberOfCoin = 0;
+    private int _maxNumberOfResourse = 2;
 
     public float Speed { get; private set; }
 
@@ -108,9 +111,9 @@ public class Enemy : MonoBehaviour
     {
         if (_isDropResourceAfterDie)
         {
-            int numberOfResourse = Random.Range(0, 2);
+            int numberOfResourse = Random.Range(_numberOfCoin, _maxNumberOfResourse);
 
-            if(numberOfResourse == 0)
+            if(numberOfResourse == _numberOfCoin)
             {
                 var coin = Instantiate(_coin, transform.position, Quaternion.identity);
                 coin.SetVolume();
@@ -125,7 +128,7 @@ public class Enemy : MonoBehaviour
         }
 
         ObjectAnimator.SetTrigger(DieAnimationName);
-        Invoke(nameof(SetEnemyActive), 0.3f);
+        Invoke(nameof(SetEnemyActive), _dieDuration);
         DieSound.PlayDelayed(0);
     }
 }

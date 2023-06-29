@@ -50,21 +50,21 @@ public class EnemiesSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        _gameUI.StartGame += StartGame;
-        _gameUI.ChangeState += ToggleEnemiesCreation;
-        _gameUI.MenuButtonClick += StartGame;
-        _scoreManager.SpeedChange += SetObjectsSpeed;
+        _gameUI.StartGame += OnStartGame;
+        _gameUI.ChangeState += OnChangeState;
+        _gameUI.MenuButtonClick += OnStartGame;
+        _scoreManager.SpeedChange += OnSpeedChange;
     }
 
     private void OnDisable()
     {
-        _gameUI.StartGame -= StartGame;
-        _gameUI.ChangeState -= ToggleEnemiesCreation;
-        _gameUI.MenuButtonClick -= StartGame;
-        _scoreManager.SpeedChange -= SetObjectsSpeed;
+        _gameUI.StartGame -= OnStartGame;
+        _gameUI.ChangeState -= OnChangeState;
+        _gameUI.MenuButtonClick -= OnStartGame;
+        _scoreManager.SpeedChange -= OnSpeedChange;
     }
 
-    private void StartGame()
+    private void OnStartGame()
     {
         foreach (var enemy in _easyEnemies)
         {
@@ -77,7 +77,7 @@ public class EnemiesSpawner : MonoBehaviour
         }
     }
 
-    private void ToggleEnemiesCreation(bool state)
+    private void OnChangeState(bool state)
     {
         if (!state)
         {
@@ -114,7 +114,7 @@ public class EnemiesSpawner : MonoBehaviour
         }
     }
 
-    private void SetObjectsSpeed(float speed)
+    private void OnSpeedChange(float speed)
     {
         _speedObjects = speed;
     }

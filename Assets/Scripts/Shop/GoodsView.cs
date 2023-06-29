@@ -62,7 +62,7 @@ public class GoodsView : MonoBehaviour
         _buttonSound.PlayDelayed(0);
         _purchasedEffect.Buy();
         _wallet.RemoveCoins(_priceValue);
-        _wallet.SaveCoins();
+        _wallet.OnPlayerDied();
 
         if(!_good.IsRepurchasable)
         {

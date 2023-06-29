@@ -33,12 +33,12 @@ public class LearningPanel : MonoBehaviour
     {
         _storyText.gameObject.SetActive(true);
         _controlText.gameObject.SetActive(true);
-        _closeButton.onClick.AddListener(CloseButtonClick);
+        _closeButton.onClick.AddListener(OnCloseButtonClick);
     }
 
     private void OnDisable()
     {
-        _closeButton.onClick.RemoveListener(CloseButtonClick);
+        _closeButton.onClick.RemoveListener(OnCloseButtonClick);
     }
 
     public void ShowControlInfo()
@@ -51,7 +51,7 @@ public class LearningPanel : MonoBehaviour
         _clicksCounter = 2;
     }
 
-    private void CloseButtonClick()
+    private void OnCloseButtonClick()
     {
         if (_clicksCounter == 0)
         {
