@@ -30,12 +30,12 @@ public class DecorationSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        _gameUI.ChangeState += ControlSpawner;
+        _gameUI.ChangeState += ToggleDecorationCreation;
     }
 
     private void OnDisable()
     {
-        _gameUI.ChangeState -= ControlSpawner;
+        _gameUI.ChangeState -= ToggleDecorationCreation;
     }
 
     private bool CheckActive()
@@ -51,7 +51,7 @@ public class DecorationSpawner : MonoBehaviour
         return false;
     }
 
-    private void ControlSpawner(bool state)
+    private void ToggleDecorationCreation(bool state)
     {
         if (!state)
         {

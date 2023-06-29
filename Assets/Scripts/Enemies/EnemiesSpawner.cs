@@ -51,7 +51,7 @@ public class EnemiesSpawner : MonoBehaviour
     private void OnEnable()
     {
         _gameUI.StartGame += StartGame;
-        _gameUI.ChangeState += ControlSpawner;
+        _gameUI.ChangeState += ToggleEnemiesCreation;
         _gameUI.MenuButtonClick += StartGame;
         _scoreManager.SpeedChange += SetObjectsSpeed;
     }
@@ -59,7 +59,7 @@ public class EnemiesSpawner : MonoBehaviour
     private void OnDisable()
     {
         _gameUI.StartGame -= StartGame;
-        _gameUI.ChangeState -= ControlSpawner;
+        _gameUI.ChangeState -= ToggleEnemiesCreation;
         _gameUI.MenuButtonClick -= StartGame;
         _scoreManager.SpeedChange -= SetObjectsSpeed;
     }
@@ -77,7 +77,7 @@ public class EnemiesSpawner : MonoBehaviour
         }
     }
 
-    private void ControlSpawner(bool state)
+    private void ToggleEnemiesCreation(bool state)
     {
         if (!state)
         {

@@ -41,13 +41,13 @@ public class ResourcesAndBuffsSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        _gameUI.ChangeState += ControlSpawner;
+        _gameUI.ChangeState += ToggleResourceCreation;
         _scoreManager.SpeedChange += SetObjectsSpeed;
     }
 
     private void OnDisable()
     {
-        _gameUI.ChangeState -= ControlSpawner;
+        _gameUI.ChangeState -= ToggleResourceCreation;
         _scoreManager.SpeedChange += SetObjectsSpeed;
     }
 
@@ -56,7 +56,7 @@ public class ResourcesAndBuffsSpawner : MonoBehaviour
         _speedObjects = speed;
     }
 
-    private void ControlSpawner(bool state)
+    private void ToggleResourceCreation(bool state)
     {
         if (!state)
         {
