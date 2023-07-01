@@ -14,7 +14,7 @@ public class EnemyShooter : Enemy
     private float _distanceToPlayer = 11;
     private float _startYPosition = 2;
     private Vector3 _shootingPosition;
-    private float _step = 0.015f;
+    private float _step = 0.06f;
 
     private void Start()
     {

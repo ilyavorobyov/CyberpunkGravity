@@ -19,7 +19,7 @@ public class EnemyMissileSystem : Enemy
     private Coroutine _missileShooting;
     private bool _isShooting = true;
     private Vector3 _shootingPosition;
-    private float _step = 0.015f;
+    private float _step = 0.09f;
     private bool _isStarted = false;
 
     private void Start()

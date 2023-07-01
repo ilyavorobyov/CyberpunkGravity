@@ -155,7 +155,7 @@ MonoBehaviour:
   _healthBarSample: {fileID: 0}
   _canBeDestroyedByPlayer: 1
   _isDropResourceAfterDie: 0
-  _additionSpeed: 2
+  _additionSpeed: 3
 --- !u!82 &6187961917615311024
 AudioSource:
   m_ObjectHideFlags: 0

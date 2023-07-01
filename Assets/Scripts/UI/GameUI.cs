@@ -1,3 +1,4 @@
+
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -31,6 +32,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] private AudioSource _startButtonClick;
     [SerializeField] private AudioSource _simpleButtonClick;
     [SerializeField] private AudioSource _gameOverSound;
+    [SerializeField] private Button _soundSwitchMenuButton;
 
     public static Action RocketsRemoval;
     private WeaponController _weaponController;
@@ -39,10 +41,13 @@ public class GameUI : MonoBehaviour
     public event UnityAction MenuButtonClick;
     public event UnityAction<bool> ChangeState;
 
+    public bool IsGameOn { get; private set; }
+
     private void Awake()
     {
         _weaponController = _player.GetComponent<WeaponController>();
         Time.timeScale = 0;
+        IsGameOn = false;
     }
 
     private void OnEnable()
@@ -73,6 +78,11 @@ public class GameUI : MonoBehaviour
         _shopButton.onClick.RemoveListener(OnShopButtonClick);
         _closeShopButton.onClick.RemoveListener(OnCloseShopButtonClick);
         _viewControlButton.onClick.RemoveListener(OnShowControlButtonClick);
+    }
+
+    public void PauseGame()
+    {
+        OnPauseButtonClick();
     }
 
     private void ShrinkAnimation(GameObject uiElement)
@@ -114,6 +124,7 @@ public class GameUI : MonoBehaviour
         ZoomAnimation(_startButton.gameObject);
         ZoomAnimation(_shopButton.gameObject);
         ZoomAnimation(_viewControlButton.gameObject);
+        ZoomAnimation(_soundSwitchMenuButton.gameObject);
         ShrinkAnimation(_coinsPerGameSession.gameObject);
         ShrinkAnimation(_scoreValue.gameObject);
         ShrinkAnimation(_batteryValueText.gameObject);
@@ -122,6 +133,7 @@ public class GameUI : MonoBehaviour
         MenuButtonClick.Invoke();
         RocketsRemoval?.Invoke();
         _simpleButtonClick.PlayDelayed(0);
+        IsGameOn = false;
     }
 
     private void OnStartButtonClick()
@@ -134,6 +146,7 @@ public class GameUI : MonoBehaviour
         ShrinkAnimation(_startButton.gameObject);
         ShrinkAnimation(_startButton.gameObject);
         ShrinkAnimation(_shopButton.gameObject);
+        ShrinkAnimation(_soundSwitchMenuButton.gameObject);
 
         if (_viewControlButton.gameObject.activeSelf == true)
         {
@@ -150,6 +163,7 @@ public class GameUI : MonoBehaviour
         StartGame.Invoke();
         RocketsRemoval?.Invoke();
         _startButtonClick.PlayDelayed(0);
+        IsGameOn = true;
     }
 
     private void OnRestartButtonClick()
@@ -161,6 +175,7 @@ public class GameUI : MonoBehaviour
         StartGame.Invoke();
         RocketsRemoval?.Invoke();
         _simpleButtonClick.PlayDelayed(0);
+        IsGameOn = true;
     }
 
     private void OnPlayerDied()
@@ -171,6 +186,7 @@ public class GameUI : MonoBehaviour
         ChangeState?.Invoke(true);
         GameOver.Invoke();
         _gameOverSound.PlayDelayed(0);
+        IsGameOn = false;
     }
 
     private void OnPauseButtonClick()
@@ -180,6 +196,7 @@ public class GameUI : MonoBehaviour
         ZoomAnimation(_pausePanel.gameObject);
         ShrinkAnimation(_pauseButton.gameObject);
         _simpleButtonClick.PlayDelayed(0);
+        IsGameOn = false;
     }
 
     private void OnResumeButtonClick()
@@ -189,6 +206,7 @@ public class GameUI : MonoBehaviour
         ShrinkAnimation(_pausePanel.gameObject);
         ZoomAnimation(_pauseButton.gameObject);
         _simpleButtonClick.PlayDelayed(0);
+        IsGameOn = true;
     }
 
     private void OnWeaponChanged(Sprite icon)
