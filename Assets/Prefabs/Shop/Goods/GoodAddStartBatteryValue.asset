@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _label: "+5 \u043A \u043D\u0430\u0447\u0430\u043B\u044C\u043D\u043E\u0439 \u044D\u043D\u0435\u0440\u0433\u0438\u0438
     \u0434\u043B\u044F \u0441\u0442\u0440\u0435\u043B\u044C\u0431\u044B"
-  _price: 200
+  _price: 150
   _icon: {fileID: 21300000, guid: f812ceb0fa574554eaf989fd4ac6a997, type: 3}
   _purchasedEffect: {fileID: 2791176311120742752, guid: 6dbbc9eea9b1e9b43908a0a5c4a63bf4, type: 3}
   _isRepurchasable: 1

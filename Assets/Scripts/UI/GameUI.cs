@@ -28,7 +28,6 @@ public class GameUI : MonoBehaviour
     [SerializeField] private Button _closeShopButton;
     [SerializeField] private GameObject _shopPanel;
     [SerializeField] private LearningPanel _learningPanel;
-    [SerializeField] private Button _viewControlButton;
     [SerializeField] private AudioSource _startButtonClick;
     [SerializeField] private AudioSource _simpleButtonClick;
     [SerializeField] private AudioSource _gameOverSound;
@@ -62,7 +61,6 @@ public class GameUI : MonoBehaviour
         _weaponController.WeaponChange += OnWeaponChanged;
         _shopButton.onClick.AddListener(OnShopButtonClick);
         _closeShopButton.onClick.AddListener(OnCloseShopButtonClick);
-        _viewControlButton.onClick.AddListener(OnShowControlButtonClick);
     }
 
     private void OnDisable()
@@ -77,7 +75,6 @@ public class GameUI : MonoBehaviour
         _weaponController.WeaponChange -= OnWeaponChanged;
         _shopButton.onClick.RemoveListener(OnShopButtonClick);
         _closeShopButton.onClick.RemoveListener(OnCloseShopButtonClick);
-        _viewControlButton.onClick.RemoveListener(OnShowControlButtonClick);
     }
 
     public void PauseGame()
@@ -123,7 +120,6 @@ public class GameUI : MonoBehaviour
         ZoomAnimation(_allCoinsValue.gameObject);
         ZoomAnimation(_startButton.gameObject);
         ZoomAnimation(_shopButton.gameObject);
-        ZoomAnimation(_viewControlButton.gameObject);
         ZoomAnimation(_soundSwitchMenuButton.gameObject);
         ShrinkAnimation(_coinsPerGameSession.gameObject);
         ShrinkAnimation(_scoreValue.gameObject);
@@ -147,12 +143,6 @@ public class GameUI : MonoBehaviour
         ShrinkAnimation(_startButton.gameObject);
         ShrinkAnimation(_shopButton.gameObject);
         ShrinkAnimation(_soundSwitchMenuButton.gameObject);
-
-        if (_viewControlButton.gameObject.activeSelf == true)
-        {
-            ShrinkAnimation(_viewControlButton.gameObject);
-        }
-
         ZoomAnimation(_coinsPerGameSession.gameObject);
         ZoomAnimation(_scoreValue.gameObject);
         ZoomAnimation(_batteryValueText.gameObject);
@@ -224,13 +214,6 @@ public class GameUI : MonoBehaviour
     private void OnCloseShopButtonClick()
     {
         _shopPanel.SetActive(false);
-        _simpleButtonClick.PlayDelayed(0);
-    }
-
-    private void OnShowControlButtonClick()
-    {
-        _learningPanel.gameObject.SetActive(true);
-        _learningPanel.ShowControlInfo();
         _simpleButtonClick.PlayDelayed(0);
     }
 }

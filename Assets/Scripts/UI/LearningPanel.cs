@@ -41,16 +41,6 @@ public class LearningPanel : MonoBehaviour
         _closeButton.onClick.RemoveListener(OnCloseButtonClick);
     }
 
-    public void ShowControlInfo()
-    {
-        _antigravText.gameObject.SetActive(false);
-        _unkillableEnemiesText.gameObject.SetActive(false);
-        _antigravImage.gameObject.SetActive(false);
-        _storyText.gameObject.SetActive(true);
-        _controlText.gameObject.SetActive(true);
-        _clicksCounter = 2;
-    }
-
     private void OnCloseButtonClick()
     {
         if (_clicksCounter == 0)

@@ -33,7 +33,7 @@ public class WeaponController : MonoBehaviour
     private int _batteryValue;
     private int _defaultBatteryEnergy = 20;
     private WeaponViewObject _weaponViewObject;
-    private float _soundVolume = 1f;
+    private float _soundVolume = 0.33f;
 
     public event UnityAction<Sprite> WeaponChange;
 
