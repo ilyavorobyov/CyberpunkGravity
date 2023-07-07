@@ -1,4 +1,3 @@
-
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,6 +15,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] private TMP_Text _coinsPerGameSession;
     [SerializeField] private TMP_Text _scoreValue;
     [SerializeField] private TMP_Text _batteryValueText;
+    [SerializeField] private TMP_Text _controlText;
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _menuButton;
@@ -125,6 +125,12 @@ public class GameUI : MonoBehaviour
         ShrinkAnimation(_scoreValue.gameObject);
         ShrinkAnimation(_batteryValueText.gameObject);
         ShrinkAnimation(_selectedWeaponIcon.gameObject);
+
+        if(_controlText.gameObject.activeSelf == true)
+        {
+            ShrinkAnimation(_controlText.gameObject);
+        }
+
         ChangeState?.Invoke(true);
         MenuButtonClick.Invoke();
         RocketsRemoval?.Invoke();
@@ -149,6 +155,7 @@ public class GameUI : MonoBehaviour
         ZoomAnimation(_selectedWeaponIcon.gameObject);
         ShrinkAnimation(_allCoinsText.gameObject);
         ShrinkAnimation(_allCoinsValue.gameObject);
+        ZoomAnimation(_controlText.gameObject);
         ChangeState?.Invoke(false);
         StartGame.Invoke();
         RocketsRemoval?.Invoke();
@@ -161,6 +168,7 @@ public class GameUI : MonoBehaviour
         Time.timeScale = 1;
         ShrinkAnimation(_gameOverPanel.gameObject);
         ZoomAnimation(_pauseButton.gameObject);
+        ZoomAnimation(_controlText.gameObject);
         ChangeState?.Invoke(false);
         StartGame.Invoke();
         RocketsRemoval?.Invoke();
@@ -173,6 +181,7 @@ public class GameUI : MonoBehaviour
         Time.timeScale = 0;
         ShrinkAnimation(_pauseButton.gameObject);
         ZoomAnimation(_gameOverPanel.gameObject);
+        ShrinkAnimation(_controlText.gameObject);
         ChangeState?.Invoke(true);
         GameOver.Invoke();
         _gameOverSound.PlayDelayed(0);
@@ -185,6 +194,7 @@ public class GameUI : MonoBehaviour
         ChangeState?.Invoke(true);
         ZoomAnimation(_pausePanel.gameObject);
         ShrinkAnimation(_pauseButton.gameObject);
+        ShrinkAnimation(_controlText.gameObject);
         _simpleButtonClick.PlayDelayed(0);
         IsGameOn = false;
     }
@@ -195,6 +205,7 @@ public class GameUI : MonoBehaviour
         ChangeState?.Invoke(false);
         ShrinkAnimation(_pausePanel.gameObject);
         ZoomAnimation(_pauseButton.gameObject);
+        ZoomAnimation(_controlText.gameObject);
         _simpleButtonClick.PlayDelayed(0);
         IsGameOn = true;
     }

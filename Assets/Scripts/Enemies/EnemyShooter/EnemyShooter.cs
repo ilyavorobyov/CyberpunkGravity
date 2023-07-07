@@ -11,7 +11,7 @@ public class EnemyShooter : Enemy
     private float _shotTime;
     private ShotPoint _shotPoint;
     private Coroutine _laserShooting;
-    private float _distanceToPlayer = 11;
+    private float _distanceToPlayer = 10;
     private float _startYPosition = 2;
     private Vector3 _shootingPosition;
     private float _step = 0.06f;

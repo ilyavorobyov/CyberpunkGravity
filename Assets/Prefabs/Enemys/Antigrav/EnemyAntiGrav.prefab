@@ -176,7 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DieSound: {fileID: 3262914926708317246}
   HitSound: {fileID: 7556743044299777635}
-  AddToXPosition: 20
+  AddToXPosition: 19
   _coin: {fileID: 9151226536257720570, guid: 6bc57435804896f4183c917cf8aa1e3e, type: 3}
   _battery: {fileID: 8310121584227869769, guid: c1a9da91b94eb9b4991dd4c19e18d7fe, type: 3}
   _maxHealth: 5

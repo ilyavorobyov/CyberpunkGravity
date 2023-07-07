@@ -138,7 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DieSound: {fileID: 0}
   HitSound: {fileID: 0}
-  AddToXPosition: 20
+  AddToXPosition: 19
   _coin: {fileID: 0}
   _battery: {fileID: 0}
   _maxHealth: 0

@@ -239,7 +239,7 @@ MonoBehaviour:
   _timeBetweenShots: 1
   _minYDirectionMissle: -0.2
   _maxYDirectionMissle: 0.5
-  _shootXPosition: 11
+  _shootXPosition: 9
   _startYPosition: 2
   _shootYPosition: 1
   _shotPointAttackSprite: {fileID: 1181864764, guid: 001daf8ebf1986646896218c1ce99cb9, type: 3}
