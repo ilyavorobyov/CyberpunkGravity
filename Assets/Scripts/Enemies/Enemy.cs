@@ -82,6 +82,11 @@ public class Enemy : MonoBehaviour
     {
         Speed = speed;
         SetStartInfo();
+
+        if(EnemyHealthBar != null)
+        {
+            EnemyHealthBar.gameObject.SetActive(true);
+        }
     }
 
     private void ShowHealthBar()
@@ -130,5 +135,10 @@ public class Enemy : MonoBehaviour
         ObjectAnimator.SetTrigger(DieAnimationName);
         Invoke(nameof(SetEnemyActive), _dieDuration);
         DieSound.PlayDelayed(0);
+
+        if (EnemyHealthBar != null)
+        {
+            EnemyHealthBar.gameObject.SetActive(false);
+        }
     }
 }

@@ -65,17 +65,6 @@
                 },
                 {
                     "name": "",
-                    "id": "f9d12598-c112-4251-b908-a19c1b00c44e",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyBoard + mouse",
-                    "action": "ChangeGravity",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "7381794b-8a2e-4940-a26d-395301b9274c",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -88,7 +77,7 @@
                 {
                     "name": "",
                     "id": "8274086e-15ae-40bf-841f-4c2c8a5720d9",
-                    "path": "<Keyboard>/r",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyBoard + mouse",
