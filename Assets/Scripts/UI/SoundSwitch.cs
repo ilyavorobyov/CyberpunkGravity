@@ -18,7 +18,7 @@ public class SoundSwitch : MonoBehaviour
         AudioListener.volume = _maxVolume;
     }
 
-    public void ÑhangeSoundState()
+    public void ChangeSoundState()
     {
         _isPlaying = !_isPlaying;
 

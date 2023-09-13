@@ -33,8 +33,9 @@ public class GameUI : MonoBehaviour
     [SerializeField] private AudioSource _gameOverSound;
     [SerializeField] private Button _soundSwitchMenuButton;
 
-    public static Action RocketsRemoval;
     private WeaponController _weaponController;
+
+    public static Action RocketsRemoval;
     public event UnityAction StartGame;
     public event UnityAction GameOver;
     public event UnityAction MenuButtonClick;
