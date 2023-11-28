@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Diagnostics;
 
 public class GoodsView : MonoBehaviour
 {
@@ -42,13 +41,9 @@ public class GoodsView : MonoBehaviour
     public void CheckWallet()
     {
         if (_priceValue > _wallet.Coins)
-        {
             _sellButton.interactable = false;
-        }
         else
-        {
             _sellButton.interactable = true;
-        }
 
         if (_good.IsBuyed)
         {
@@ -65,9 +60,7 @@ public class GoodsView : MonoBehaviour
         _wallet.OnPlayerDied();
 
         if(!_good.IsRepurchasable)
-        {
             _good.SetBuyed();
-        }
 
         CheckWallet();
     }

@@ -35,8 +35,6 @@ public class PlayerForceField : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out EnemyDrone enemyDrone))
-        {
             enemyDrone.Die();
-        }
     }
 }

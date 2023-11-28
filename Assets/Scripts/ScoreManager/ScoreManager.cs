@@ -78,9 +78,7 @@ public class ScoreManager : MonoBehaviour
         _maxResult = PlayerPrefs.GetInt(ScoreValue);
 
         if (_maxResult < _currentResult)
-        {
             PlayerPrefs.SetInt(ScoreValue, _currentResult);
-        }
 
         _maxScoreText.text = PlayerPrefs.GetInt(ScoreValue).ToString() + " ì";
     }

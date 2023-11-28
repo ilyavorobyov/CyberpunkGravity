@@ -10,9 +10,7 @@ public class WindowState : MonoBehaviour
         _audioListener.enabled = false;
 
         if (_gameUi.IsGameOn)
-        {
             _gameUi.PauseGame();
-        }
     }
 
     private void OnApplicationFocus(bool focus)

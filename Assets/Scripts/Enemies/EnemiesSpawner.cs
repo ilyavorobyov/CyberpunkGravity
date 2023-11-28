@@ -82,35 +82,27 @@ public class EnemiesSpawner : MonoBehaviour
         if (!state)
         {
             if (_activateEasyEnemy != null)
-            {
                 StopCoroutine(_activateEasyEnemy);
-            }
 
             _activateEasyEnemy = StartCoroutine(ActivateEasyEnemy());
         }
         else
         {
             if (_activateEasyEnemy != null)
-            {
                 StopCoroutine(_activateEasyEnemy);
-            }
         }
 
         if (!state)
         {
             if (_activateHardEnemy != null)
-            {
                 StopCoroutine(_activateHardEnemy);
-            }
 
             _activateHardEnemy = StartCoroutine(ActivateHardEnemy());
         }
         else
         {
             if (_activateHardEnemy != null)
-            {
                 StopCoroutine(_activateHardEnemy);
-            }
         }
     }
 
@@ -124,9 +116,7 @@ public class EnemiesSpawner : MonoBehaviour
         foreach (var enemy in enemies)
         {
             if (enemy.gameObject.activeSelf == true)
-            {
                 return true;
-            }
         }
 
         return false;

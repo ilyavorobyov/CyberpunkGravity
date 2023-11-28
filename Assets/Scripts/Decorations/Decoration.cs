@@ -46,8 +46,6 @@ public class Decoration : MonoBehaviour
         _speed = speed - _speedReducer;
 
         if (_speed <= 0)
-        {
             _speed = _minSpeed;
-        }
     }
 }

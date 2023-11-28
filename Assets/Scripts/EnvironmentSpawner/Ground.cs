@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Ground : MonoBehaviour
 {
-    [SerializeField] private Player _player;
     [SerializeField] private ScoreManager _scoreManager;
 
     private float _speed;

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.XR;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Animator))]

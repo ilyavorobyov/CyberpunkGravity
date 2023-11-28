@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class CameraMover : MonoBehaviour
 {
-    [SerializeField] private Player _player;
+    [SerializeField] private Transform _playerPosition;
     [SerializeField] private float _xOffset;
 
     private void Awake()
     {
-        transform.position = new Vector3(_player.transform.position.x 
+        transform.position = new Vector3(_playerPosition.position.x 
             + _xOffset, transform.position.y, transform.position.z);
     }
 }

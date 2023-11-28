@@ -29,9 +29,7 @@ public class EnemyMissileSystem : Enemy
         _shotPointIdleSprite = _shotPointSpriteRenderer.sprite;
 
         if (_missileShooting != null)
-        {
             StopCoroutine(_missileShooting);
-        }
 
         _missileShooting = StartCoroutine(MissileShooting());
 

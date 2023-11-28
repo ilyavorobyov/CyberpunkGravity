@@ -33,9 +33,7 @@ public class PlayerCollisionHandler : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out AntiGravField antiGravityField))
-        {
             _playerMover.TurnOffGravityChanger();
-        }
 
         if (collision.TryGetComponent(out ForceField forceField))
         {
@@ -73,17 +71,13 @@ public class PlayerCollisionHandler : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out AntiGravField antiGravityField))
-        {
             _playerMover.TurnOnGravityChanger();
-        }
     }
 
     private void TurnOnForceField()
     {
         if (_turnOnForceField != null)
-        {
             StopCoroutine(_turnOnForceField);
-        }
 
         _turnOnForceField = StartCoroutine(ForceFieldAction());
     }

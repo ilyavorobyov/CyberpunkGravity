@@ -96,9 +96,7 @@ public class WeaponController : MonoBehaviour
         foreach (var weapon in _allWeapons)
         {
             if (weapon.IsBuyed == true)
-            {
                 _availableWeapons.Add(weapon);
-            }
         }
     }
 
@@ -139,9 +137,7 @@ public class WeaponController : MonoBehaviour
     private void StartTextEffectCoroutine(Color color, int energyPoints)
     {
         if (_changeEnergyTextColor != null)
-        {
             StopCoroutine(_changeEnergyTextColor);
-        }
 
         _changeEnergyTextColor = StartCoroutine(ChangeEnergyTextColor(color, energyPoints));
     }
@@ -151,13 +147,9 @@ public class WeaponController : MonoBehaviour
         if (!_onMenu)
         {
             if (_currentWeaponNumber == _availableWeapons.Count - 1)
-            {
                 _currentWeaponNumber = 0;
-            }
             else
-            {
                 _currentWeaponNumber++;
-            }
 
             ChangeWeapon(_availableWeapons[_currentWeaponNumber]);
             CalculateAvailableNumberOfShots();
@@ -170,13 +162,9 @@ public class WeaponController : MonoBehaviour
         if (!_onMenu)
         {
             if (_currentWeaponNumber == 0)
-            {
                 _currentWeaponNumber = _availableWeapons.Count - 1;
-            }
             else
-            {
                 _currentWeaponNumber--;
-            }
 
             ChangeWeapon(_availableWeapons[_currentWeaponNumber]);
             CalculateAvailableNumberOfShots();

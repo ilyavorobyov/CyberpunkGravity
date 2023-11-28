@@ -21,13 +21,9 @@ public class RollingSaw : Enemy
         int yPositionNumber = Random.Range(_minPositionNumber, _maxPositionNumber);
 
         if (yPositionNumber == _minPositionNumber)
-        {
             StartPosition = new Vector3(AddToXPosition, _yPositions.y, 0f);
-        }
         else
-        {
             StartPosition = new Vector3(AddToXPosition, _yPositions.x, 0f);
-        }
 
         transform.position = StartPosition;
         _workSound.PlayDelayed(0);

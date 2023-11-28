@@ -26,9 +26,7 @@ public class Rocket : Enemy
     {
         if (collision.TryGetComponent(out Player player) 
             || collision.TryGetComponent(out PlayerForceField playerForceField))
-        {
             Die();
-        }
     }
 
     public void SetYDirection(float yDirection)

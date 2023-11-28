@@ -32,9 +32,7 @@ public class RocketTuner : Enemy
     private void OnDisable()
     {
         if (_launchRocket != null)
-        {
             StopCoroutine(_launchRocket);
-        }
     }
 
     public override void SetStartInfo()
@@ -42,9 +40,7 @@ public class RocketTuner : Enemy
         gameObject.SetActive(true);
 
         if (_launchRocket != null)
-        {
             StopCoroutine(_launchRocket);
-        }
 
         _launchRocket = StartCoroutine(LaunchRocket());
         PlayerPosition = PlayerObject.transform.position;

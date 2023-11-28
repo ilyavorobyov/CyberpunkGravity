@@ -43,9 +43,7 @@ public class DecorationSpawner : MonoBehaviour
         foreach (var decoration in _decorations)
         {
             if (decoration.gameObject.activeSelf == true)
-            {
                 return true;
-            }
         }
 
         return false;
@@ -56,18 +54,14 @@ public class DecorationSpawner : MonoBehaviour
         if (!state)
         {
             if (_respawnDecoration != null)
-            {
                 StopCoroutine(_respawnDecoration);
-            }
 
             _respawnDecoration = StartCoroutine(RespawnDecoration());
         }
         else
         {
             if (_respawnDecoration != null)
-            {
                 StopCoroutine(_respawnDecoration);
-            }
         }
     }
 

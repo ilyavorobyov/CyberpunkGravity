@@ -15,9 +15,7 @@ public class Resource : MonoBehaviour
     private void OnValidate()
     {
         if (_minVolume >= _maxVolume)
-        {
             _minVolume = _maxVolume - 1;
-        }
     }
 
     public void SetVolume()

@@ -70,9 +70,7 @@ public class ResourcesAndBuffsSpawner : MonoBehaviour
         else
         {
             if (_createResources != null)
-            {
                 StopCoroutine(_createResources);
-            }
         }
     }
 
@@ -81,13 +79,9 @@ public class ResourcesAndBuffsSpawner : MonoBehaviour
         int numberOfPosition = Random.Range(_topSpawnPositionNumber, 3);
 
         if (numberOfPosition == _topSpawnPositionNumber)
-        {
             return _topSpawnPosition;
-        }
         else if (numberOfPosition == _middleSpawnPositionNumber)
-        {
             return _middleSpawnPosition;
-        }
 
         return _bottomSpawnPosition;
     }
@@ -97,9 +91,7 @@ public class ResourcesAndBuffsSpawner : MonoBehaviour
         int numberOfResorce = Random.Range(_coinRespawnNumber, _maxRespawnNumber);
 
         if (numberOfResorce == _coinRespawnNumber)
-        {
             return false;
-        }
 
         return true;
     }

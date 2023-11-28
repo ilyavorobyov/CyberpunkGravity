@@ -29,5 +29,8 @@ public abstract class Weapon : MonoBehaviour
         _isBuyed = true;
     }
 
-    public abstract void Shoot();
+    public void Shoot()
+    {
+        Instantiate(Bullet, WeaponView.transform.position, Quaternion.identity);
+    }
 }

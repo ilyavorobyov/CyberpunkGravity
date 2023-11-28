@@ -46,14 +46,10 @@ public class EnemyDrone : Enemy
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out Player player))
-        {
             Die();
-        }
 
         if (collision.TryGetComponent(out PlayerForceField forceField))
-        {
             Die();
-        }
     }
 
     public override void SetStartInfo()

@@ -3,6 +3,7 @@ using UnityEngine;
 public class ShieldTime : PurchasedEffect
 {
     private const string ForceFieldDurationName = "ForceFieldDuration";
+
     private int _duration;
         
     public override void Buy()
