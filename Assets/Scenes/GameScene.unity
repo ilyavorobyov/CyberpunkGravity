@@ -2466,7 +2466,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 462985440}
         m_TargetAssemblyTypeName: SoundSwitch, Assembly-CSharp
-        m_MethodName: "\u0421hangeSoundState"
+        m_MethodName: ChangeSoundState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2837,7 +2837,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008fcd1c81e35ea41b7c59c8f035b80e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetFrameRate: 60
 --- !u!1 &533881868
 GameObject:
   m_ObjectHideFlags: 0
@@ -3810,10 +3809,10 @@ RectTransform:
   - {fileID: 1264652524}
   m_Father: {fileID: 1446457826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 105.08179, y: -87.52307}
-  m_SizeDelta: {x: 2020.9808, y: 728.44}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -200, y: -140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &851220448
 MonoBehaviour:
@@ -7039,9 +7038,9 @@ RectTransform:
   - {fileID: 131667438}
   - {fileID: 1562301731}
   - {fileID: 1454837679}
-  - {fileID: 851220447}
   - {fileID: 951713980}
   - {fileID: 462985439}
+  - {fileID: 851220447}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
