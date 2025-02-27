@@ -1,20 +1,23 @@
 using UnityEngine;
 
-public class WindowState : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private AudioListener _audioListener;
-    [SerializeField] private GameUI _gameUi;
-
-    private void OnApplicationPause(bool pause)
+    public class WindowState : MonoBehaviour
     {
-        _audioListener.enabled = false;
+        [SerializeField] private AudioListener _audioListener;
+        [SerializeField] private GameUI _gameUi;
 
-        if (_gameUi.IsGameOn)
-            _gameUi.PauseGame();
-    }
+        private void OnApplicationPause(bool pause)
+        {
+            _audioListener.enabled = false;
 
-    private void OnApplicationFocus(bool focus)
-    {
-        _audioListener.enabled = true;
+            if (_gameUi.IsGameOn)
+                _gameUi.PauseGame();
+        }
+
+        private void OnApplicationFocus(bool focus)
+        {
+            _audioListener.enabled = true;
+        }
     }
 }

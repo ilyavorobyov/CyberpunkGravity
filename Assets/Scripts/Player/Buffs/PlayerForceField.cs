@@ -1,40 +1,44 @@
+using Enemies;
 using UnityEngine;
 
-public class PlayerForceField : MonoBehaviour
+namespace PlayerCharacter.Buffs
 {
-    private const string ForceFieldDurationName = "ForceFieldDuration";
-
-    private int _defaultDuration = 6;
-    private int _duration;
-
-    private void Awake()
+    public class PlayerForceField : MonoBehaviour
     {
-        SetDuration();
-        gameObject.SetActive(false);
-    }
+        private const string ForceFieldDurationName = "ForceFieldDuration";
 
-    public int GetDuration()
-    {
-        SetDuration();
-        return _duration;
-    }
+        private int _defaultDuration = 6;
+        private int _duration;
 
-    private void SetDuration()
-    {
-        if (PlayerPrefs.HasKey(ForceFieldDurationName))
+        private void Awake()
         {
-            _duration = PlayerPrefs.GetInt(ForceFieldDurationName);
+            SetDuration();
+            gameObject.SetActive(false);
         }
-        else
-        {
-            _duration = _defaultDuration;
-            PlayerPrefs.SetInt(ForceFieldDurationName, _duration);
-        }
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out EnemyDrone enemyDrone))
-            enemyDrone.Die();
+        public int GetDuration()
+        {
+            SetDuration();
+            return _duration;
+        }
+
+        private void SetDuration()
+        {
+            if (PlayerPrefs.HasKey(ForceFieldDurationName))
+            {
+                _duration = PlayerPrefs.GetInt(ForceFieldDurationName);
+            }
+            else
+            {
+                _duration = _defaultDuration;
+                PlayerPrefs.SetInt(ForceFieldDurationName, _duration);
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.TryGetComponent(out EnemyDrone enemyDrone))
+                enemyDrone.Die();
+        }
     }
 }

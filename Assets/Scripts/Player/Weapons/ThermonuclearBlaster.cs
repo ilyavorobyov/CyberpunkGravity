@@ -1,2 +1,6 @@
-public class ThermonuclearBlaster : Weapon
-{}
+namespace PlayerCharacter.Weapons
+{
+    public class ThermonuclearBlaster : Weapon
+    {
+    }
+}

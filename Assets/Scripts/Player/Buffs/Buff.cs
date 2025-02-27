@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class Buff : MonoBehaviour
+namespace PlayerCharacter.Buffs
 {
-    protected float Speed;
-
-    public void SetSpeed(float speed)
+    public class Buff : MonoBehaviour
     {
-        Speed = speed;
+        protected float Speed;
+
+        public void SetSpeed(float speed)
+        {
+            Speed = speed;
+        }
     }
 }

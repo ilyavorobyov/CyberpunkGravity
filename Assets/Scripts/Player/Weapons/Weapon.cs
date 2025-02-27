@@ -1,36 +1,39 @@
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour
+namespace PlayerCharacter.Weapons
 {
-    [SerializeField] protected PlayerBullet Bullet;
-    [SerializeField] private AudioClip _shootSound;
-    [SerializeField] private string _label;
-    [SerializeField] private int _energyConsuming;
-    [SerializeField] private Sprite _icon;
-    [SerializeField] private Sprite _sprite;
-    [SerializeField] private bool _isBuyed;
-
-    protected WeaponViewObject WeaponView;
-
-    public string Label => _label;
-    public int EnergyConsuming => _energyConsuming;
-    public Sprite Icon => _icon;
-    public Sprite Sprite => _sprite;
-    public bool IsBuyed => _isBuyed;
-    public AudioClip ShootSound => _shootSound;
-
-    public void Init(WeaponViewObject weaponView)
+    public abstract class Weapon : MonoBehaviour
     {
-        WeaponView = weaponView;
-    }
+        [SerializeField] protected PlayerBullet Bullet;
+        [SerializeField] private AudioClip _shootSound;
+        [SerializeField] private string _label;
+        [SerializeField] private int _energyConsuming;
+        [SerializeField] private Sprite _icon;
+        [SerializeField] private Sprite _sprite;
+        [SerializeField] private bool _isBuyed;
 
-    public void Buying()
-    {
-        _isBuyed = true;
-    }
+        protected WeaponViewObject WeaponView;
 
-    public void Shoot()
-    {
-        Instantiate(Bullet, WeaponView.transform.position, Quaternion.identity);
+        public string Label => _label;
+        public int EnergyConsuming => _energyConsuming;
+        public Sprite Icon => _icon;
+        public Sprite Sprite => _sprite;
+        public bool IsBuyed => _isBuyed;
+        public AudioClip ShootSound => _shootSound;
+
+        public void Init(WeaponViewObject weaponView)
+        {
+            WeaponView = weaponView;
+        }
+
+        public void Buying()
+        {
+            _isBuyed = true;
+        }
+
+        public void Shoot()
+        {
+            Instantiate(Bullet, WeaponView.transform.position, Quaternion.identity);
+        }
     }
 }

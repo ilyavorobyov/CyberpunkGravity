@@ -1,17 +1,20 @@
 using UnityEngine;
 
-[RequireComponent (typeof(SpriteRenderer))]
-public class WeaponViewObject : MonoBehaviour
+namespace PlayerCharacter
 {
-    private SpriteRenderer _spriteRenderer;
-
-    private void Awake()
+    [RequireComponent(typeof(SpriteRenderer))]
+    public class WeaponViewObject : MonoBehaviour
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-    }
+        private SpriteRenderer _spriteRenderer;
 
-    public void SetSprite(Sprite sprite)
-    {
-        _spriteRenderer.sprite = sprite;
+        private void Awake()
+        {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+
+        public void SetSprite(Sprite sprite)
+        {
+            _spriteRenderer.sprite = sprite;
+        }
     }
 }

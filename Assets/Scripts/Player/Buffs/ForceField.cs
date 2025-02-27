@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public class ForceField : Buff
+namespace PlayerCharacter.Buffs
 {
-    private void Update()
+    public class ForceField : Buff
     {
-        transform.Translate(Vector3.left * Speed * Time.deltaTime);
+        private void Update()
+        {
+            transform.Translate(Vector3.left * Speed * Time.deltaTime);
+        }
     }
 }
